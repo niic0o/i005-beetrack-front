@@ -14,5 +14,11 @@ module.exports = {
       'warn',
       { allowConstantExport: true },
     ],
+    'prefer-const': 'error',
+    'quotes': ['error', 'single'],
+    'comma-dangle': ['error', 'always-multiline'],
+
+    // 'semi': ['error'], // ; al final de cada sentencia
+    // '@typescript-eslint/no-explicit-any': 'error', // evitar any
   },
 }
