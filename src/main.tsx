@@ -6,11 +6,12 @@ import { Provider } from '@/components/ui/provider.tsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import DashboardPage from './pages/DashboardPage.tsx'
 import InventoryPage from './pages/InventoryPage.tsx'
+// import PrivateRoutes from './routes/PrivateRoutes.jsx'  No lo estoy usando por que sino me lleva a /login
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <App />,
+    element: <App />, // Aqui va el PrivateRoutes
     children: [
       {
         index: true,
@@ -19,21 +20,6 @@ const router = createBrowserRouter([
       {
         path: 'inventario',
         element: <InventoryPage />
-      },
-      // Aquí más rutas privadas
-      
-      {
-        path: 'auth',
-        children: [
-          {
-            path: 'login',
-            element: <div>Login Page</div>
-          },
-          {
-            path: 'register',
-            element: <div>Register Page</div>
-          }
-        ]
       }
     ]
   }
