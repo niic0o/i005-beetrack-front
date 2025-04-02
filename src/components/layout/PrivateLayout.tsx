@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
-import Topbar from "../DashboardComponents/Topbar";
+import Topbar from "@/components/DashboardComponents/Topbar";
 import Sidebar from "../Sidebar";
+import { Grid, GridItem } from "@chakra-ui/react";
 
 type PrivateLayoutProps = {
   children: ReactNode;
@@ -8,15 +9,20 @@ type PrivateLayoutProps = {
 
 const PrivateLayout = ({ children }: PrivateLayoutProps) => {
   return (
-    <div className="flex h-screen">
-      <Sidebar />
-      <div className="flex flex-col flex-1">
+    <Grid templateColumns={"repeat(6, 1fr)"} bg={"gray.50"} minH={{ lg: "100vh" }}>
+      <GridItem
+        as={"aside"}
+        colSpan={1}
+        bg={"#f2f0eb"}
+        minH={{ xl: "100vh" }}
+        p={{ base: "20px", lg: "30px" }}>
+        <Sidebar />
+      </GridItem>
+      <GridItem as={"main"} colSpan={5} p={"0"}>
         <Topbar />
-        <main className="p-4 overflow-auto">
-          {children}
-        </main>
-      </div>
-    </div>
+        {children}
+      </GridItem>
+    </Grid>
   );
 };
 

@@ -11,7 +11,6 @@ import { FaMoneyBills } from "react-icons/fa6";
 import { IoWallet } from "react-icons/io5";
 import { MdPayment } from "react-icons/md";
 import { FaCashRegister } from "react-icons/fa";
-import Topbar from "@/components/DashboardComponents/Topbar";
 import { InventoryList } from "../DashboardComponents/InventoryList";
 
 export const DashboardContent = () => {
@@ -42,18 +41,6 @@ export const DashboardContent = () => {
 
   return (
     <Flex direction="column" overflow="hidden" margin="0" padding="0">
-      <Box
-        position="sticky"
-        top="0"
-        zIndex="10"
-        left="0"
-        right="0"
-        margin="0"
-        padding="0"
-        width="100%"
-      >
-        <Topbar />
-      </Box>
       <Box p={6} bg={"background.25"}>
         <SimpleGrid columns={12} gap={6}>
           {cards.map((card, i) => (
