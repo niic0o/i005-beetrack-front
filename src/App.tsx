@@ -2,6 +2,7 @@ import { Grid, GridItem, Heading } from '@chakra-ui/react'
 import './App.css'
 import Sidebar from '@/components/Sidebar'
 import { Outlet } from 'react-router-dom'
+import DashboardPage from '@/pages/DashboardPage'
 
 function App() {
   return (
@@ -14,9 +15,10 @@ function App() {
         p={{ base: "20px", lg: "30px" }}>
         <Sidebar />
       </GridItem>
-      <GridItem as={"main"} colSpan={5} p={"40px"}>
+      <GridItem as={"main"} colSpan={5}>
         {/* <Navbar /> */}
-        <Outlet />
+        {/* <Outlet /> */}
+        <DashboardPage />
       </GridItem>
     </Grid>
   )
