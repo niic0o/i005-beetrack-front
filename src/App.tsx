@@ -1,10 +1,16 @@
-import { Grid, GridItem, Heading } from '@chakra-ui/react'
+import { Grid, GridItem} from '@chakra-ui/react'
 import './App.css'
 import Sidebar from '@/components/Sidebar'
+// import PrivateRoutes from "./utils/PrivateRoutes"
 import { Outlet } from 'react-router-dom'
 import DashboardPage from '@/pages/DashboardPage'
 
 function App() {
+  // para utilizar el privateRoute solo tienes que ponerlo como element del route ej:
+  // <Route element={<PrivateRoutes />}>
+  //   <Route path="/" element={<Home />} />
+  // </Route>
+
   return (
     <Grid templateColumns={"repeat(6, 1fr)"} bg={"gray.50"} minH={{ lg: "100vh" }}>
       <GridItem
