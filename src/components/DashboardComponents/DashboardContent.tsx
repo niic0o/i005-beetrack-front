@@ -60,24 +60,22 @@ export const DashboardContent = () => {
           </GridItem>
 
           <GridItem colSpan={{ base: 12, lg: 6 }}>
-          <Text fontWeight="bold" fontSize="lg" mb={4} color="blue.500">
+            <Text fontWeight="bold" fontSize="lg" mb={4} color="blue.500">
               Estadísticas
             </Text>
             <Box bg="white" p={4} borderRadius="3xl" boxShadow="soft" h="100%">
-              <Text fontWeight="bold" color="blue.400" mb={4}>
-                <FinanceGraph />
-              </Text>
+              <FinanceGraph />
             </Box>
           </GridItem>
 
           <GridItem colSpan={12}>
-          <Text fontWeight="bold" fontSize="lg" mb={4} color="blue.500">
+            <Text fontWeight="bold" fontSize="lg" mb={4} color="blue.500">
               Pedidos de compra
             </Text>
             <Box bg="white" p={4} borderRadius="3xl" boxShadow="soft">
-              <Text fontWeight="bold" color="blue.400" mb={4}>
+              <Box fontWeight="bold" color="blue.400" mb={4}>
                 {/* Component */}
-              </Text>
+              </Box>
             </Box>
           </GridItem>
         </SimpleGrid>

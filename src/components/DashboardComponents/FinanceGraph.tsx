@@ -6,13 +6,11 @@ import {
   YAxis,
   Tooltip,
   ResponsiveContainer,
-  CartesianGrid,
   ComposedChart,
   Bar,
 } from "recharts";
-import { useToken } from "@chakra-ui/react";
-
-const data = [
+// Mocks de Data
+const monthlyData = [
   { name: "Ene", value: 300 },
   { name: "Feb", value: 200 },
   { name: "Mar", value: 100 },
@@ -23,10 +21,26 @@ const data = [
   { name: "Ago", value: 150 },
 ];
 
-const FinanceGraph = () => {
-  const [gradientToken] = useToken("chart", ["gradient"]);
-  const gradient = gradientToken;
+const weeklyData = [
+  { name: "Lun", value: 120 },
+  { name: "Mar", value: 180 },
+  { name: "Mié", value: 150 },
+  { name: "Jue", value: 220 },
+  { name: "Vie", value: 300 },
+  { name: "Sáb", value: 250 },
+  { name: "Dom", value: 180 },
+];
 
+const yearlyData = [
+  { name: "2018", value: 2500 },
+  { name: "2019", value: 3200 },
+  { name: "2020", value: 2800 },
+  { name: "2021", value: 3500 },
+  { name: "2022", value: 4200 },
+  { name: "2023", value: 4800 },
+];
+//
+const FinanceGraph = () => {
   return (
     <Box
       bg="white"
@@ -37,11 +51,14 @@ const FinanceGraph = () => {
       maxW="600px"
       mx="auto"
     >
-      <Tabs.Root defaultValue="mensual">
+      <Tabs.Root variant="plain" defaultValue="mensual">
         <Tabs.List
           justifyContent="center"
-          mb={4}
-          borderBottom="1px solid #e5e7eb"
+          display="flex"
+          width="100%"
+          mb={2}
+          borderBottom="none"
+          border="none"
         >
           {["semanal", "mensual", "anual"].map((key) => (
             <Tabs.Trigger
@@ -51,42 +68,128 @@ const FinanceGraph = () => {
               textTransform="capitalize"
               px={4}
               pb={2}
+              borderBottom="none"
               _selected={{
                 color: "black",
-                borderBottom: "2px solid #3CCF91",
+                borderBottom: "2px solid",
+                borderColor: "green.400",
               }}
             >
               {key}
             </Tabs.Trigger>
           ))}
         </Tabs.List>
-
-        <Tabs.Content value="mensual">
-          <Box bg="blue.400" p={4} borderRadius="lg" minHeight="250px">
+        <Tabs.Content value="semanal">
+          <Box bg="blue.400" p={4} borderRadius="lg" minHeight="180px">
             <Flex justify="center">
               <Box w="100%" maxW="500px">
-                <ResponsiveContainer width="100%" height={250}>
-                  <ComposedChart data={data}>
-                    <CartesianGrid stroke="#CBD5E0" strokeDasharray="3 3" />
-                    <XAxis dataKey="name" stroke="#CBD5E0" tick={{ style: { fontSize: "12px"}}} />
+                <ResponsiveContainer width="100%" height={200}>
+                  <ComposedChart data={weeklyData} margin={{ left: -15, right: 15 }}>
+                    <XAxis
+                      dataKey="name"
+                      stroke="#CBD5E0"
+                      tick={{ style: { fontSize: "12px" } }}
+                      axisLine={false}
+                      tickLine={false}
+                    />
                     <YAxis
                       stroke="#CBD5E0"
                       tick={{ style: { fontSize: "12px" } }}
+                      axisLine={false}
+                      tickLine={false}
                     />
                     <Tooltip />
-
                     <Bar
                       dataKey="value"
                       fill="white"
                       radius={[4, 4, 0, 0]}
                       barSize={8}
                     />
-
                     <Line
                       dataKey="value"
-                      type="monotone"
+                      type="linear"
                       stroke="#3CCF91"
-                      strokeWidth={3}
+                      strokeWidth={4}
+                      dot={true}
+                      isAnimationActive={true}
+                    />
+                  </ComposedChart>
+                </ResponsiveContainer>
+              </Box>
+            </Flex>
+          </Box>
+        </Tabs.Content>
+        <Tabs.Content value="mensual">
+          <Box bg="blue.400" p={4} borderRadius="lg" minHeight="180px">
+            <Flex justify="center">
+              <Box w="100%" maxW="500px">
+                <ResponsiveContainer width="100%" height={200}>
+                  <ComposedChart data={monthlyData} margin={{ left: -15, right: 15 }}>
+                    <XAxis
+                      dataKey="name"
+                      stroke="#CBD5E0"
+                      tick={{ style: { fontSize: "12px" } }}
+                      axisLine={false}
+                      tickLine={false}
+                    />
+                    <YAxis
+                      stroke="#CBD5E0"
+                      tick={{ style: { fontSize: "12px" } }}
+                      axisLine={false}
+                      tickLine={false}
+                    />
+                    <Tooltip />
+                    <Bar
+                      dataKey="value"
+                      fill="white"
+                      radius={[4, 4, 0, 0]}
+                      barSize={8}
+                    />
+                    <Line
+                      dataKey="value"
+                      type="linear"
+                      stroke="#3CCF91"
+                      strokeWidth={4}
+                      dot={true}
+                      isAnimationActive={true}
+                    />
+                  </ComposedChart>
+                </ResponsiveContainer>
+              </Box>
+            </Flex>
+          </Box>
+        </Tabs.Content>
+        <Tabs.Content value="anual">
+          <Box bg="blue.400" p={4} borderRadius="lg" minHeight="180px">
+            <Flex justify="center">
+              <Box w="100%" maxW="500px">
+                <ResponsiveContainer width="100%" height={200}>
+                  <ComposedChart data={yearlyData} margin={{ left: -15, right: 15 }}>
+                    <XAxis
+                      dataKey="name"
+                      stroke="#CBD5E0"
+                      tick={{ style: { fontSize: "12px" } }}
+                      axisLine={false}
+                      tickLine={false}
+                    />
+                    <YAxis
+                      stroke="#CBD5E0"
+                      tick={{ style: { fontSize: "12px" } }}
+                      axisLine={false}
+                      tickLine={false}
+                    />
+                    <Tooltip />
+                    <Bar
+                      dataKey="value"
+                      fill="white"
+                      radius={[4, 4, 0, 0]}
+                      barSize={8}
+                    />
+                    <Line
+                      dataKey="value"
+                      type="linear"
+                      stroke="#3CCF91"
+                      strokeWidth={4}
                       dot={true}
                       isAnimationActive={true}
                     />
@@ -106,7 +209,6 @@ const FinanceGraph = () => {
     </Box>
   );
 };
-
 type SummaryCardProps = {
   icon: React.ElementType;
   label: string;
@@ -116,22 +218,38 @@ type SummaryCardProps = {
 const SummaryCard = ({ icon, label, value }: SummaryCardProps) => (
   <Flex
     direction="column"
-    bg="gray.50"
-    borderRadius="lg"
+    bg="white"
+    borderRadius="xl"
     p={4}
-    align="center"
-    boxShadow="soft"
-    border="1px solid #f1f1f1"
+    align="flex-start"
+    position="relative"
   >
-    <Icon as={icon} boxSize={6} mb={2} color="#3CCF91" />
-    <Text fontSize="sm" color="gray.500" mb={1} textTransform="capitalize">
-      {label}
-    </Text>
-    <Text fontSize="xl" fontWeight="bold" color="gray.900">
+    <Flex w="100%" align="center" mb={2}>
+      <Box
+        bg="green.500"
+        borderRadius="md"
+        p={2}
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        mr={3}
+      >
+        <Icon as={icon} boxSize={5} color="white" />
+      </Box>
+      <Text fontSize="md" color="gray.400" fontWeight="bold" textTransform="capitalize">
+        {label}
+      </Text>
+    </Flex>
+    <Text fontSize="2xl" fontWeight="semibold" color="black" mb={2}>
       {value}
     </Text>
-    <Box w="100%" h="2px" bg="gray.200" mt={2} position="relative">
-      <Box w="60%" h="2px" bg="#3CCF91" position="absolute" />
+    <Box w="100%" h="4px" bg="gray.100" borderRadius="full" mt="auto">
+      <Box 
+        w={label === "ventas" ? "70%" : label === "Gastos" ? "30%" : "80%"} 
+        h="4px" 
+        bg="green.500" 
+        borderRadius="full" 
+      />
     </Box>
   </Flex>
 );
