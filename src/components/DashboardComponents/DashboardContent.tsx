@@ -11,7 +11,8 @@ import { FaMoneyBills } from "react-icons/fa6";
 import { IoWallet } from "react-icons/io5";
 import { MdPayment } from "react-icons/md";
 import { FaCashRegister } from "react-icons/fa";
-import { InventoryList } from "../DashboardComponents/InventoryList";
+import { InventoryList } from "@/components/DashboardComponents/InventoryList";
+import FinanceGraph from "@/components/DashboardComponents/FinanceGraph";
 
 export const DashboardContent = () => {
   const colSpan = useBreakpointValue({ base: 12, md: 6, lg: 3 });
@@ -64,7 +65,7 @@ export const DashboardContent = () => {
             </Text>
             <Box bg="white" p={4} borderRadius="3xl" boxShadow="soft" h="100%">
               <Text fontWeight="bold" color="blue.400" mb={4}>
-                {/* Component */}
+                <FinanceGraph />
               </Text>
             </Box>
           </GridItem>
