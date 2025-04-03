@@ -13,6 +13,7 @@ import { MdPayment } from "react-icons/md";
 import { FaCashRegister } from "react-icons/fa";
 import { InventoryList } from "@/components/DashboardComponents/InventoryList";
 import FinanceGraph from "@/components/DashboardComponents/FinanceGraph";
+import SalesTable from "@/components/DashboardComponents/SalesTable";
 
 export const DashboardContent = () => {
   const colSpan = useBreakpointValue({ base: 12, md: 6, lg: 3 });
@@ -42,7 +43,7 @@ export const DashboardContent = () => {
 
   return (
     <Flex direction="column" overflow="hidden" margin="0" padding="0">
-      <Box p={6} bg={"background.25"}>
+      <Box p={6} bg={"background.25"} >
         <SimpleGrid columns={12} gap={6}>
           {cards.map((card, i) => (
             <GridItem key={i} colSpan={colSpan}>
@@ -54,7 +55,7 @@ export const DashboardContent = () => {
             <Text fontWeight="bold" fontSize="lg" mb={4} color="blue.500">
               Stock del inventario
             </Text>
-            <Box bg="white" p={4} borderRadius="3xl" boxShadow="soft" h="100%">
+            <Box bg="white" p={4} borderRadius="3xl" boxShadow="md" h="100%">
               <InventoryList />
             </Box>
           </GridItem>
@@ -63,18 +64,18 @@ export const DashboardContent = () => {
             <Text fontWeight="bold" fontSize="lg" mb={4} color="blue.500">
               Estadísticas
             </Text>
-            <Box bg="white" p={4} borderRadius="3xl" boxShadow="soft" h="100%">
+            <Box bg="white" p={4} borderRadius="3xl" boxShadow="md" h="100%">
               <FinanceGraph />
             </Box>
           </GridItem>
 
           <GridItem colSpan={12}>
-            <Text fontWeight="bold" fontSize="lg" mb={4} color="blue.500">
+            <Text fontWeight="bold" fontSize="lg" mt={6} mb={4} color="blue.500">
               Pedidos de compra
             </Text>
-            <Box bg="white" p={4} borderRadius="3xl" boxShadow="soft">
+            <Box bg="white" p={4} borderRadius="3xl" boxShadow="md">
               <Box fontWeight="bold" color="blue.400" mb={4}>
-                {/* Component */}
+                <SalesTable />
               </Box>
             </Box>
           </GridItem>

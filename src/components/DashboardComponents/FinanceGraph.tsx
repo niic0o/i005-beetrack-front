@@ -1,5 +1,6 @@
 import { Box, Tabs, Icon, Text, SimpleGrid, Flex } from "@chakra-ui/react";
-import { FaShoppingCart, FaWallet, FaMoneyBillWave } from "react-icons/fa";
+import { FaShoppingCart, FaWallet, } from "react-icons/fa";
+import { MdRocketLaunch } from "react-icons/md";
 import {
   Line,
   XAxis,
@@ -203,8 +204,8 @@ const FinanceGraph = () => {
 
       <SimpleGrid columns={[1, 3]} gap={4}>
         <SummaryCard icon={FaShoppingCart} label="ventas" value="32,984$" />
-        <SummaryCard icon={FaWallet} label="Gastos" value="2,42$" />
-        <SummaryCard icon={FaMoneyBillWave} label="Balance" value="30,400$" />
+        <SummaryCard icon={MdRocketLaunch} label="Gastos" value="2,42$" />
+        <SummaryCard icon={FaWallet} label="Balance" value="30,400$" />
       </SimpleGrid>
     </Box>
   );
