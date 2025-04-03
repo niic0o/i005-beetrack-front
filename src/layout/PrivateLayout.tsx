@@ -1,8 +1,9 @@
 import { ReactNode } from "react";
 import Topbar from "@/components/DashboardComponents/Topbar";
-import Sidebar from "@/components/Sidebar";
+import Sidenavbar from "@/components/Sidenavbar";
 import { Grid, GridItem } from "@chakra-ui/react";
 import { Outlet } from "react-router-dom";
+import { ColorModeButton } from "@/components/ui/color-mode";
 
 type PrivateLayoutProps = {
   children?: ReactNode;
@@ -11,33 +12,42 @@ type PrivateLayoutProps = {
   contentPadding?: string | object;
 };
 
-const PrivateLayout = ({ 
-  children, 
-  showTopbar = true, 
+const PrivateLayout = ({
+  children,
+  showTopbar = true,
   showSidebar = true,
   contentPadding = "0"
 }: PrivateLayoutProps) => {
   return (
-    <Grid templateColumns={"repeat(6, 1fr)"} bg={"gray.50"} minH={{ lg: "100vh" }}>
-      {showSidebar && (
+    <>
+      {/* El botón del modo es para visualizar light/dark y es una demo */}
+      <ColorModeButton pos={"fixed"} bottom={"10px"} left={"10px"} zIndex={1000} border={"md"} borderColor={{ base: "black", _dark: "white" }} />
+      <Grid templateColumns={"repeat(6, 1fr)"} bg={"gray.50"} h={"100vh"}>
+        {showSidebar && (
+          <GridItem
+            as={"aside"}
+            colSpan={{ base: 6, md: 1 }}
+            position={{ base: "fixed", md: "initial" }}
+            bg={{ base: "sidenavbar.light", _dark: "sidenavbar.dark" }}
+            w={"full"}
+            h={{ base: "fit", md: "100vh" }}
+            p={{ base: "20px", lg: "30px" }}
+            zIndex={100}>
+            <Sidenavbar />
+          </GridItem>
+        )}
         <GridItem
-          as={"aside"}
-          colSpan={1}
-          bg={"#f2f0eb"}
-          minH={{ xl: "100vh" }}
-          p={{ base: "20px", lg: "30px" }}>
-          <Sidebar />
+          as={"main"}
+          colSpan={{ base: 6, md: 5 }}
+          mt={{ base: "100px", md: 0 }} // De momento para que en el modo móvil no se tape el topbar
+          p={contentPadding}
+          bg={{ base: "content.light", _dark: "content.dark" }}
+          h={{ base: "100%", md: "100vh" }}>
+          {showTopbar && <Topbar />}
+          {children || <Outlet />}
         </GridItem>
-      )}
-      <GridItem 
-        as={"main"} 
-        colSpan={showSidebar ? 5 : 6} 
-        p={contentPadding}
-      >
-        {showTopbar && <Topbar />}
-        {children || <Outlet />}
-      </GridItem>
-    </Grid>
+      </Grid>
+    </>
   );
 };
 

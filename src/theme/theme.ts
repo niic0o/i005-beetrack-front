@@ -8,6 +8,14 @@ export const customStyles = createSystem(defaultConfig, {
 				heading: { value: `'Montserrat', sans-serif` },
 			},
 			colors: {
+				sidenavbar: {
+					light: { value: "#f7f9fc" },
+					dark: { value: "#242424" }
+				},
+				content: {
+					light: { value: "#f2f2f2" },
+					dark: { value: "#363636" }
+				},
 				yellow: {
 					50: { value: '#fff9e6' },
 					200: { value: '#ffe28d' },
