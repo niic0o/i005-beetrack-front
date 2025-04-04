@@ -7,6 +7,7 @@ import Register from '@/pages/Register'
 // import Home from './pages/Home'
 import DashboardPage from '@/pages/DashboardPage'
 import InventoryPage from '@/pages/InventoryPage'
+import ProductEditPage from '@/pages/ProductEditPage'
 
 function App() {
   const isAuthenticated = true // Cuando tengamos la lógica de autenticación cambiamos esto
@@ -23,6 +24,7 @@ function App() {
           <Route index element={<DashboardPage />} />
           <Route path="home" element={<DashboardPage />} />
           <Route path="inventario" element={<InventoryPage />} />
+          <Route path="inventarioindividual" element={<ProductEditPage />} />
         </Route>
       </Route>
     </Routes>

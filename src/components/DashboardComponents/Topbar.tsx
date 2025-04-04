@@ -30,7 +30,7 @@ const Topbar = () => {
         </InputGroup>
 
         <IconButton aria-label="Notificaciones">
-          <FaBell color={"black"} />
+          <FaBell />
         </IconButton>
       </Flex>
     </Flex>
