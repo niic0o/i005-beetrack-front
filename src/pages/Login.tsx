@@ -21,11 +21,11 @@ const Login = () => {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
   const [errorMessage, setErrorMessage] = useState("");
 
-  // Simplify the store access - only select what you need
+
   const loginUser = useAuthStore((state) => state.loginUser);
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
-  // Check authentication status and redirect if needed
+
   useEffect(() => {
     if (isAuthenticated) {
       navigate("/home");
