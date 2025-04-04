@@ -6,9 +6,12 @@ import {
   Stack,
   AbsoluteCenter,
   Text,
+  Image,
+  Flex,
 } from "@chakra-ui/react";
+import Logo from "@/assets/logo.svg";
 
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAuthStore from "@/store/useAuthStore";
 import { useEffect, useState } from "react";
 
@@ -49,11 +52,14 @@ const Login = () => {
 
   return (
     <AbsoluteCenter>
-      <Card.Root as="form" maxW="sm" shadow="lg" onSubmit={handleLoginSubmit}>
+      <Card.Root as="form" maxW="md" shadow="lg" onSubmit={handleLoginSubmit}>
         <Card.Header>
-          <Card.Title>Log In</Card.Title>
+          <Flex position={"relative"} align={"center"} mb={3}>
+            <Image position={"absolute"} left={0}  src={Logo} alt="Logo Beetrack" maxWidth={"50px"} />
+            <Card.Title w={"100%"} textAlign={"center"}>Log In</Card.Title>
+          </Flex>
           <Card.Description>
-            Fill in the form below to log in your account
+            Please fill in the form below to log in to your account.
           </Card.Description>
         </Card.Header>
         <Card.Body>
@@ -85,7 +91,9 @@ const Login = () => {
           </Stack>
         </Card.Body>
         <Card.Footer justifyContent="flex-end">
-          <Button variant="outline">Register</Button>
+          <Link to="/register">
+            <Button variant="outline">Register</Button>
+          </Link>
           <Button type="submit" variant="solid">
             Sign in
           </Button>
