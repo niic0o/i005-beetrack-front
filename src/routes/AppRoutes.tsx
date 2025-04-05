@@ -5,6 +5,7 @@ import Register from '@/pages/Register'
 import DashboardPage from '@/pages/DashboardPage'
 import InventoryPage from '@/pages/InventoryPage'
 import PrivateRoutes from './PrivateRoutes'
+import NotFoundPage from '@/pages/NotFoundPage'
 
 const AppRoutes = () => {
   return (
@@ -21,6 +22,8 @@ const AppRoutes = () => {
           <Route path="inventario" element={<InventoryPage />} />
         </Route>
       </Route>
+
+      <Route path="*" element={<NotFoundPage />}></Route>
     </Routes>
   )
 }
