@@ -1,7 +1,11 @@
 import { Flex, Text, InputGroup, Input, IconButton } from "@chakra-ui/react";
 import { FaSearch, FaBell } from "react-icons/fa";
+import { useColorModeValue } from "@/components/ui/color-mode"
 
 const Topbar = () => {
+
+  const bg = useColorModeValue("white", "sidenavbar.dark")
+  const color = useColorModeValue("black", "white")
   return (
     <Flex
       as="header"
@@ -10,10 +14,11 @@ const Topbar = () => {
       px={6}
       align="center"
       justify="space-between"
-      bg="white"
+      bg={bg}
       boxShadow="soft"
+      height="24"
     >
-      <Text fontSize="lg" fontWeight="bold" color={"black"}>
+      <Text fontSize="lg" fontWeight="bold" color={color}>
         ¡Bienvenido Carlos!
       </Text>
 
@@ -25,7 +30,7 @@ const Topbar = () => {
             variant="outline"
             borderColor="gray.300"
             _hover={{ borderColor: "gray.400" }}
-            color="black"
+            color={color}
           />
         </InputGroup>
 
