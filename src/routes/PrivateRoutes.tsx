@@ -16,7 +16,7 @@ const PrivateRoutes = () => {
             </Flex>
         )
     }
-    return user ? <Outlet /> : <Navigate to={'/login'} />
+    return !user ? <Outlet /> : <Navigate to={'/login'} /> //TODO: Cambiar "!user" a "user" cuando tengamos implementada la autenticación.
 };
 
 export default PrivateRoutes;

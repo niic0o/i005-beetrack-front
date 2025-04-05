@@ -7,18 +7,15 @@ export const customStyles = createSystem(defaultConfig, {
 				body: { value: `'Montserrat', sans-serif` },
 				heading: { value: `'Montserrat', sans-serif` },
 			},
-			// fontWeights: {
-			// 	extralight: { value: '100' }, 
-			// 	lighter: { value: '200' }, 
-			// 	light: { value: '300' }, 
-			// 	normal: { value: '400' },
-			// 	medium: { value: '500' }, 
-			// 	bold: { value: '600' }, 
-			// 	bolder: { value: '700' }, 
-			// 	extrabold: { value: '800' }, 
-			// 	black: { value: '900' }, 
-			// },
 			colors: {
+				sidenavbar: {
+					light: { value: "#f7f9fc" },
+					dark: { value: "#242424" }
+				},
+				content: {
+					light: { value: "#f2f2f2" },
+					dark: { value: "#363636" }
+				},
 				yellow: {
 					50: { value: '#fff9e6' },
 					200: { value: '#ffe28d' },
@@ -56,7 +53,20 @@ export const customStyles = createSystem(defaultConfig, {
 					medium: { value: '#f86b40' },
 					good: { value: '#2ce281' },
 				},
+				background:{
+					white: { value: '#ffffff' },
+					25: { value: '#f7f9fc' },
+					50: { value: '#e7e9eb' },
+					100: { value: '#b6bac0' },
+					200: { value: '#9298A1' },
+					300: { value: '#606976' },
+				}
 			},
+			shadows: {
+				soft: { value: '0 2px 4px rgba(0, 0, 0, 0.05)' },
+				softer: { value: '0 4px 8px rgba(0, 0, 0, 0.04)' },
+				ultraSoft: { value: '0 8px 24px rgba(0, 0, 0, 0.03)' },
+			  },
 		},
 	}
 })
