@@ -30,12 +30,7 @@ export interface Sale {
 }
 
 
-export interface AppError {
-    message: string;         
-    code?: string;           
-    status?: number;         
-    details?: unknown; 
-}
+
   
  
 export type NewProduct = Omit<Product, 'id'>;
