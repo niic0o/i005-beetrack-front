@@ -6,7 +6,7 @@ import {
   Text,
   Flex,
 } from "@chakra-ui/react";
-import { useColorMode, useColorModeValue } from "@/components/ui/color-mode"
+import { useColorModeValue } from "@/components/ui/color-mode"
 import { Card } from "@/components/DashboardComponents/Card";
 import { FaMoneyBills } from "react-icons/fa6";
 import { IoWallet } from "react-icons/io5";

@@ -1,11 +1,10 @@
-import { Flex, Text, InputGroup, Input, IconButton } from "@chakra-ui/react";
+import { Flex, Text, InputGroup, Input, Box, IconButton } from "@chakra-ui/react";
 import { FaSearch, FaBell } from "react-icons/fa";
-import { useColorModeValue } from "@/components/ui/color-mode"
+import { useColorModeValue } from "@/components/ui/color-mode";
 
 const Topbar = () => {
-
-  const bg = useColorModeValue("white", "sidenavbar.dark")
-  const color = useColorModeValue("black", "white")
+  const bg = useColorModeValue("white", "sidenavbar.dark");
+  const color = useColorModeValue("black", "white");
   return (
     <Flex
       as="header"
@@ -34,9 +33,22 @@ const Topbar = () => {
           />
         </InputGroup>
 
-        <IconButton aria-label="Notificaciones">
-          <FaBell />
-        </IconButton>
+        <Box position="relative">
+          <IconButton
+            aria-label="Notificaciones"
+            variant="plain"
+            color={color}
+          > <FaBell /> </IconButton>
+          {/* <Box
+            position="absolute"
+            top="0"
+            right="0"
+            w="10px"
+            h="10px"
+            bg="red.500"
+            borderRadius="full"
+          /> */}
+        </Box>
       </Flex>
     </Flex>
   );
