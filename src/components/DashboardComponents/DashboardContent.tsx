@@ -18,7 +18,6 @@ import SalesTable from "@/components/DashboardComponents/SalesTable";
 
 export const DashboardContent = () => {
   const colSpan = useBreakpointValue({ base: 12, md: 6, lg: 3 });
-  const { toggleColorMode } = useColorMode();
   const color = useColorModeValue("blue.400", "white")
 
   const cards = [
