@@ -1,6 +1,6 @@
 import { createSystem, defaultConfig } from '@chakra-ui/react';
 
-export const customStyles = createSystem(defaultConfig, {
+const customStyles = createSystem(defaultConfig, {
 	theme: {
 		tokens: {
 			fonts: {
@@ -60,7 +60,11 @@ export const customStyles = createSystem(defaultConfig, {
 					100: { value: '#b6bac0' },
 					200: { value: '#9298A1' },
 					300: { value: '#606976' },
-				}
+				},
+				chart: {
+					bg: { value: '#0f2027' },
+					gradient: { value: 'linear(to-br, #0f2027, #203a43, #2c5364)' }
+				  }
 			},
 			shadows: {
 				soft: { value: '0 2px 4px rgba(0, 0, 0, 0.05)' },
@@ -70,3 +74,4 @@ export const customStyles = createSystem(defaultConfig, {
 		},
 	}
 })
+export default customStyles;
