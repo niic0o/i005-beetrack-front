@@ -1,5 +1,5 @@
-import { buildUrl } from './../../src/utils/buildUrl';
-import { QueryParams } from './../../src/types/utilsAppTypes';
+import { buildUrl } from '../../src/utils/buildUrl';
+import { QueryParams } from '../../src/types/utilsAppTypes';
 
 
 describe('buildUrl', () => {

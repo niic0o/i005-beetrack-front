@@ -4,7 +4,7 @@ import Login from '@/pages/Login'
 import Register from '@/pages/Register'
 import DashboardPage from '@/pages/DashboardPage'
 import InventoryPage from '@/pages/InventoryPage'
-import PrivateRoutes from './PrivateRoutes'
+import PrivateRoutes from '@/routes/PrivateRoutes'
 import NotFoundPage from '@/pages/NotFoundPage'
 
 const AppRoutes = () => {
