@@ -1,7 +1,10 @@
 import { createSystem, defaultConfig } from '@chakra-ui/react';
 
-export const customStyles = createSystem(defaultConfig, {
+const customStyles = createSystem(defaultConfig, {
 	theme: {
+		breakpoints: {
+			xs: "280px",
+		},
 		tokens: {
 			fonts: {
 				body: { value: `'Montserrat', sans-serif` },
@@ -15,6 +18,9 @@ export const customStyles = createSystem(defaultConfig, {
 				content: {
 					light: { value: "#f2f2f2" },
 					dark: { value: "#363636" }
+				},
+				amarillo: {
+					value: "#ffd701",
 				},
 				yellow: {
 					50: { value: '#fff9e6' },
@@ -70,3 +76,5 @@ export const customStyles = createSystem(defaultConfig, {
 		},
 	}
 })
+
+export default customStyles;
