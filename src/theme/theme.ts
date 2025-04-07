@@ -1,6 +1,6 @@
 import { createSystem, defaultConfig } from '@chakra-ui/react';
 
-export const customStyles = createSystem(defaultConfig, {
+const customStyles = createSystem(defaultConfig, {
 	theme: {
 		tokens: {
 			fonts: {
@@ -74,3 +74,4 @@ export const customStyles = createSystem(defaultConfig, {
 		},
 	}
 })
+export default customStyles;
