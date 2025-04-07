@@ -1,15 +1,17 @@
-import { Flex } from "@chakra-ui/react";
-import { useState } from "react";
+import { Flex, useBreakpointValue } from "@chakra-ui/react";
 import MobileTopBar from "./SidenavbarComponents/MobileTopBar";
 import MainSidenavbarMenu from "./SidenavbarComponents/MainSidenavbarMenu";
+import { useRef } from "react";
+import useSidenavbarStore from "@/store/useSidenavbarStore";
 
 const Sidenavbar = () => {
-	const [isOpen, setIsOpen] = useState<boolean>(false);
-
 	return (
-		<Flex direction={"column"} position={{ md: "sticky" }} top={{ md: "30px" }}>
-			<MobileTopBar setIsOpen={setIsOpen} />
-			<MainSidenavbarMenu isOpen={isOpen} setIsOpen={setIsOpen} />
+		<Flex
+			direction={"column"}
+			position={{ md: "sticky" }}
+			top={{ md: "30px" }}>
+			<MobileTopBar />
+			<MainSidenavbarMenu />
 		</Flex >
 	)
 }

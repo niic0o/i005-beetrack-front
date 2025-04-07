@@ -1,14 +1,18 @@
-import { Box, HStack, IconButton, Image, Separator, SystemStyleObject, Text, VStack } from "@chakra-ui/react"
+import { Box, HStack, IconButton, Image, Separator, SystemStyleObject, Text, useBreakpointValue, VStack } from "@chakra-ui/react"
 import { MdBarChart, MdClose, MdHistory, MdHomeFilled, MdInventory, MdPointOfSale } from "react-icons/md"
 import Logo from '@/assets/logo.svg';
 import { NavLink } from "react-router-dom";
+import useSidenavbarStore from "@/store/useSidenavbarStore";
 
-type MainSidenavbarMenu = {
-    isOpen: boolean;
-    setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}
+// type MainSidenavbarMenu = {
+//     isOpen: boolean;
+//     setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+// }
 
-const MainSidenavbarMenu = ({ isOpen, setIsOpen }: MainSidenavbarMenu) => {
+const MainSidenavbarMenu = () => {
+
+    const  { isOpen, setIsOpen } = useSidenavbarStore()
+    const isMobile = useBreakpointValue({ base: true, md: false })
 
     const sidenavabarStyles: SystemStyleObject = {
         "& > a": { w: "full", p: 2, display: "flex", alignItems: "center", gap: 3, fontWeight: "bold", fontSize: "14px", borderRadius: "md" },
@@ -20,11 +24,13 @@ const MainSidenavbarMenu = ({ isOpen, setIsOpen }: MainSidenavbarMenu) => {
 
     return (
         <Box
-            display={{ base: isOpen ? "block" : "none", md: "block" }}
+            // display={{ base: isOpen ? "block" : "none", md: "block" }}
             h={{ base: "100vh", md: "auto" }}
             p={{ base: "20px", md: "0" }}
             bg={{ base: "sidenavbar.light", _dark: "sidenavbar.dark" }}
             position={{ base: "absolute", md: "relative" }}
+            transform={isMobile && !isOpen ? 'translateX(-100%)' : 'translateX(0)'}
+            transition="transform 0.3s ease-in-out"
             shadow={{ base: "lg", md: "none" }}
             top={0} left={0}>
             <HStack gap={4}>
