@@ -1,8 +1,6 @@
-import { Flex, useBreakpointValue } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import MobileTopBar from "./SidenavbarComponents/MobileTopBar";
 import MainSidenavbarMenu from "./SidenavbarComponents/MainSidenavbarMenu";
-import { useRef } from "react";
-import useSidenavbarStore from "@/store/useSidenavbarStore";
 
 const Sidenavbar = () => {
 	return (
