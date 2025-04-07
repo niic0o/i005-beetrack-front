@@ -3,7 +3,6 @@ import { devtools } from 'zustand/middleware';
 
 interface SidenavbarState {
     isOpen: boolean;
-    itemSelected: string;
     setIsOpen: (status: boolean) => void;
 }
 
@@ -11,7 +10,6 @@ const useSidenavbarStore = create<SidenavbarState>()(
     devtools(
         (set) => ({
             isOpen: false,
-            itemSelected: "home",
             setIsOpen: (status) => {
 
                 set({ isOpen: status })
