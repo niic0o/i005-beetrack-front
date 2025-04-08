@@ -20,7 +20,7 @@ export const useCheckAuthStatus = () => {
       setUser(user);
       setIsAuthenticated(true);
     },
-    staleTime: 5 * 60 * 1000 // Match product staleTime
+    staleTime: 5 * 60 * 1000 // lo puse porque esta en products tmb ^^'
   });
 };
 
