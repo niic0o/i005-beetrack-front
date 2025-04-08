@@ -1,6 +1,8 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 import { User } from "@/types/authType";
+import { Query } from "@tanstack/react-query";
+import { QueryParams } from "@/types/utilsAppTypes";
 interface AppError {
   message: string;
   code?: string | number;
@@ -11,6 +13,7 @@ interface AuthState {
   loading: boolean;
   isAuthenticated: boolean;
   error: AppError | null;
+  queryParams: QueryParams
 
   setLoading: (isLoading: boolean) => void;
   setUser: (user: User | null) => void;
@@ -24,6 +27,7 @@ const initialState = {
   loading: false,
   isAuthenticated: false,
   error: null,
+  queryParams: { resource: "auth" },
 };
 
 const useAuthStore = create<AuthState>()(

@@ -1,6 +1,5 @@
 import { AUTH_ENDPOINT } from "@/const/api";
-import { User, UserData, Credentials, NewUserData } from "@/types/authType";
-// import { QueryParams } from "@/types/utilsAppTypes";
+import { User, Credentials, NewUserData } from "@/types/authType";
 import { apiRequest } from "@/utils/apiRequest";
 import { buildUrl } from "@/utils/buildUrl";
 
