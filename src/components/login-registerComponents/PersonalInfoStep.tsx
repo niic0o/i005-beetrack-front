@@ -1,17 +1,14 @@
-import { Field, Input, Stack } from "@chakra-ui/react";
-import { UseFormReturn } from "react-hook-form";
+import { Field, Input, Stack, Text } from "@chakra-ui/react";
+import { FieldErrors, UseFormRegister } from "react-hook-form";
 import { RegisterFormData } from "./registerSchema";
 
 type PersonalInfoStepProps = {
-  formMethods: UseFormReturn<RegisterFormData>;
+  register: UseFormRegister<RegisterFormData>;
+  errors: FieldErrors<RegisterFormData>;
 };
 
-export const PersonalInfoStep = ({ formMethods }: PersonalInfoStepProps) => {
-  const {
-    register,
-    formState: { errors },
-  } = formMethods;
-
+export const PersonalInfoStep = ({ register, errors }: PersonalInfoStepProps) => {
+  console.log("Personal info errors:", errors.name, errors.lastName, errors.dateOfBirth); 
   return (
     <Stack gap="4" w="full">
       <Field.Root>
@@ -22,7 +19,7 @@ export const PersonalInfoStep = ({ formMethods }: PersonalInfoStepProps) => {
           {...register("name")}
         />
         {errors.name && (
-          <Field.ErrorText>{errors.name.message}</Field.ErrorText>
+          <Text>{errors.name.message as string}</Text>
         )}
       </Field.Root>
       <Field.Root>
@@ -33,17 +30,17 @@ export const PersonalInfoStep = ({ formMethods }: PersonalInfoStepProps) => {
           {...register("lastName")}
         />
         {errors.lastName && (
-          <Field.ErrorText>{errors.lastName.message}</Field.ErrorText>
+          <Field.ErrorText>{errors.lastName.message as string}</Field.ErrorText>
         )}
       </Field.Root>
       <Field.Root>
-        <Field.Label>Date of Birth</Field.Label>
+        <Field.Label>Fecha de nacimiento</Field.Label>
         <Input
           type="date"
           {...register("dateOfBirth")}
         />
         {errors.dateOfBirth && (
-          <Field.ErrorText>{errors.dateOfBirth.message}</Field.ErrorText>
+          <Field.ErrorText>{errors.dateOfBirth.message as string}</Field.ErrorText>
         )}
       </Field.Root>
     </Stack>

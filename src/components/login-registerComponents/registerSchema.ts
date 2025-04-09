@@ -1,33 +1,39 @@
 import { z } from "zod";
 
-export const emailSchema = z.object({
-  email: z.string().min(1, "Email is required").email("Invalid email format"),
-});
-export const passwordSchema = z.object({
+// Create the base schema
+export const baseRegisterSchema = z.object({
+  // Step 1: Email
+  email: z.string().min(1, "Email requerido").email("Formato de email invalido"),
+  
+  // Step 2: Password
   password: z.string().min(6, "Password must be at least 6 characters"),
-});
-
-export const personalInfoSchema = z.object({
-  name: z.string().min(1, "Name is required"),
-  lastName: z.string().min(1, "Last name is required"),
-  dateOfBirth: z.string().min(1, "Date of birth is required"),
-});
-
-export const storeInfoSchema = z.object({
-  storeName: z.string().min(1, "Store name is required"),
-  storePhone: z.string().min(1, "Store phone is required"),
+  confirmPassword: z.string().min(1, "Contraseña de confirmación es requerida"),
+  
+  // Step 3: Personal Info
+  name: z.string().min(1, "Nombre requerido"),
+  lastName: z.string().min(1, "Apellido requerido"),
+  dateOfBirth: z.string().min(1, "Fecha de nacimiento requerida"),
+  
+  // Step 4: Store Info
+  storeName: z.string().min(1, "Nombre de establecimiento es requerido"),
+  storePhone: z.string().min(1, "Número de telefono es requerido"),
   storeAddress: z.string().optional(),
 });
 
-export const registerSchema = z.object({
-  email: emailSchema.shape.email,
-  password: passwordSchema.shape.password,
-  name: personalInfoSchema.shape.name,
-  lastName: personalInfoSchema.shape.lastName,
-  dateOfBirth: personalInfoSchema.shape.dateOfBirth,
-  storeName: storeInfoSchema.shape.storeName,
-  storePhone: storeInfoSchema.shape.storePhone,
-  storeAddress: storeInfoSchema.shape.storeAddress,
+// Create the step schemas
+export const emailSchema = baseRegisterSchema.pick({ email: true });
+export const passwordSchema = baseRegisterSchema.pick({ password: true, confirmPassword: true })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Las contraseñas no coinciden",
+    path: ["confirmPassword"],
+  });
+export const personalInfoSchema = baseRegisterSchema.pick({ name: true, lastName: true, dateOfBirth: true });
+export const storeInfoSchema = baseRegisterSchema.pick({ storeName: true, storePhone: true, storeAddress: true });
+
+// Add refinement to the full schema
+export const registerSchema = baseRegisterSchema.refine((data) => data.password === data.confirmPassword, {
+  message: "Las contraseñas no coinciden",
+  path: ["confirmPassword"],
 });
 
 export type RegisterFormData = z.infer<typeof registerSchema>;

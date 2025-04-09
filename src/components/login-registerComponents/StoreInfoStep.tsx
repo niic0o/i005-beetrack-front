@@ -1,17 +1,15 @@
 import { Field, Input, Stack } from "@chakra-ui/react";
-import { UseFormReturn } from "react-hook-form";
+import { FieldErrors, UseFormRegister } from "react-hook-form";
 import { RegisterFormData } from "./registerSchema";
 
 type StoreInfoStepProps = {
-  formMethods: UseFormReturn<RegisterFormData>;
+  register: UseFormRegister<RegisterFormData>;
+  errors: FieldErrors<RegisterFormData>;
 };
 
-export const StoreInfoStep = ({ formMethods }: StoreInfoStepProps) => {
-  const {
-    register,
-    formState: { errors },
-  } = formMethods;
-
+export const StoreInfoStep = ({ register, errors }: StoreInfoStepProps) => {
+  console.log("Store info errors:", errors.storeName, errors.storePhone, errors.storeAddress); // Add debugging
+  
   return (
     <Stack gap="4" w="full">
       <Field.Root>
@@ -22,7 +20,7 @@ export const StoreInfoStep = ({ formMethods }: StoreInfoStepProps) => {
           {...register("storeName")}
         />
         {errors.storeName && (
-          <Field.ErrorText>{errors.storeName.message}</Field.ErrorText>
+          <Field.ErrorText>{errors.storeName.message as string}</Field.ErrorText>
         )}
       </Field.Root>
       <Field.Root>
@@ -33,7 +31,7 @@ export const StoreInfoStep = ({ formMethods }: StoreInfoStepProps) => {
           {...register("storePhone")}
         />
         {errors.storePhone && (
-          <Field.ErrorText>{errors.storePhone.message}</Field.ErrorText>
+          <Field.ErrorText>{errors.storePhone.message as string}</Field.ErrorText>
         )}
       </Field.Root>
       <Field.Root>
@@ -44,7 +42,7 @@ export const StoreInfoStep = ({ formMethods }: StoreInfoStepProps) => {
           {...register("storeAddress")}
         />
         {errors.storeAddress && (
-          <Field.ErrorText>{errors.storeAddress.message}</Field.ErrorText>
+          <Field.ErrorText>{errors.storeAddress.message as string}</Field.ErrorText>
         )}
       </Field.Root>
     </Stack>
