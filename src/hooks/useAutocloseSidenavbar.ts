@@ -1,12 +1,13 @@
-import useSidenavbarStore from "@/store/useSidenavbarStore";
-import { useEffect } from "react";
+import useSidenavbarStore from '@/store/useSidenavbarStore';
+import { useBreakpointValue } from '@chakra-ui/react';
+import { useEffect } from 'react';
 
-const useAutocloseSidenavbar = (isMobile: boolean) => {
-    const { setIsOpen } = useSidenavbarStore();
-
+const useAutocloseSidenavbar = () => {
+    const { isOpen, setIsOpen } = useSidenavbarStore();
+    const isMobile = useBreakpointValue({ base: true, md: false });
+    
     useEffect(() => {
-        console.log("Cambio: ", isMobile)
-        if(!isMobile) setIsOpen(false);
+        if(!isMobile && isOpen) setIsOpen(false);
     }, [isMobile]);
 }
 
