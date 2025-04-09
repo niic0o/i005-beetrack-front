@@ -1,6 +1,5 @@
 import { z } from "zod";
 
-// Create the base schema
 export const baseRegisterSchema = z.object({
   // Step 1: Email
   email: z.string().min(1, "Email requerido").email("Formato de email invalido"),
@@ -20,7 +19,6 @@ export const baseRegisterSchema = z.object({
   storeAddress: z.string().optional(),
 });
 
-// Create the step schemas
 export const emailSchema = baseRegisterSchema.pick({ email: true });
 export const passwordSchema = baseRegisterSchema.pick({ password: true, confirmPassword: true })
   .refine((data) => data.password === data.confirmPassword, {
@@ -30,7 +28,6 @@ export const passwordSchema = baseRegisterSchema.pick({ password: true, confirmP
 export const personalInfoSchema = baseRegisterSchema.pick({ name: true, lastName: true, dateOfBirth: true });
 export const storeInfoSchema = baseRegisterSchema.pick({ storeName: true, storePhone: true, storeAddress: true });
 
-// Add refinement to the full schema
 export const registerSchema = baseRegisterSchema.refine((data) => data.password === data.confirmPassword, {
   message: "Las contraseñas no coinciden",
   path: ["confirmPassword"],
