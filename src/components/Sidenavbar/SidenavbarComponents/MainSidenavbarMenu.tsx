@@ -62,7 +62,7 @@ const MainSidenavbarMenu = () => {
                         <MdHomeFilled />
                         Inicio
                     </NavLink>
-                    <NavLink to={"/inventario"} onClick={closeSidenavbar}>
+                    <NavLink to={"/inventory"} onClick={closeSidenavbar}>
                         <MdInventory />
                         Inventario
                     </NavLink>
