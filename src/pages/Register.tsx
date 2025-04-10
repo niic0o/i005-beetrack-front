@@ -1,21 +1,16 @@
-import {
-  Card,
-  Box,
-  Text,
-  Container,
-} from "@chakra-ui/react";
+import { Card, Box, Text, Container } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { useCheckEmailExists, useRegister } from "@/hooks/useAuth";
 import { useEmailCheck } from "@/hooks/useEmailCheck";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { 
-  registerSchema, 
-  emailSchema, 
-  passwordSchema, 
-  personalInfoSchema, 
-  storeInfoSchema, 
-  RegisterFormData 
+import {
+  registerSchema,
+  emailSchema,
+  passwordSchema,
+  personalInfoSchema,
+  storeInfoSchema,
+  RegisterFormData,
 } from "@/components/login-registerComponents/registerSchema";
 import { EmailStep } from "@/components/login-registerComponents/EmailStep";
 import { PasswordStep } from "@/components/login-registerComponents/PasswordStep";
@@ -30,17 +25,19 @@ const Register = () => {
   const [isRegistering, setIsRegistering] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
-  
+
   const registerMutation = useRegister();
   const emailCheckMutation = useCheckEmailExists();
-  
-  const { isCheckingEmail, checkEmailExists } = useEmailCheck(emailCheckMutation);
+
+  const { isCheckingEmail, checkEmailExists } =
+    useEmailCheck(emailCheckMutation);
 
   const {
     register,
     handleSubmit,
     trigger,
     getValues,
+    setError,
     formState: { errors, isSubmitting },
   } = useForm<RegisterFormData>({
     resolver: zodResolver(registerSchema),
@@ -57,28 +54,28 @@ const Register = () => {
       storeAddress: "",
     },
   });
-  useEffect(() => {
-    if (Object.keys(errors).length > 0) {
-      console.log("Form errors:", errors);
-    }
-  }, [errors]);
+  // useEffect(() => {
+  //   if (Object.keys(errors).length > 0) {
+  //     console.log("Form errors:", errors);
+  //   }
+  // }, [errors]);
 
   const onSubmit = async (data: RegisterFormData) => {
     try {
       setIsRegistering(true);
-      
+
       const formattedData = {
         ...data,
         dateOfBirth: data.dateOfBirth ? new Date(data.dateOfBirth) : undefined,
         storePhone: data.storePhone ? Number(data.storePhone) : undefined,
       };
-      
+
       // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 1500));
-      
+
       //TODO: DESCOMENTAR UNA VEZ TENGAMOS EL BACKEND
       // await registerMutation.mutateAsync(formattedData);
-      
+
       console.log("Registration successful!", formattedData);
       setIsRegistering(false);
       navigate("/login");
@@ -91,12 +88,12 @@ const Register = () => {
 
   const validateCurrentStep = async () => {
     let isValid = false;
-    
+
     switch (step) {
       case 1:
         isValid = await trigger("email");
         if (isValid) {
-          isValid = await checkEmailExists(getValues("email"), setErrorMessage);
+          isValid = await checkEmailExists(getValues("email"), setError);
         }
         break;
       case 2:
@@ -109,15 +106,15 @@ const Register = () => {
         isValid = await trigger(["storeName", "storePhone", "storeAddress"]);
         break;
     }
-    
+
     return isValid;
   };
 
   const handleNextStep = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
-    
+
     const isValid = await validateCurrentStep();
-    
+
     if (isValid) {
       if (step < 4) {
         setStep(step + 1);
@@ -135,11 +132,16 @@ const Register = () => {
 
   const getStepTitle = () => {
     switch (step) {
-      case 1: return "Verificacion de Email";
-      case 2: return "Crear contraseña";
-      case 3: return "Información personal";
-      case 4: return "Detalles del establecimiento";
-      default: return "Registro";
+      case 1:
+        return "Registrate para empezar a gestionar tu negocio";
+      case 2:
+        return "Crear contraseña";
+      case 3:
+        return "Información personal";
+      case 4:
+        return "Detalles del establecimiento";
+      default:
+        return "Registro";
     }
   };
 
@@ -161,24 +163,14 @@ const Register = () => {
             <StepProgress step={step} title={getStepTitle()} />
           </Card.Header>
           <Card.Body>
-            {errorMessage && (
-              <Text color="red.500" mb={4}>
-                {errorMessage}
-              </Text>
-            )}
-            
-            {step === 1 && (
-              <EmailStep register={register} errors={errors} />
-            )}
-            
-            {step === 2 && (
-              <PasswordStep register={register} errors={errors} />
-            )}
-            
+            {step === 1 && <EmailStep register={register} errors={errors} />}
+
+            {step === 2 && <PasswordStep register={register} errors={errors} />}
+
             {step === 3 && (
               <PersonalInfoStep register={register} errors={errors} />
             )}
-            
+
             {step === 4 && (
               <StoreInfoStep register={register} errors={errors} />
             )}

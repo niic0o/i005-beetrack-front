@@ -12,7 +12,7 @@ export const StoreInfoStep = ({ register, errors }: StoreInfoStepProps) => {
   
   return (
     <Stack gap="4" w="full">
-      <Field.Root>
+      <Field.Root invalid={!!errors.storeName}>
         <Field.Label>Nombre del establecimiento</Field.Label>
         <Input
           type="text"
@@ -23,7 +23,7 @@ export const StoreInfoStep = ({ register, errors }: StoreInfoStepProps) => {
           <Field.ErrorText>{errors.storeName.message as string}</Field.ErrorText>
         )}
       </Field.Root>
-      <Field.Root>
+      <Field.Root invalid={!!errors.storePhone}>
         <Field.Label>Teléfono del establecimiento</Field.Label>
         <Input
           type="tel"
@@ -31,10 +31,10 @@ export const StoreInfoStep = ({ register, errors }: StoreInfoStepProps) => {
           {...register("storePhone")}
         />
         {errors.storePhone && (
-          <Field.ErrorText>{errors.storePhone.message as string}</Field.ErrorText>
+          <Field.ErrorText>{errors.storePhone.message}</Field.ErrorText>
         )}
       </Field.Root>
-      <Field.Root>
+      <Field.Root invalid={!!errors.storeAddress}>
         <Field.Label>Dirección del establecimiento</Field.Label>
         <Input
           type="text"

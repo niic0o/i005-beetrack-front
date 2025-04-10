@@ -11,7 +11,7 @@ export const PersonalInfoStep = ({ register, errors }: PersonalInfoStepProps) =>
   console.log("Personal info errors:", errors.name, errors.lastName, errors.dateOfBirth); 
   return (
     <Stack gap="4" w="full">
-      <Field.Root>
+      <Field.Root invalid={!!errors.name}>
         <Field.Label>Nombre</Field.Label>
         <Input
           type="text"
@@ -19,10 +19,10 @@ export const PersonalInfoStep = ({ register, errors }: PersonalInfoStepProps) =>
           {...register("name")}
         />
         {errors.name && (
-          <Text>{errors.name.message as string}</Text>
+          <Field.ErrorText>{errors.name.message as string}</Field.ErrorText>
         )}
       </Field.Root>
-      <Field.Root>
+      <Field.Root invalid={!!errors.lastName}>
         <Field.Label>Apellido</Field.Label>
         <Input
           type="text"
@@ -33,7 +33,7 @@ export const PersonalInfoStep = ({ register, errors }: PersonalInfoStepProps) =>
           <Field.ErrorText>{errors.lastName.message as string}</Field.ErrorText>
         )}
       </Field.Root>
-      <Field.Root>
+      <Field.Root invalid={!!errors.dateOfBirth}>
         <Field.Label>Fecha de nacimiento</Field.Label>
         <Input
           type="date"

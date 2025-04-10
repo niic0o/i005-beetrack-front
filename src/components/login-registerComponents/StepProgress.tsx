@@ -9,9 +9,8 @@ type StepProgressProps = {
 export const StepProgress = ({ step, title }: StepProgressProps) => {
   return (
     <>
-      <Flex position="relative" align="center" mb={3}>
+      <Flex direction={"column"} align="center" mb={3}>
         <Image
-          position="absolute"
           left={0}
           src={Logo}
           alt="Logo Beetrack"

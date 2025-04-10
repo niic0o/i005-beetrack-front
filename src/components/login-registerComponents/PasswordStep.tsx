@@ -12,7 +12,7 @@ export const PasswordStep = ({ register, errors }: PasswordStepProps) => {
   
   return (
     <Stack gap="4" w="full">
-      <Field.Root>
+      <Field.Root invalid={!!errors.password}>
         <Field.Label>Contraseña</Field.Label>
         <Input
           type="password"
@@ -26,7 +26,7 @@ export const PasswordStep = ({ register, errors }: PasswordStepProps) => {
           <Field.ErrorText>{errors.password.message as string}</Field.ErrorText>
         )}
       </Field.Root>
-      <Field.Root>
+      <Field.Root invalid={!!errors.confirmPassword}>
         <Field.Label>Confirmar contraseña</Field.Label>
         <Input
           type="password"
@@ -40,13 +40,6 @@ export const PasswordStep = ({ register, errors }: PasswordStepProps) => {
           <Field.ErrorText>{errors.confirmPassword.message as string}</Field.ErrorText>
         )}
       </Field.Root>
-            
-      {/* Alternative error display for debugging */}
-      {errors.password && (
-        <Text color="red.500">
-           {errors.password?.message as string}
-        </Text>
-      )}
     </Stack>
   );
 };

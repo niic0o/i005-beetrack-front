@@ -8,31 +8,21 @@ type EmailStepProps = {
 };
 
 export const EmailStep = ({ register, errors }: EmailStepProps) => {
-  console.log("Email errors:", errors.email); // Add this for debugging
-  
   return (
-    <Stack gap="4" w="full">
-      <Field.Root>
-        <Field.Label>Email</Field.Label>
+    <Stack gap="6" w="full">
+      <Text fontWeight="medium">Dirección de email</Text>
+      <Field.Root invalid={!!errors.email}>
         <Input
           type="email"
-          placeholder="Enter your email"
+          placeholder="nombre@dominio.com"
           {...register("email")}
+          borderRadius="md"
+          size="lg"
         />
-        <Field.HelperText>
-          Comprobaremos si este email ya está registrado
-        </Field.HelperText>
         {errors.email && (
-          <Field.ErrorText>{errors.email.message as string}</Field.ErrorText>
+          <Field.ErrorText>{errors.email.message}</Field.ErrorText>
         )}
       </Field.Root>
-      
-      {/* Alternative error display for debugging */}
-      {errors.email && (
-        <Text color="red.500">
-           {errors.email.message as string}
-        </Text>
-      )}
     </Stack>
   );
 };
