@@ -1,4 +1,4 @@
-import { Box, Image, Text, Flex, Badge, HStack, Icon, VStack } from '@chakra-ui/react'
+import { Box, Image, Text, Badge, HStack, Icon, VStack } from '@chakra-ui/react'
 import { FaShoppingCart, FaChartLine } from 'react-icons/fa'
 
 interface ProductCardProps {
@@ -26,7 +26,7 @@ export function ProductCard({
       p={3}
       bg="white"
       w="full"
-      maxW="220px"
+      maxW="auto"
       position="relative"
     >
       <Badge

@@ -1,6 +1,6 @@
-import { Box, SimpleGrid, useBreakpointValue } from '@chakra-ui/react'
+import { Box, SimpleGrid, useBreakpointValue, Text, Flex } from '@chakra-ui/react'
 import Slider from 'react-slick'
-import { ProductCard } from './ProductCard'
+import { ProductCard } from '@/components/DashboardComponents/ProductCard'
 
 const products = [
   {
@@ -60,7 +60,7 @@ export default function ProductList() {
     dots: true,
     infinite: false,
     speed: 400,
-    slidesToShow: 1.65,
+    slidesToShow: 1.6,
     slidesToScroll: 1,
     arrows: false,
     centerMode: false,
@@ -68,24 +68,34 @@ export default function ProductList() {
     cssEase: 'ease-out',
   }
 
+  const content = isMobile ? (
+    <Box mx="-16px" width="calc(100% + 32px)">
+      <Slider {...settings}>
+        {products.map((product, idx) => (
+          <Box key={idx} px={1}>
+            <ProductCard {...product} />
+          </Box>
+        ))}
+      </Slider>
+    </Box>
+  ) : (
+    <SimpleGrid columns={2} gap={4} width="100%" templateColumns="repeat(2, 1fr)">
+      {products.map((product, idx) => (
+        <ProductCard key={idx} {...product} />
+      ))}
+    </SimpleGrid>
+  )
+
   return (
     <Box>
       {isMobile ? (
-        <Box mx="-16px" width="calc(100% + 32px)">
-          <Slider {...settings}>
-            {products.map((product, idx) => (
-              <Box key={idx} px={1}>
-                <ProductCard {...product} />
-              </Box>
-            ))}
-          </Slider>
-        </Box>
+        content
       ) : (
-        <SimpleGrid columns={[1, 2, 3, 4]} gap={4}>
-          {products.map((product, idx) => (
-            <ProductCard key={idx} {...product} />
-          ))}
-        </SimpleGrid>
+        <Box bg="white" p={6} borderRadius="2xl" boxShadow="sm" width="50%">
+          <Flex overflowX="auto" width="100%">
+            {content}
+          </Flex>
+        </Box>
       )}
     </Box>
   )
