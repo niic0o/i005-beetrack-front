@@ -4,6 +4,8 @@ import Sidenavbar from "@/components/Sidenavbar/Sidenavbar";
 import { Box, Grid, GridItem } from "@chakra-ui/react";
 import { Outlet } from "react-router-dom";
 import useSidenavbarStore from "@/store/useSidenavbarStore";
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
 // import { ColorModeButton } from "@/components/ui/color-mode";
 
 type PrivateLayoutProps = {
