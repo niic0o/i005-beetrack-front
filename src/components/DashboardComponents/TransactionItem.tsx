@@ -1,9 +1,11 @@
 import { HStack, Icon, Text, VStack } from "@chakra-ui/react";
 import { FiChevronRight } from "react-icons/fi";
-import { FiCreditCard, FiDollarSign, FiRepeat } from "react-icons/fi";
+import { FiRepeat } from "react-icons/fi";
 import { IconType } from "react-icons";
+import { FaMoneyBill,  } from "react-icons/fa";
+import { MdOutlineCreditCard } from "react-icons/md";
 
-type TransactionType = "Transferencia" | "Tarjeta de crédito" | "Ventas";
+type TransactionType = "Transferencia" | "Tarjeta de crédito" | "Efectivo";
 export type TransactionItemProps = {
   type: TransactionType;
   method: string;
@@ -13,8 +15,8 @@ export type TransactionItemProps = {
 
 const iconMap: Record<TransactionType, IconType> = {
   Transferencia: FiRepeat,
-  "Tarjeta de crédito": FiCreditCard,
-  Ventas: FiDollarSign,
+  "Tarjeta de crédito": MdOutlineCreditCard,
+  Efectivo: FaMoneyBill,
 };
 
 export const TransactionItem = ({ type, method, amount, date }: TransactionItemProps) => {

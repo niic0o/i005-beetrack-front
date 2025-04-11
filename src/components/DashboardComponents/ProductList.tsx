@@ -56,6 +56,8 @@ const products = [
 export default function ProductList() {
   const isMobile = useBreakpointValue({ base: true, md: false, sm: true })
 
+  const limitedProducts = products.slice(0, 4)
+
   const settings = {
     dots: true,
     infinite: false,
@@ -71,7 +73,7 @@ export default function ProductList() {
   const content = isMobile ? (
     <Box mx="-16px" width="calc(100% + 32px)">
       <Slider {...settings}>
-        {products.map((product, idx) => (
+        {limitedProducts.map((product, idx) => (
           <Box key={idx} px={1}>
             <ProductCard {...product} />
           </Box>
@@ -80,7 +82,7 @@ export default function ProductList() {
     </Box>
   ) : (
     <SimpleGrid columns={2} gap={4} width="100%" templateColumns="repeat(2, 1fr)">
-      {products.map((product, idx) => (
+      {limitedProducts.map((product, idx) => (
         <ProductCard key={idx} {...product} />
       ))}
     </SimpleGrid>
@@ -92,6 +94,9 @@ export default function ProductList() {
         content
       ) : (
         <Box bg="white" p={6} borderRadius="2xl" boxShadow="sm" width="100%">
+          <Text fontWeight="bold" fontSize="lg" mb={4}>
+            Productos más vendidos este mes
+          </Text>
           <Flex overflowX="auto" width="100%">
             {content}
           </Flex>

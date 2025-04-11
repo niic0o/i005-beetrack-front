@@ -3,12 +3,12 @@ import { TransactionItem } from "@/components/DashboardComponents/TransactionIte
 import type { TransactionItemProps } from "@/components/DashboardComponents/TransactionItem";
 
 const transactions: TransactionItemProps[] = [
-    { type: "Transferencia", method: "Venta", amount: "5.432", date: "06/04" },
-    { type: "Transferencia", method: "Venta", amount: "5.432", date: "06/04" },
-    { type: "Tarjeta de crédito", method: "Venta", amount: "16.432", date: "06/04" },
-    { type: "Tarjeta de crédito", method: "Venta", amount: "16.432", date: "06/04" },
-    { type: "Ventas", method: "Efectivo", amount: "12.432", date: "06/04" },
-    { type: "Ventas", method: "Efectivo", amount: "12.432", date: "06/04" },
+    { type: "Transferencia", method: "Ventas", amount: "5.432", date: "06/04" },
+    { type: "Transferencia", method: "Ventas", amount: "5.432", date: "06/04" },
+    { type: "Tarjeta de crédito", method: "Ventas", amount: "16.432", date: "06/04" },
+    { type: "Tarjeta de crédito", method: "Ventas", amount: "16.432", date: "06/04" },
+    { type: "Efectivo", method: "Ventas", amount: "12.432", date: "06/04" },
+    { type: "Efectivo", method: "Ventas", amount: "12.432", date: "06/04" },
   ];
 
 export default function TransactionsList() {
