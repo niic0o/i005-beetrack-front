@@ -15,6 +15,7 @@ export const StepProgress = ({ step, title }: StepProgressProps) => {
           src={Logo}
           alt="Logo Beetrack"
           maxWidth="50px"
+          mb={10}
         />
         <Text w="100%" textAlign="center" fontWeight="bold" fontSize="xl">
           {title}
@@ -27,8 +28,11 @@ export const StepProgress = ({ step, title }: StepProgressProps) => {
         mb={4}
         borderRadius="md"
       />
+
+      {/* TODo: modificar esto para la navegacion */}
+      {step > 1 && (
       <HStack gap={2} justifyContent="center" marginBottom={2}>
-        {[1, 2, 3, 4].map((s) => (
+        {[2, 3, 4].map((s) => (
           <Box
             key={s}
             w="8px"
@@ -38,6 +42,8 @@ export const StepProgress = ({ step, title }: StepProgressProps) => {
           />
         ))}
       </HStack>
+
+      )}
     </>
   );
 };

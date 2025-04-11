@@ -16,7 +16,7 @@ export const StoreInfoStep = ({ register, errors }: StoreInfoStepProps) => {
         <Field.Label>Nombre del establecimiento</Field.Label>
         <Input
           type="text"
-          placeholder="Introduce el nombre de tu establecimiento"
+          placeholder="Nombre del establecimiento"
           {...register("storeName")}
         />
         {errors.storeName && (
@@ -27,7 +27,7 @@ export const StoreInfoStep = ({ register, errors }: StoreInfoStepProps) => {
         <Field.Label>Teléfono del establecimiento</Field.Label>
         <Input
           type="tel"
-          placeholder="Introduce el teléfono del establecimiento"
+          placeholder="000-000-00"
           {...register("storePhone")}
         />
         {errors.storePhone && (
@@ -38,7 +38,7 @@ export const StoreInfoStep = ({ register, errors }: StoreInfoStepProps) => {
         <Field.Label>Dirección del establecimiento</Field.Label>
         <Input
           type="text"
-          placeholder="Introduce la dirección del establecimiento"
+          placeholder="Calle, número, colonia, municipio, estado"
           {...register("storeAddress")}
         />
         {errors.storeAddress && (

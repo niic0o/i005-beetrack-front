@@ -1,5 +1,16 @@
-import { Card, Box, Text, Container } from "@chakra-ui/react";
-import { useState, useEffect } from "react";
+import {
+  Card,
+  Box,
+  Text,
+  Stack,
+  Container,
+  Separator,
+  Button,
+  Link,
+} from "@chakra-ui/react";
+import { AiFillGoogleCircle } from "react-icons/ai";
+import { IoLogoFacebook } from "react-icons/io";
+import { useState } from "react";
 import { useCheckEmailExists, useRegister } from "@/hooks/useAuth";
 import { useEmailCheck } from "@/hooks/useEmailCheck";
 import { useForm } from "react-hook-form";
@@ -130,10 +141,16 @@ const Register = () => {
     }
   };
 
-  const getStepTitle = () => {
+  const getStepTitle = ():any => {
     switch (step) {
       case 1:
-        return "Registrate para empezar a gestionar tu negocio";
+        return (
+          <Stack gap={0}>
+            <Text>Registrate para</Text>
+            <Text>empezar a</Text>
+            <Text>gestionar tu negocio</Text>
+          </Stack>
+        );
       case 2:
         return "Crear contraseña";
       case 3:
@@ -148,7 +165,7 @@ const Register = () => {
   const isLoading = isCheckingEmail || isRegistering || isSubmitting;
 
   return (
-    <Box
+    <Stack
       minH="100vh"
       w="100%"
       display="flex"
@@ -157,40 +174,87 @@ const Register = () => {
       bg="gray.50"
       p={4}
     >
-      <Container maxW="md" p={0}>
-        <Card.Root as="form" w="full" shadow="lg" onSubmit={handleNextStep}>
-          <Card.Header>
-            <StepProgress step={step} title={getStepTitle()} />
-          </Card.Header>
-          <Card.Body>
-            {step === 1 && <EmailStep register={register} errors={errors} />}
+      <Card.Root
+        minH={{ base: "80vh", md: "60vh" }}
+        maxW={{ base: "100%", md: "480px" }}
+        variant={"subtle"}
+        bg={"gray.50"}
+        as="form"
+        w="full"
+        onSubmit={handleNextStep}
+      >
+        <Card.Header>
+          <StepProgress step={step} title={getStepTitle()} />
+        </Card.Header>
+        <Card.Body>
+          {step === 1 && <EmailStep register={register} errors={errors} />}
 
-            {step === 2 && <PasswordStep register={register} errors={errors} />}
+          {step === 2 && <PasswordStep register={register} errors={errors} />}
 
-            {step === 3 && (
-              <PersonalInfoStep register={register} errors={errors} />
-            )}
+          {step === 3 && (
+            <PersonalInfoStep register={register} errors={errors} />
+          )}
 
-            {step === 4 && (
-              <StoreInfoStep register={register} errors={errors} />
-            )}
-          </Card.Body>
-          <Card.Footer
-            justifyContent="space-between"
-            flexWrap={{ base: "wrap", sm: "nowrap" }}
-            gap={2}
-          >
-            <StepNavigation
-              step={step}
-              isLoading={isLoading}
-              isCheckingEmail={isCheckingEmail}
-              isRegistering={isRegistering}
-              handlePrevStep={handlePrevStep}
-            />
-          </Card.Footer>
-        </Card.Root>
-      </Container>
-    </Box>
+          {step === 4 && <StoreInfoStep register={register} errors={errors} />}
+        </Card.Body>
+        <Card.Footer flexWrap={{ base: "wrap" }} gap={2}>
+          <StepNavigation
+            step={step}
+            isLoading={isLoading}
+            isCheckingEmail={isCheckingEmail}
+            isRegistering={isRegistering}
+            // handlePrevStep={handlePrevStep}
+          />
+          {step === 1 && (
+            <Stack
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              w={"full"}
+            >
+              {/* la linea separadora pero tengo que buscar como hacerla mejor que con una caja */}
+              <Box
+                as="span"
+                w="100%"
+                h="1px"
+                bg="gray.500"
+                my="25px"
+                position="relative"
+              />
+              <Button
+                variant="outline"
+                mb={4}
+                w="full"
+                fontWeight={"bold"}
+                borderRadius="xl"
+                size={"lg"}
+              >
+                <AiFillGoogleCircle /> Registrate con Google
+              </Button>
+              <Button
+                variant="outline"
+                w="full"
+                fontWeight={"bold"}
+                borderRadius="xl"
+                size={"lg"}
+              >
+                <IoLogoFacebook /> Registrate con Facebook
+              </Button>
+              <Text mt={10} textStyle={"xs"}>
+                ¿Ya tienes una cuenta?{" "}
+                <Link
+                  textDecoration="underline"
+                  fontWeight={"bold"}
+                  href="/login"
+                >
+                  Inicia sesión aquí
+                </Link>
+              </Text>
+            </Stack>
+          )}
+        </Card.Footer>
+      </Card.Root>
+    </Stack>
   );
 };
 

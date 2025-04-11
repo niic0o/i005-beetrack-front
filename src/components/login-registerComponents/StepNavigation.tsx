@@ -1,12 +1,10 @@
-import { Box, Button } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { Button } from "@chakra-ui/react";
 
 type StepNavigationProps = {
   step: number;
   isLoading: boolean;
   isCheckingEmail: boolean;
   isRegistering: boolean;
-  handlePrevStep: () => void;
 };
 
 export const StepNavigation = ({
@@ -20,7 +18,9 @@ export const StepNavigation = ({
       type="submit"
       variant="solid"
       w="full"
-      colorScheme="yellow"
+      bg={"amarillo"}
+      color={"gray.900"}
+      fontWeight={"bold"}
       loading={isLoading}
       loadingText={
         isCheckingEmail
@@ -29,7 +29,7 @@ export const StepNavigation = ({
           ? "Registering"
           : "Processing"
       }
-      borderRadius="md"
+      borderRadius="xl"
       py={6}
     >
       {step < 4 ? "Siguiente" : "Registrar"}

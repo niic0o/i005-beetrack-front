@@ -9,7 +9,7 @@ type EmailStepProps = {
 
 export const EmailStep = ({ register, errors }: EmailStepProps) => {
   return (
-    <Stack gap="6" w="full">
+    <Stack gap="4" w="full">
       <Text fontWeight="medium">Dirección de email</Text>
       <Field.Root invalid={!!errors.email}>
         <Input
