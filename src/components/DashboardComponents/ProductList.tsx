@@ -1,5 +1,7 @@
 import { Box, SimpleGrid, useBreakpointValue, Text, Flex } from '@chakra-ui/react'
 import Slider from 'react-slick'
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import { ProductCard } from '@/components/DashboardComponents/ProductCard'
 
 const products = [
@@ -54,7 +56,7 @@ const products = [
 ]
 
 export default function ProductList() {
-  const isMobile = useBreakpointValue({ base: true, md: false, sm: true })
+  const isMobile = useBreakpointValue({ base: true, sm: true ,md: false })
 
   const limitedProducts = products.slice(0, 4)
 
@@ -68,10 +70,13 @@ export default function ProductList() {
     centerMode: false,
     centerPadding: '0',
     cssEase: 'ease-out',
+    swipeToSlide: true,
+    touchMove: true,
+    accessibility: true,
   }
 
   const content = isMobile ? (
-    <Box mx="-16px" width="calc(100% + 32px)">
+    <Box mx="-16px" width="calc(100% + 32px)" className="mobile-slider">
       <Slider {...settings}>
         {limitedProducts.map((product, idx) => (
           <Box key={idx} px={1}>
@@ -91,7 +96,9 @@ export default function ProductList() {
   return (
     <Box>
       {isMobile ? (
-        content
+        <Box width="100%">
+          {content}
+        </Box>
       ) : (
         <Box bg="white" p={6} borderRadius="2xl" boxShadow="sm" width="100%">
           <Text fontWeight="bold" fontSize="lg" mb={4}>
