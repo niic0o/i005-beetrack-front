@@ -19,10 +19,8 @@ const customStyles = createSystem(defaultConfig, {
 					light: { value: "#f2f2f2" },
 					dark: { value: "#363636" }
 				},
-				amarillo: {
-					value: "#ffd701",
-				},
 				yellow: {
+					"amarillo": { value: "#ffd701" },
 					50: { value: '#fff9e6' },
 					200: { value: '#ffe28d' },
 					300: { value: '#ffd559' },
