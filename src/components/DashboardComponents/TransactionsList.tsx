@@ -14,7 +14,7 @@ const transactions: TransactionItemProps[] = [
 export default function TransactionsList() {
   return (
     <Box bg="white" p={{ base: 3 }} borderRadius="xl" boxShadow="sm">
-    <VStack gap={3} p={4}>
+    <VStack gap={2} p={4}>
       {transactions.map((tx, i) => (
         <TransactionItem
         key={i}
