@@ -91,7 +91,7 @@ export default function ProductList() {
       {isMobile ? (
         content
       ) : (
-        <Box bg="white" p={6} borderRadius="2xl" boxShadow="sm" width="50%">
+        <Box bg="white" p={6} borderRadius="2xl" boxShadow="sm" width="100%">
           <Flex overflowX="auto" width="100%">
             {content}
           </Flex>

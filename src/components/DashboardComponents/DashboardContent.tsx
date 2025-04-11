@@ -8,9 +8,10 @@ import {
 } from "@chakra-ui/react";
 import { useColorModeValue } from "@/components/ui/color-mode";
 import QuickAccess from "@/components/DashboardComponents/QuickAccess";
-import BalanceCard from "./BalanceCard";
-import ResumeCard from "./ResumeCard";
-import ProductList from "./ProductList";
+import BalanceCard from "@/components/DashboardComponents/BalanceCard";
+import ResumeCard from "@/components/DashboardComponents/ResumeCard";
+import ProductList from "@/components/DashboardComponents/ProductList";
+import TransactionsList from "@/components/DashboardComponents/TransactionsList";
 
 export const DashboardContent = () => {
   const color = useColorModeValue("blue.400", "white");
@@ -39,11 +40,22 @@ export const DashboardContent = () => {
             <ResumeCard />
           </GridItem>
 
-          <GridItem colSpan={12}>
-            <Text fontWeight="bold" fontSize="lg" mt={12} mb={4} color={color}>
+          <GridItem colSpan={{ base: 12, lg: 6 }}>
+            <Text fontWeight="bold" fontSize="lg" mt={2} mb={2} color={color}>
               Productos más vendidos este mes
             </Text>
             <ProductList />
+          </GridItem>
+          <GridItem colSpan={{ base: 12, lg: 6 }}>
+            <Flex justify="space-between" align="center" mt={2} mb={2}>
+              <Text fontWeight="bold" fontSize="lg" color={color}>
+                Historial reciente
+              </Text>
+              <Text fontSize="sm" color="gray.500" cursor="pointer" fontWeight={"bold"}>
+                Ver más &gt;
+              </Text>
+            </Flex>
+            <TransactionsList />
           </GridItem>
         </SimpleGrid>
       </Box>
