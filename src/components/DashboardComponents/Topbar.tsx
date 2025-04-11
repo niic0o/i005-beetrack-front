@@ -1,14 +1,20 @@
-import { Flex, Text, InputGroup, Input, Box, IconButton } from "@chakra-ui/react";
-import { FaSearch, FaBell } from "react-icons/fa";
-import { useColorModeValue } from "@/components/ui/color-mode";
+import { Flex, Text, InputGroup, Input, Box, IconButton, Button, useBreakpointValue } from '@chakra-ui/react';
+import { FaSearch, FaBell } from 'react-icons/fa';
+import { useColorModeValue } from '@/components/ui/color-mode';
+import { MdMenu } from 'react-icons/md';
+import useSidenavbarStore from '@/store/useSidenavbarStore';
 
 const Topbar = () => {
+  const { setIsOpen, titleToTopBar } = useSidenavbarStore();
+  const isMobile = useBreakpointValue({ base: true, md: false });
+
   const bg = useColorModeValue("white", "sidenavbar.dark");
   const color = useColorModeValue("black", "white");
+
   return (
     <Flex
       as="header"
-      w="100%"
+      w="full"
       py={4}
       px={6}
       align="center"
@@ -17,8 +23,18 @@ const Topbar = () => {
       boxShadow="soft"
       height="24"
     >
+      {isMobile &&
+        <Button
+          h={"auto"}
+          p={"10px"}
+          mr={"4px"}
+          variant={"ghost"}
+          onClick={() => setIsOpen()}>
+          <MdMenu />
+        </Button>
+      }
       <Text fontSize="lg" fontWeight="bold" color={color}>
-        ¡Bienvenido Carlos!
+        { titleToTopBar ?? "Nombre tienda" }
       </Text>
 
       <Flex align="center" gap={4}>
