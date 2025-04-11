@@ -1,83 +1,41 @@
-import { Box, Button, Flex, HStack, IconButton, Image, Separator, SystemStyleObject, Text, useBreakpointValue, VStack } from '@chakra-ui/react';
-import { MdBarChart, MdHistory, MdHomeFilled, MdInventory, MdOutlinePersonPin, MdOutlineVerifiedUser, MdPointOfSale } from 'react-icons/md';
-import Logo from '@/assets/logo.svg';
-import useSidenavbarStore from '@/store/useSidenavbarStore';
-import useAutocloseSidenavbar from '@/hooks/useAutocloseSidenavbar';
+import { Box, Flex, HStack, IconButton, Image, Text, useBreakpointValue, VStack } from '@chakra-ui/react';
+import { MdBarChart, MdHomeFilled, MdInventory, MdMenu, MdPerson, MdPointOfSale } from 'react-icons/md';
 import NavItem from './NavItem';
+import useSidenavbarStore from '@/store/useSidenavbarStore';
+import Logo from '@/assets/logo.svg';
 
 const MainSidenavbarMenu = () => {
 
-    const { isOpen, setIsOpen } = useSidenavbarStore()
-    const isMobile = useBreakpointValue({ base: true, md: false })
-    useAutocloseSidenavbar(isMobile ? isMobile : false);
-
-    const sidenavabarStyles: SystemStyleObject = {
-        "& a, & button": {
-            w: "full",
-            px: "16px", py: "14px",
-            display: "flex",
-            alignItems: "center",
-            gap: 3,
-            fontWeight: "bold",
-            fontSize: "14px",
-            borderRadius: "16px"
-        },
-        "& a.active": { bg: "yellow.amarillo" },
-        "& a:hover": { bg: "yellow.400" },
-    }
+    const { setIsOpen, setToggle, isToggle } = useSidenavbarStore();
+    const isMobile = useBreakpointValue({ base: true, md: false });
 
     return (
-        <Box
-            h={{ base: "100vh", md: "auto" }}
-            p={{ base: "20px", md: "0" }}
-            bg={{ base: "sidenavbar.light", _dark: "sidenavbar.dark" }}
-            position={{ base: "absolute", md: "relative" }}
-            transform={isMobile && !isOpen ? 'translateX(-100%)' : 'translateX(0)'}
-            transition={"transform 0.3s ease-in-out"}
-            shadow={{ base: "lg", md: "none" }}
-            top={0} left={0}
-            css={sidenavabarStyles}>
-            <HStack gap={4}>
-                <Image
-                    src={Logo} alt="Logo Beetrack" maxWidth={"50px"} />
-                <Box>
-                    <Text as={"p"} fontWeight={"bold"}>BEETRACK</Text>
-                    <Text as={"p"} fontSize={"2xs"}>SALES & MINORY MANAGER</Text>
-                </Box>
-                {/* <IconButton variant={"ghost"} onClick={() => setIsOpen(false)} display={{ base: "inline-flex", md: "none" }} position={{ base: "absolute", xs: "relative" }} bottom={{ base: "30px", xs: "auto" }} left={{ base: "20px", xs: "auto" }}>
-                    <MdClose />
-                </IconButton> */}
-            </HStack>
-            <Separator my={"10px"} />
-            <Flex direction={"column"} justifyContent={"space-between"} h={"100vh"}>
-                <VStack gap={"24px"} alignItems={"start"} w={"full"}>
-                    <NavItem to="/">
-                        <MdHomeFilled />
-                        Inicio
-                    </NavItem>
-                    <NavItem to={"/inventario"}>
-                        <MdInventory />
-                        Inventario
-                    </NavItem>
-                    <NavItem to={"/ventas"}>
-                        <MdPointOfSale />
-                        Ventas
-                    </NavItem>
-                    <NavItem to={"/estadisticas"}>
-                        <MdBarChart />
-                        Estadísticas
-                    </NavItem>
-                    <Button variant={"solid"} colorPalette={"red"} textAlign={"left"} onClick={() => setIsOpen(false)} display={{ base: "inline-flex", md: "none!" }}>
-                        {/* <MdClose /> */}
-                        Cerrar menú
-                    </Button>
-                </VStack>
-                <NavItem to={"/perfil"}>
-                    <MdOutlinePersonPin />
-                    Perfil
-                </NavItem>
+        <VStack id="main-menu-item" h={"full"} gap={"24px"} zIndex={10}>
+            <Flex gap={4} alignItems={"center"}>
+                <IconButton
+                    variant={"ghost"}
+                    onClick={() => isMobile ? setIsOpen(false) : setToggle()}>
+                    <MdMenu />
+                </IconButton>
+                <HStack display={{ base: "flex", md: isToggle ? "none" : "" }}>
+                    <Image
+                        src={Logo} alt="Logo Beetrack" maxWidth={"50px"} />
+                    <Box>
+                        <Text as={"p"} fontWeight={"bold"}>BEETRACK</Text>
+                        <Text as={"p"} fontSize={"2xs"}>SALES & MINORY MANAGER</Text>
+                    </Box>
+                </HStack>
             </Flex>
-        </Box>
+            <VStack w={"full"} h={"full"}>
+                <NavItem to="/" icon={<MdHomeFilled />} text="Home" />
+                <NavItem to="/inventario" icon={<MdInventory />} text="Inventario" />
+                <NavItem to="/ventas" icon={<MdPointOfSale />} text="Ventas" />
+                <NavItem to="/estadisticas" icon={<MdBarChart />} text="Estadísticas" />
+                <Box asChild marginTop={"auto"}>
+                    <NavItem to="/perfil" icon={<MdPerson />} text="Perfil" />
+                </Box>
+            </VStack>
+        </VStack>
     )
 }
 
