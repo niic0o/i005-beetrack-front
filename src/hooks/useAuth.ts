@@ -70,7 +70,7 @@ export const useRegister = () => {
 
 };
 
-export const checkEmailExists = () => {
+export const useCheckEmailExists = () => {
   return useMutation<boolean, AppError, string> ({
     mutationFn: authService.checkEmailExists,
   })
