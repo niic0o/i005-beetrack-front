@@ -176,7 +176,7 @@ const Register = () => {
     >
       <Card.Root
         minH={{ base: "80vh", md: "60vh" }}
-        maxW={{ base: "100%", md: "480px" }}
+        maxW={{ base: "100%", md: "380px" }}
         variant={"subtle"}
         bg={"gray.50"}
         as="form"
@@ -222,6 +222,7 @@ const Register = () => {
                 position="relative"
               />
               <Button
+                border={"1px solid"}
                 variant="outline"
                 mb={4}
                 w="full"
@@ -232,6 +233,7 @@ const Register = () => {
                 <AiFillGoogleCircle /> Registrate con Google
               </Button>
               <Button
+                border={"1px solid"}
                 variant="outline"
                 w="full"
                 fontWeight={"bold"}
