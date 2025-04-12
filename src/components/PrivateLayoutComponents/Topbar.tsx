@@ -19,23 +19,26 @@ const Topbar = () => {
       px={6}
       align="center"
       justify="space-between"
+      gap={4}
       bg={bg}
       boxShadow="soft"
       height="24"
     >
-      {isMobile &&
-        <Button
-          h={"auto"}
-          p={"10px"}
-          mr={"4px"}
-          variant={"ghost"}
-          onClick={() => setIsOpen()}>
-          <MdMenu />
-        </Button>
-      }
-      <Text fontSize="lg" fontWeight="bold" color={color}>
-        { titleToTopBar ?? "Nombre tienda" }
-      </Text>
+      <Flex align={"center"} gap={2}>
+        {isMobile &&
+          <Button
+            h={"auto"}
+            p={"10px"}
+            mr={"4px"}
+            variant={"ghost"}
+            onClick={() => setIsOpen()}>
+            <MdMenu />
+          </Button>
+        }
+        <Text fontSize="lg" fontWeight="bold" color={color}>
+          {titleToTopBar ?? "Nombre tienda"}
+        </Text>
+      </Flex>
 
       <Flex align="center" gap={4}>
         <InputGroup flex="1" startElement={<FaSearch />}>
