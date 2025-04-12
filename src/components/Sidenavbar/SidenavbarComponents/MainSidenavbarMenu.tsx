@@ -28,11 +28,11 @@ const MainSidenavbarMenu = () => {
             </Flex>
             <VStack w={"full"} h={"full"}>
                 <NavItem to="/" icon={<MdHomeFilled />} text="Home" />
-                <NavItem to="/inventario" icon={<MdInventory />} text="Inventario" />
-                <NavItem to="/ventas" icon={<MdPointOfSale />} text="Ventas" />
-                <NavItem to="/estadisticas" icon={<MdBarChart />} text="Estadísticas" />
+                <NavItem to="/inventory" icon={<MdInventory />} text="Inventario" />
+                <NavItem to="/sales" icon={<MdPointOfSale />} text="Ventas" />
+                <NavItem to="/stadistics" icon={<MdBarChart />} text="Estadísticas" />
                 <Box asChild marginTop={"auto"}>
-                    <NavItem to="/perfil" icon={<MdPerson />} text="Perfil" />
+                    <NavItem to="/profile" icon={<MdPerson />} text="Perfil" />
                 </Box>
             </VStack>
         </VStack>
