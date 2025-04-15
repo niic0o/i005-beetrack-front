@@ -28,11 +28,11 @@ const AppRoutes = () => {
 
       {/* Rutas protegidas */}
       <Route element={<AccessRoutes isPrivate={true} />}>
-        <Route element={<PrivateLayout contentPadding="0" />}>
+        <Route element={<PrivateLayout />}>
           <Route index element={<DashboardPage />} />
           <Route path="home" element={<DashboardPage />} />
           <Route path="inventory" element={<InventoryPage />} />
-          <Route path="perfil" element={<ProfilePage />} />
+          <Route path="profile" element={<ProfilePage />} />
         </Route>
       </Route>
 
