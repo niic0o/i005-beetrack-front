@@ -9,7 +9,7 @@ import {
 import { useColorModeValue } from "@/components/ui/color-mode";
 import QuickAccess from "@/components/DashboardComponents/QuickAccess";
 import BalanceCard from "@/components/DashboardComponents/BalanceCard";
-import ResumeCard from "@/components/DashboardComponents/ResumeCard";
+import IncomeCard from "@/components/DashboardComponents/IncomeCard";
 import ProductList from "@/components/DashboardComponents/ProductList";
 import TransactionsList from "@/components/DashboardComponents/TransactionsList";
 
@@ -33,11 +33,8 @@ export const DashboardContent = () => {
               <Text fontWeight="bold" fontSize="lg" color={color}>
                 Resumen de hoy
               </Text>
-              <Text fontSize="sm" color="gray.500" cursor="pointer" fontWeight={"bold"}>
-                Ver más &gt;
-              </Text>
             </Flex>
-            <ResumeCard />
+            <IncomeCard />
           </GridItem>
 
           <GridItem colSpan={{ base: 12, lg: 6 }}>

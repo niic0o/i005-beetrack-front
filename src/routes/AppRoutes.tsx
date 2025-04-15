@@ -9,6 +9,8 @@ import ProductScannerPage from '@/pages/ProductScannerPage'
 import AddProductPage from '@/pages/AddProductPage'
 import ProfilePage from '@/pages/ProfilePage'
 import PrivateLayout from '@/layout/PrivateLayout'
+import SalesPage from '@/pages/SalesPage'
+import StatsPage from '@/pages/StatsPage'
 
 const AppRoutes = () => {
   return (
@@ -32,6 +34,8 @@ const AppRoutes = () => {
           <Route index element={<DashboardPage />} />
           <Route path="home" element={<DashboardPage />} />
           <Route path="inventory" element={<InventoryPage />} />
+          <Route path="sales" element={<SalesPage />} />
+          <Route path="stats" element={<StatsPage />} />
           <Route path="perfil" element={<ProfilePage />} />
         </Route>
       </Route>
