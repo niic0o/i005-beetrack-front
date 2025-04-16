@@ -1,5 +1,5 @@
 import useSidenavbarStore from '@/store/useSidenavbarStore';
-import { Button, Text } from '@chakra-ui/react';
+import { Button, Text, useBreakpointValue } from '@chakra-ui/react';
 import { SystemStyleObject } from '@chakra-ui/system';
 import { ReactElement } from 'react';
 import { NavLink } from 'react-router-dom';
@@ -10,9 +10,10 @@ type NavItemProps = {
     to: string;
     text: string; // Texto del botón
     icon?: ReactElement;
+    toggeable?: boolean;
 }
 
-const NavItem = ({ to, text, icon, ...rest }: NavItemProps) => {
+const NavItem = ({ to, text, icon, toggeable = true, ...rest }: NavItemProps) => {
 
     const { isToggle } = useSidenavbarStore();
     const { setIsOpen } = useSidenavbarStore();
@@ -43,7 +44,7 @@ const NavItem = ({ to, text, icon, ...rest }: NavItemProps) => {
                     onClick={() => setIsOpen(false)}>
                     {icon}
                     <Text
-                        display={{ base: "block", md: isToggle ? "none" : "" }}>
+                        display={{ base: "block", md: toggeable ? isToggle ? "none" : "" : "" }}>
                         {text}
                     </Text>
                 </NavLink>
