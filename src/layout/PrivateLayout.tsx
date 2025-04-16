@@ -4,6 +4,7 @@ import useAutocloseSidenavbar from '@/hooks/useAutocloseSidenavbar';
 import OverlayToLayout from '@/components/ui/OverlayToLayout';
 import { useToolbarTittle } from '@/hooks/useToolbarTitle';
 import MainContainer from '@/components/PrivateLayoutComponents/MainContainer';
+import { useFetchProfile } from '@/hooks/useProfile';
 // import { ColorModeButton } from '@/components/ui/color-mode';
 
 const PrivateLayout = () => {
@@ -11,6 +12,7 @@ const PrivateLayout = () => {
   const isMobile = useBreakpointValue({ base: true, md: false });
   useAutocloseSidenavbar();
   useToolbarTittle();
+  useFetchProfile()
 
   return (
     <Box
