@@ -1,4 +1,5 @@
 import { useFetchProfile } from '@/hooks/useProfile';
+import useProfileStore from '@/store/useProfileStore';
 import { dateFormatter } from '@/utils/dateFormatter';
 import { Box, Button, Center, DataList, GridItem, SimpleGrid, Spinner, Text, VStack } from '@chakra-ui/react';
 import { MdOutlineEdit } from 'react-icons/md';
@@ -18,7 +19,7 @@ export interface UserData {
     name: string;
     address: string;
     tel: string;
-    status: boolean;
+    status: 'ACTIVE' | 'BLOCKED';
     createdAt: Date;
     updatedAt: Date;
   }
@@ -26,9 +27,9 @@ export interface UserData {
 
 const ProfilePage = () => {
 
-  const { data: profile, isLoading, isError, error } = useFetchProfile();
+  const { isLoading, isError, error } = useFetchProfile()
+  const { profile } = useProfileStore();
 
-  // console.log(profile);
   if (isLoading) return (
     <VStack colorPalette="gray" h={"full"} justifyContent={"center"} alignItems={"center"}>
       <Spinner color="colorPalette.600" />
@@ -36,13 +37,12 @@ const ProfilePage = () => {
     </VStack>
   );
 
-  // if (isError) console.log("Error: ", error.message);
   if (isError || !profile || !profile.store) {
     return (
       <Center h={"full"}>
         <Text fontWeight={"bold"} color={"gray.500"}>
           {isError
-            ? "Todo mal papá"
+            ? error.message
             : "No se pudo recuperar la información como se esperaba. Por favor, inténtelo de nuevo más tarde."
           }
         </Text>

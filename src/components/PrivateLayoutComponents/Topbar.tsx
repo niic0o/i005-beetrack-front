@@ -1,10 +1,12 @@
-import { Flex, Text, InputGroup, Input, Box, IconButton, Button, useBreakpointValue } from '@chakra-ui/react';
+import { Flex, Text, InputGroup, Input, Box, IconButton, Button, useBreakpointValue, Skeleton } from '@chakra-ui/react';
 import { FaSearch, FaBell } from 'react-icons/fa';
 import { useColorModeValue } from '@/components/ui/color-mode';
 import { MdMenu } from 'react-icons/md';
 import useSidenavbarStore from '@/store/useSidenavbarStore';
+import { useFetchProfile } from '@/hooks/useProfile';
 
 const Topbar = () => {
+  const { isLoading } = useFetchProfile();
   const { setIsOpen, titleToTopBar } = useSidenavbarStore();
   const isMobile = useBreakpointValue({ base: true, md: false });
 
@@ -15,6 +17,7 @@ const Topbar = () => {
     <Flex
       as="header"
       w="full"
+      h={"auto"}
       py={4}
       px={6}
       align="center"
@@ -22,7 +25,6 @@ const Topbar = () => {
       gap={4}
       bg={bg}
       boxShadow="soft"
-      height="24"
     >
       <Flex align={"center"} gap={2}>
         {isMobile &&
@@ -31,13 +33,13 @@ const Topbar = () => {
             p={"10px"}
             mr={"4px"}
             variant={"ghost"}
-            onClick={() => setIsOpen()}>
+            onClick={() => setIsOpen(true)}>
             <MdMenu />
           </Button>
         }
-        <Text fontSize="lg" fontWeight="bold" color={color}>
-          {titleToTopBar ?? "Nombre tienda"}
-        </Text>
+        <Skeleton as={Text} loading={isLoading} fontSize="lg" fontWeight="bold" color={color}>
+          {titleToTopBar}
+        </Skeleton>
       </Flex>
 
       <Flex align="center" gap={4}>

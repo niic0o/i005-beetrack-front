@@ -1,20 +1,25 @@
-import { Profile } from '@/services/profileService';
+import { Profile } from '@/types/profileTypes';
 import { create } from 'zustand';
-import { devtools } from 'zustand/middleware';
+import { devtools, persist } from 'zustand/middleware';
 
 interface ProfileState {
-    profile: Profile;
-    fetchProfile: (profile: Profile) => Promise<void>;
-    editProfile: (profile: Profile) => Promise<void>;
+    profile: Profile | null;
+    fetchProfile: (profile: Profile) => void;
+    editProfile: (profile: Profile) => void;
 }
 
 const useProfileStore = create<ProfileState>()(
     devtools(
-        (set) => ({
-            profile: null,
-            fetchProfile: (profile: Profile) => set({ profile }),
-            editProfile: (profile: Profile) => set({ profile })
-        })
+        persist(
+            (set) => ({
+                profile: null,
+                fetchProfile: (profile: Profile) => set({ profile }),
+                editProfile: (profile: Profile) => set({ profile })
+            }),
+            { name: "profile", partialize: ({ profile }) => ({
+                profile,
+            }) }
+        ), { name: 'ProfileStore' }
     )
 )
 
