@@ -79,7 +79,7 @@ const Login = () => {
         bg={"gray.50"}
         as="form"
         w="full"
-        onSubmit={handleSubmit(onSubmit)}
+        // onSubmit={handleSubmit(onSubmit)}
       >
         <Card.Header>
           <Flex direction={"column"} align="center" mb={3}>
