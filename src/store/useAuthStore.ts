@@ -1,53 +1,53 @@
-// import { create } from "zustand";
-// import { devtools } from "zustand/middleware";
-// import { User } from "@/types/authType";
-// import { Query } from "@tanstack/react-query";
-// import { QueryParams } from "@/types/utilsAppTypes";
-// interface AppError {
-//   message: string;
-//   code?: string | number;
-// }
+import { create } from "zustand";
+import { devtools } from "zustand/middleware";
+import { User } from "@/types/authType";
+import { QueryParams } from "@/types/utilsAppTypes";
 
-// interface AuthState {
-//   user: User | null;
-//   loading: boolean;
-//   isAuthenticated: boolean;
-//   error: AppError | null;
-//   queryParams: QueryParams
+interface AppError {
+  message: string;
+  code?: string | number;
+}
 
-//   setLoading: (isLoading: boolean) => void;
-//   setUser: (user: User | null) => void;
-//   setIsAuthenticated: (isAuthenticated: boolean) => void;
-//   setError: (error: AppError | null) => void;
-//   resetState: () => void;
-// }
+interface AuthState {
+  user: User | null;
+  loading: boolean;
+  isAuthenticated: boolean;
+  error: AppError | null;
+  queryParams: QueryParams;
 
-// const initialState = {
-//   user: null,
-//   loading: false,
-//   isAuthenticated: false,
-//   error: null,
-//   queryParams: { resource: "auth" },
-// };
+  setLoading: (isLoading: boolean) => void;
+  setUser: (user: User | null) => void;
+  setIsAuthenticated: (isAuthenticated: boolean) => void;
+  setError: (error: AppError | null) => void;
+  resetState: () => void;
+}
 
-// const useAuthStore = create<AuthState>()(
-//   devtools(
-//     (set) => ({
-//       ...initialState,
+const initialState = {
+  user: null,
+  loading: false,
+  isAuthenticated: false,
+  error: null,
+  queryParams: { resource: "auth" },
+};
 
-//       setLoading: (isLoading: boolean) => set({ loading: isLoading }),
+const useAuthStore = create<AuthState>()(
+  devtools(
+    (set) => ({
+      ...initialState,
 
-//       setUser: (user: User | null) => set({ user }),
+      setLoading: (isLoading: boolean) => set({ loading: isLoading }),
 
-//       setIsAuthenticated: (isAuthenticated: boolean) =>
-//         set({ isAuthenticated }),
+      setUser: (user: User | null) => set({ user }),
 
-//       setError: (error: AppError | null) => set({ error }),
+      setIsAuthenticated: (isAuthenticated: boolean) =>
+        set({ isAuthenticated }),
 
-//       resetState: () => set(initialState),
-//     }),
-//     { name: "AuthStore" }
-//   )
-// );
+      setError: (error: AppError | null) => set({ error }),
 
-// export default useAuthStore;
+      resetState: () => set(initialState),
+    }),
+    { name: "AuthStore" }
+  )
+);
+
+export default useAuthStore;

@@ -1,77 +1,82 @@
-// // import { AUTH_ENDPOINT } from "@/const/api";
-// // import { authService } from "@/services/authService";
-// // import useAuthStore from "@/store/useAuthStore";
-// // import { Credentials, NewUserData, User } from "@/types/authType";
-// // import { buildUrl } from "@/utils/buildUrl";
-// // interface AppError {
-// //   message: string;
-// //   details: string;
-// // }
-// // import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { AUTH_ENDPOINT } from "@/const/api";
+import { authService } from "@/services/authService";
+import useAuthStore from "@/store/useAuthStore";
+import { Credentials, NewUserData, User } from "@/types/authType";
+import { buildUrl } from "@/utils/buildUrl";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"; 
+import { useEffect } from "react";
 
-// // export const useCheckAuthStatus = () => {
-// //   const { setUser, setIsAuthenticated, queryParams } = useAuthStore();
-// //   const url = buildUrl(AUTH_ENDPOINT, {... queryParams, resource: "checkAuthStatus"});
+interface AppError {
+  message: string;
+  details: string;
+}
 
-// //   return useQuery<User, AppError>({
-// //     queryKey: [url],
-// //     queryFn: () => authService.checkAuthStatus(),
-// //     onSuccess: (user: User) => {
-// //       setUser(user);
-// //       setIsAuthenticated(true);
-// //     },
-// //     staleTime: 5 * 60 * 1000 // lo puse porque esta en products tmb ^^'
-// //   });
-// // };
+export const useCheckAuthStatus = () => {
+  const { setUser, setIsAuthenticated, queryParams } = useAuthStore();
+  const url = buildUrl(AUTH_ENDPOINT, { ...queryParams, resource: "checkAuthStatus" });
 
-// // export const useLogin = () => {
-// //   const queryClient = useQueryClient();
-// //   const { setUser, setIsAuthenticated, queryParams} = useAuthStore();
-// //   const url = buildUrl(AUTH_ENDPOINT, queryParams);
-  
-// //   return useMutation<User, AppError, Credentials>({
-// //     mutationFn: authService.loginUser,
-// //     onSuccess: (data) => {
-// //       setUser(data);
-// //       setIsAuthenticated(true);
-// //       queryClient.invalidateQueries({queryKey: [url]});
-// //     }
-// //   })
- 
-// // };
+  const query = useQuery<User, AppError>({
+    queryKey: [url],
+    queryFn: () => authService.checkAuthStatus(),
+    staleTime: 5 * 60 * 1000 // 5 minutos
+  });
 
-// // export const useLogout = () => {
-// //   const queryClient = useQueryClient();
-// //   const { resetState, queryParams } = useAuthStore();
-// //   const url = buildUrl(AUTH_ENDPOINT, queryParams);
+  // Manejamos la lógica de onSuccess usando useEffect
+  useEffect(() => {
+    if (query.data) {
+      setUser(query.data);
+      setIsAuthenticated(true);
+    }
+  }, [query.data, setUser, setIsAuthenticated]);
 
-// //   return useMutation<void, AppError> ({
-// //     mutationFn: authService.logoutUser,
-// //     onSuccess: () => {
-// //       resetState();
-// //       queryClient.invalidateQueries({queryKey: [url]});
-// //     }
-// //   })
+  return query;
+};
 
-// // };
+export const useLogin = () => {
+  const queryClient = useQueryClient();
+  const { setUser, setIsAuthenticated, queryParams } = useAuthStore();
+  const url = buildUrl(AUTH_ENDPOINT, queryParams);
 
-// // export const useRegister = () => {
-// //   const queryClient = useQueryClient();
-// //   const { setUser, queryParams } = useAuthStore();
-// //   const url = buildUrl(AUTH_ENDPOINT, queryParams);
+  return useMutation<User, AppError, Credentials>({
+    mutationFn: authService.loginUser,
+    onSuccess: (data) => {
+      setUser(data);
+      setIsAuthenticated(true);
+      queryClient.invalidateQueries({ queryKey: [url] });
+    }
+  });
+};
 
-// //   return useMutation<User, AppError, NewUserData> ({
-// //     mutationFn: authService.registerUser,
-// //     onSuccess: (data) => {
-// //       setUser(data);
-// //       queryClient.invalidateQueries({queryKey: [url]});
-// //     }
-// //   })
+export const useLogout = () => {
+  const queryClient = useQueryClient();
+  const { resetState, queryParams } = useAuthStore();
+  const url = buildUrl(AUTH_ENDPOINT, queryParams);
 
-// // };
+  return useMutation<void, AppError>({
+    mutationFn: authService.logoutUser,
+    onSuccess: () => {
+      resetState();
+      queryClient.invalidateQueries({ queryKey: [url] });
+    }
+  });
+};
 
-// // export const useCheckEmailExists = () => {
-// //   return useMutation<boolean, AppError, string> ({
-// //     mutationFn: authService.checkEmailExists,
-// //   })
-// // };
+export const useRegister = () => {
+  const queryClient = useQueryClient();
+  const { setUser, queryParams } = useAuthStore();
+  const url = buildUrl(AUTH_ENDPOINT, queryParams);
+
+  return useMutation<User, AppError, NewUserData>({
+    mutationFn: authService.registerUser,
+    onSuccess: (data) => {
+      setUser(data);
+      queryClient.invalidateQueries({ queryKey: [url] });
+    }
+  });
+};
+
+export const useCheckEmailExists = () => {
+  return useMutation<boolean, AppError, string>({
+    mutationFn: authService.checkEmailExists,
+  });
+};
