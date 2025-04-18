@@ -7,7 +7,7 @@ concurrency:
 on:
   push:
     branches:
-      - cicd/deploy
+      - main
 
 env:
   PROJECT_ID: ${{ secrets.PROJECT_ID }}   # Proyecto GCP (secreto)
