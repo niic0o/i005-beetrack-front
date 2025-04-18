@@ -1,7 +1,7 @@
 // import { FaArrowLeft } from "react-icons/fa";
 import { IoIosArrowForward } from "react-icons/io";
 import { ProductItemProps } from "@/components/InventoryComponents/ProductItem";
-
+import { MdArrowBack, MdLightbulb } from 'react-icons/md'
 import {
   Box,
   Button,
@@ -16,6 +16,7 @@ import {
   Link,
   useBreakpointValue,
 } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
 
 const products = [
@@ -106,7 +107,6 @@ const Notifications = ({
   name,
   price,
   stock,
-  view,
   stockMin = 10, //El usuario configura este valor de Stock Mínimo
   stockOpt = 30, //El usuario configura este valor de Stock Óptimo
 }: ProductItemProps) => {
@@ -137,15 +137,25 @@ const Notifications = ({
   };
 
   const lowStockProducts = products.filter(product => product.stock <= stockMin)
+  const navigate = useNavigate();
 
   return (
     <Flex
+      p={6}
       direction="column"
       h="100%"
       position="relative"
       pb={{ base: "80px", md: 0 }}
     >
-      <Heading>Faltante de stock</Heading>
+      {isMobile && (
+        <HStack mb={6} align="center">
+          <MdArrowBack size={22} onClick={() => navigate(-1)} cursor="pointer" />
+          <Heading fontSize="xl" fontWeight="bold">
+            Notificaciones
+          </Heading>
+        </HStack>
+      )}
+      <Heading size={'md'}>Faltante de stock</Heading>
       <Box
         bg="white"
         rounded="xl"
