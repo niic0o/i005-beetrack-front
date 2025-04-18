@@ -42,25 +42,25 @@ const Login = () => {
     },
   });
 
-  const onSubmit = async (data: LoginFormData) => {
-    try {
-      // Simular llamada a la API
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+  // const onSubmit = async (data: LoginFormData) => {
+  //   try {
+  //     // Simular llamada a la API
+  //     await new Promise((resolve) => setTimeout(resolve, 1500));
 
-      await loginUser(data, {
-        onSuccess: () => {
-          console.log("¡Inicio de sesión exitoso!");
-          navigate("/home");
-        },
-        onError: (error) => {
-          throw error;
-        },
-      });
-    } catch (error) {
-      setErrorMessage("Inicio de sesión fallido. Verifica tus credenciales.");
-      console.error("Error de inicio de sesión:", error);
-    }
-  };
+  //     await loginUser(data, {
+  //       onSuccess: () => {
+  //         console.log("¡Inicio de sesión exitoso!");
+  //         navigate("/home");
+  //       },
+  //       onError: (error) => {
+  //         throw error;
+  //       },
+  //     });
+  //   } catch (error) {
+  //     setErrorMessage("Inicio de sesión fallido. Verifica tus credenciales.");
+  //     console.error("Error de inicio de sesión:", error);
+  //   }
+  // };
 
   return (
     <Stack
