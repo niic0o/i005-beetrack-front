@@ -11,6 +11,7 @@ import ProfilePage from '@/pages/ProfilePage'
 import PrivateLayout from '@/layout/PrivateLayout'
 import SalesPage from '@/pages/SalesPage'
 import StatsPage from '@/pages/StatsPage'
+import Notifications from '@/pages/NotificationPage'
 
 const AppRoutes = () => {
   return (
@@ -37,6 +38,7 @@ const AppRoutes = () => {
           <Route path="sales" element={<SalesPage />} />
           <Route path="stats" element={<StatsPage />} />
           <Route path="profile" element={<ProfilePage />} />
+          <Route path="notifications" element={<Notifications />} />
         </Route>
       </Route>
 

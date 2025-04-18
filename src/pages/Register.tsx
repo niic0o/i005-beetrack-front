@@ -4,7 +4,7 @@ import {
   Text,
   Stack,
   Container,
-  Separator,
+  Image,
   Button,
   Link,
   Flex,
@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { AiFillGoogleCircle } from "react-icons/ai";
 import { IoLogoFacebook } from "react-icons/io";
+import HexagonPattern from "@/assets/HexagonPattern.svg";
 import { useState } from "react";
 import { useCheckEmailExists, useRegister } from "@/hooks/useAuth";
 import { useEmailCheck } from "@/hooks/useEmailCheck";
@@ -181,17 +182,34 @@ const Register = () => {
     <Stack
       minH="100vh"
       w="100%"
+      maxW={"100vw"}
       display="flex"
       alignItems="center"
       justifyContent="center"
       bg="gray.50"
       p={4}
+      position={"relative"}
+      overflow={"hidden"}
     >
+      <Box
+        position="absolute"
+        bottom="-70px"
+        right="-50px"
+        zIndex="0"
+        pointerEvents="none"
+      >
+        <Image
+          src={HexagonPattern}
+          alt="Decorative pattern"
+          width="250px"
+          height="183px"
+        />
+      </Box>
       <Card.Root
         minH={{ base: "90vh", md: "60vh" }}
         maxW={{ base: "100%", md: "380px" }}
         variant={"subtle"}
-        bg={"gray.50"}
+        bg={"transparent"}
         as="form"
         w="full"
         onSubmit={handleNextStep}
@@ -255,12 +273,18 @@ const Register = () => {
             isRegistering={isRegistering}
             handlePrevStep={handlePrevStep}
           />
-          <Text mt={1} textStyle={"xs"}>
-            ¿Ya tienes una cuenta?{" "}
-            <Link textDecoration="underline" fontWeight={"bold"} href="/login">
-              Iniciar sesión
-            </Link>
-          </Text>
+          {step === 1 && (
+            <Text mt={1} textStyle={"xs"}>
+              ¿Ya tienes una cuenta?{" "}
+              <Link
+                textDecoration="underline"
+                fontWeight={"bold"}
+                href="/login"
+              >
+                Iniciar sesión
+              </Link>
+            </Text>
+          )}
         </Card.Footer>
       </Card.Root>
     </Stack>

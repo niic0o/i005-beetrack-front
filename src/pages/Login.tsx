@@ -15,8 +15,10 @@ import {
 import Logo from "@/assets/logo.svg";
 import { AiFillGoogleCircle } from "react-icons/ai";
 import { IoLogoFacebook } from "react-icons/io";
+import HexagonPattern from "@/assets/HexagonPattern.svg";
 import { useNavigate } from "react-router-dom";
 import useAuthStore from "@/store/useAuthStore";
+import { useLogin } from "@/hooks/useAuth";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -30,7 +32,9 @@ const Login = () => {
   const navigate = useNavigate();
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const loginUser = useAuthStore((state) => state.loginUser);
+
+  const { isPending, mutate } = useLogin()
+
 
   const {
     register,
@@ -50,12 +54,11 @@ const Login = () => {
       setIsLoggingIn(true);
 
       // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      // await new Promise((resolve) => setTimeout(resolve, 1500));
+      mutate(data);
 
-      await loginUser(data);
       console.log("Login successful!");
       setIsLoggingIn(false);
-      navigate("/home");
     } catch (error) {
       setErrorMessage("Login failed. Please check your credentials.");
       console.error("Login error:", error);
@@ -63,26 +66,45 @@ const Login = () => {
     }
   };
 
-  const isLoading = isLoggingIn || isSubmitting;
+  // const isLoading = isLoggingIn || isSubmitting;
 
   return (
     <Stack
       minH="100vh"
+      maxW="100vw"
+      bg={"gray.50"}
       w="100%"
       display="flex"
       alignItems="center"
       justifyContent="center"
-      bg="gray.50"
       p={4}
+      position="relative"
+      overflow="hidden"
     >
+      <Box
+        position="absolute"
+        bottom="-70px"
+        right="-50px"
+        zIndex="0"
+        pointerEvents="none"
+      >
+        <Image
+          src={HexagonPattern}
+          alt="Decorative pattern"
+          width="250px"
+          height="183px"
+        />
+      </Box>
       <Card.Root
         minH={{ base: "90vh", md: "60vh" }}
         maxW={{ base: "100%", md: "380px" }}
         variant={"subtle"}
-        bg={"gray.50"}
+        bg={"transparent"}
         as="form"
         w="full"
         onSubmit={handleSubmit(onSubmit)}
+        position="relative"
+        zIndex="1"
       >
         <Card.Header>
           <Flex direction={"column"} align="flex-start" mb={8}>
@@ -190,10 +212,10 @@ const Login = () => {
             type="submit"
             variant="solid"
             w="full"
-            bg={"#ffd701"}
+            colorPalette={"yellow"}
             color={"gray.900"}
             fontWeight={"bold"}
-            isLoading={isLoading}
+            loading={isPending}
             loadingText={"Iniciando sesión"}
             borderRadius="xl"
             py={6}
