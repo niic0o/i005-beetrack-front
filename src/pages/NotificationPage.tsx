@@ -1,7 +1,6 @@
-// import { FaArrowLeft } from "react-icons/fa";
 import { IoIosArrowForward } from "react-icons/io";
 import { ProductItemProps } from "@/components/InventoryComponents/ProductItem";
-import { MdArrowBack, MdLightbulb } from 'react-icons/md'
+import { MdArrowBack } from 'react-icons/md'
 import {
   Box,
   Button,
@@ -225,13 +224,12 @@ const Notifications = ({
           left={0}
           right={0}
           p={4}
-          borderTopColor="gray.200"
           zIndex={10}
         >
           <Button
             variant="solid"
             w="full"
-            bg="#ffd701"
+            colorPalette="yellow"
             color="gray.900"
             fontWeight="bold"
             borderRadius="xl"

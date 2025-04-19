@@ -20,10 +20,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   registerSchema,
-  emailSchema,
-  passwordSchema,
-  personalInfoSchema,
-  storeInfoSchema,
   RegisterFormData,
 } from "@/components/login-registerComponents/registerSchema";
 import { EmailStep } from "@/components/login-registerComponents/EmailStep";
@@ -33,7 +29,6 @@ import { StoreInfoStep } from "@/components/login-registerComponents/StoreInfoSt
 import { StepProgress } from "@/components/login-registerComponents/StepProgress";
 import { StepNavigation } from "@/components/login-registerComponents/StepNavigation";
 import { useNavigate } from "react-router-dom";
-import { IoIosArrowBack } from "react-icons/io";
 
 const Register = () => {
   const [step, setStep] = useState(1);
@@ -69,11 +64,6 @@ const Register = () => {
       storeAddress: "",
     },
   });
-  // useEffect(() => {
-  //   if (Object.keys(errors).length > 0) {
-  //     console.log("Form errors:", errors);
-  //   }
-  // }, [errors]);
 
   const onSubmit = async (data: RegisterFormData) => {
     try {
@@ -144,7 +134,7 @@ const Register = () => {
       setStep(step - 1);
     }
   };
-  //TODO: CAMBIAR EL TITULO DEPENDIENDO DEL PASO, SEGUN NUEVO DISEÑO
+
   const getStepTitle = (): any => {
     switch (step) {
       case 1:
@@ -246,7 +236,6 @@ const Register = () => {
               >
                 <IoLogoFacebook /> Registrate con Facebook
               </Button>
-              {/* la linea separadora pero tengo que buscar como hacerla mejor que con una caja */}
               <Flex align="center" width="100%" my={4}>
                 <Box flex="1" height="1px" bg="gray.300" />
                 <Text mx={4} fontWeight="bold" color="gray.600" fontSize="md">

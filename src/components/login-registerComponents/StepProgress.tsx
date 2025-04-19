@@ -6,7 +6,7 @@ type StepProgressProps = {
   title: string;
 };
 
-export const StepProgress = ({ step, title }: StepProgressProps) => {
+export const StepProgress = ({ title }: StepProgressProps) => {
   return (
     <>
       <Flex direction={"column"} align="flex-start" mb={8}>
@@ -34,13 +34,6 @@ export const StepProgress = ({ step, title }: StepProgressProps) => {
         </Heading>
         {title}
       </Box>
-      {/* <Progress.Root
-        value={(step / 4) * 100}
-        size="sm"
-        colorScheme="blue"
-        mb={4}
-        borderRadius="md"
-      /> */}
     </>
   );
 };

@@ -28,7 +28,6 @@ const AppRoutes = () => {
       <Route element={<AccessRoutes isPrivate={true} />}>
         <Route path="/addproduct" element={<AddProductPage />} />
         <Route path="/addproduct/:barcode" element={<AddProductPage />} />
-        {/* <Route path="productscanner" element={<ProductScannerPage />} /> */}
       </Route>
 
       {/* rutas privadas con layout en big screen y no layout on mobile */}
@@ -46,7 +45,7 @@ const AppRoutes = () => {
         )}
 
       </Route>
-      {/* Rutas protegidas */}
+      {/* Rutas protegidas con layout */}
       <Route element={<AccessRoutes isPrivate={true} />}>
         <Route element={<PrivateLayout />}>
           <Route index element={<DashboardPage />} />
@@ -55,7 +54,6 @@ const AppRoutes = () => {
           <Route path="sales" element={<SalesPage />} />
           <Route path="stats" element={<StatsPage />} />
           <Route path="profile" element={<ProfilePage />} />
-          {/* <Route path="notifications" element={<Notifications />} /> */}
         </Route>
       </Route>
 
