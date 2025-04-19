@@ -1,4 +1,5 @@
 import eslint from '@eslint/js';
+import parser from '@typescript-eslint/parser';
 import tseslint from '@typescript-eslint/eslint-plugin';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
@@ -7,14 +8,14 @@ import reactRefresh from 'eslint-plugin-react-refresh';
 import globals from 'globals';
 
 export default [
-  eslint.configs.recommended,
+  // eslint.configs.recommended,
   {
     files: ['**/*.{ts,tsx}'],
     ignores: ['dist', '.eslintrc.cjs'],
     languageOptions: {
       ecmaVersion: 2020,
       sourceType: 'module',
-      parser: tseslint.parser,
+      parser: parser,
       parserOptions: {
         ecmaFeatures: {
           jsx: true,
@@ -38,8 +39,8 @@ export default [
         { allowConstantExport: true },
       ],
       'prefer-const': 'error',
-      'quotes': ['error', 'single'],
-      'comma-dangle': ['error', 'always-multiline'],
+      // 'quotes': ['error', 'single'],
+      // 'comma-dangle': ['error', 'always-multiline'],
       // 'semi': ['error'],
       // '@typescript-eslint/no-explicit-any': 'error',
     },
