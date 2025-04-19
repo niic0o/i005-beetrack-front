@@ -11,15 +11,13 @@ import {
   Link,
   HStack,
   Heading,
-  useBreakpointValue,
 } from "@chakra-ui/react";
 import Logo from "@/assets/logo.svg";
 import { AiFillGoogleCircle } from "react-icons/ai";
 import { IoLogoFacebook } from "react-icons/io";
 import { MdInventory, MdPointOfSale, MdShoppingCart } from 'react-icons/md';
 import HexagonPattern from "@/assets/HexagonPattern.svg";
-import { useNavigate } from "react-router-dom";
-import useAuthStore from "@/store/useAuthStore";
+// import useAuthStore from "@/store/useAuthStore"; BORRAR?
 import { useLogin } from "@/hooks/useAuth";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -31,10 +29,9 @@ import {
 import { PasswordInput } from "@/components/ui/password-input";
 
 const Login = () => {
-  const navigate = useNavigate();
+  //TODO: arreglar esto
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const isMobile = useBreakpointValue({ base: true, md: false });
 
   const { isPending, mutate } = useLogin()
 
@@ -42,7 +39,7 @@ const Login = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
     mode: "onChange",
