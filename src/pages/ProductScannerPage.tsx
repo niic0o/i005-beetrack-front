@@ -5,6 +5,7 @@ import {
   Text,
   VStack,
   HStack,
+  useBreakpointValue,
 } from '@chakra-ui/react'
 import { MdArrowBack, MdLightbulb } from 'react-icons/md'
 import { CiBarcode } from 'react-icons/ci'
@@ -22,6 +23,7 @@ const products = [
 ]
 
 function ProductScannerPage() {
+  const isMobile = useBreakpointValue({ base: true, md: false });
   const [barCode, setBarCode] = useState<string | null>(null)
   const [showModal, setShowModal] = useState(false)
   const [scannerKey, setScannerKey] = useState(0)
@@ -40,14 +42,16 @@ function ProductScannerPage() {
   }, [barCode, navigate])
 
   return (
-    <Box p={4} maxW="500px" mx="auto">
-      <HStack mb={4} align="center">
-        <MdArrowBack size={22} onClick={() => navigate(-1)} cursor="pointer" />
-        <Text fontSize="lg" fontWeight="bold">
-          Código de barras
-        </Text>
-      </HStack>
 
+    <Box p={4} maxW="500px" mx="auto">
+      {isMobile && (
+        <HStack mb={4} align="center">
+          <MdArrowBack size={22} onClick={() => navigate(-1)} cursor="pointer" />
+          <Text fontSize="lg" fontWeight="bold">
+            Código de barras
+          </Text>
+        </HStack>
+      )}
       <Box
         mb={4}
         display="flex"
