@@ -1,8 +1,8 @@
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 import { User } from "@/types/authType";
-import { Query } from "@tanstack/react-query";
 import { QueryParams } from "@/types/utilsAppTypes";
+
 interface AppError {
   message: string;
   code?: string | number;
