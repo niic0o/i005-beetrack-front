@@ -5,15 +5,19 @@ import {
   Text,
   VStack,
   HStack,
+  Button,
+  Flex,
 } from '@chakra-ui/react'
 import { MdArrowBack, MdLightbulb } from 'react-icons/md'
 import { CiBarcode } from 'react-icons/ci'
 import ProductScanner from '@/components/InventoryComponents/ProductScanner'
 import { ProductNotFoundModal } from '@/components/InventoryComponents/ProductNotFoundModal'
+import { AddBarcodeModal } from '@/components/InventoryComponents/AddBarcodeModal'
 
 const products = [
   {
-    id: 842958301340,
+    id: 8429583013405,
+    barcode: 8429583013405,
     name: 'Berberechos al natural',
     stock: 10,
     image:
@@ -25,12 +29,13 @@ function ProductScannerPage() {
   const [barCode, setBarCode] = useState<string | null>(null)
   const [showModal, setShowModal] = useState(false)
   const [scannerKey, setScannerKey] = useState(0)
+  const [isAddBarcodeOpen, setIsAddBarcodeOpen] = useState(false)
   const navigate = useNavigate()
 
   useEffect(() => {
     if (!barCode) return
 
-    const product = products.find((p) => p.id.toString() === barCode)
+    const product = products.find((p) => p.barcode.toString() === barCode)
 
     if (product) {
       navigate(`/productDetail/${product.id}`)
@@ -40,46 +45,63 @@ function ProductScannerPage() {
   }, [barCode, navigate])
 
   return (
-    <Box p={4} maxW="500px" mx="auto">
-      <HStack mb={4} align="center">
-        <MdArrowBack size={22} onClick={() => navigate(-1)} cursor="pointer" />
-        <Text fontSize="lg" fontWeight="bold">
-          Código de barras
-        </Text>
-      </HStack>
+    <Flex direction="column" justify="space-between" minH="100vh" maxW="500px" mx="auto">
+      <Box>
+        <HStack p={4} align="center">
+          <MdArrowBack size={22} onClick={() => navigate(-1)} cursor="pointer" />
+          <Text fontSize="lg" fontWeight="bold">
+            Código de barras
+          </Text>
+        </HStack>
 
-      <Box
-        mb={4}
-        display="flex"
-        flexDirection="column"
-        alignItems="center"
-        justifyContent="center"
-        maxW={350}
-        gap={4}
-        mx="auto"
-      >
-        <ProductScanner key={scannerKey} onScanSuccess={setBarCode} />
-        <VStack gap={4} px={4} align="start">
-          <HStack>
-            <Box bg="yellow.300" p={2} borderRadius="md">
-              <CiBarcode size={22} />
-            </Box>
-            <Text fontSize="xs">
-              Acerca tu teléfono al código de barra para escanear el producto
-            </Text>
-          </HStack>
+        <Box
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          justifyContent="center"
+          maxW={350}
+          gap={4}
+          mx="auto"
+        >
+          <ProductScanner key={scannerKey} onScanSuccess={setBarCode} />
 
-          <HStack>
-            <Box bg="yellow.300" p={2} borderRadius="md">
-              <MdLightbulb size={22} />
-            </Box>
-            <Text fontSize="xs">
-              Asegúrate de tener una buena iluminación para poder escanear el producto
-            </Text>
-          </HStack>
-        </VStack>
+          <VStack gap={4} px={4} align="start">
+            <HStack>
+              <Box bg="yellow.200" p={2} borderRadius="md">
+                <CiBarcode size={22} />
+              </Box>
+              <Text fontSize="xs">
+                Acerca tu teléfono al código de barra para escanear el producto
+              </Text>
+            </HStack>
+
+            <HStack>
+              <Box bg="yellow.200" p={2} borderRadius="md">
+                <MdLightbulb size={22} />
+              </Box>
+              <Text fontSize="xs">
+                Asegúrate de tener una buena iluminación para poder escanear el producto
+              </Text>
+            </HStack>
+          </VStack>
+        </Box>
       </Box>
 
+      <VStack mx="auto" display="flex">
+        <Text>¿Tienes problemas para escanear el producto?</Text>
+        <Button
+          onClick={() => setIsAddBarcodeOpen(true)}
+          w="full"
+          bg="yellow.amarillo"
+          rounded="2xl"
+          variant="plain"
+          mb={4}
+        >
+          Cargar código manualmente
+        </Button>
+      </VStack>
+
+      {/* Modal */}
       <ProductNotFoundModal
         isOpen={showModal}
         barCode={barCode}
@@ -90,10 +112,18 @@ function ProductScannerPage() {
         }}
         onAdd={(barCode) => {
           setShowModal(false)
-          navigate(`/addproduct/${barCode}`)
+          navigate(`/products/barcode/${barCode}`)
         }}
       />
-    </Box>
+
+      <AddBarcodeModal
+        isOpen={isAddBarcodeOpen}
+        onClose={() => setIsAddBarcodeOpen(false)}
+        onConfirm={(code) => {
+          setBarCode(code)
+        }}
+      />
+    </Flex>
   )
 }
 

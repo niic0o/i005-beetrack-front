@@ -6,11 +6,11 @@ import InventoryPage from '@/pages/InventoryPage'
 import NotFoundPage from '@/pages/NotFoundPage'
 import AccessRoutes from './AccessRoutes'
 import ProductScannerPage from '@/pages/ProductScannerPage'
-import AddProductPage from '@/pages/AddProductPage'
 import ProfilePage from '@/pages/ProfilePage'
 import PrivateLayout from '@/layout/PrivateLayout'
 import SalesPage from '@/pages/SalesPage'
 import StatsPage from '@/pages/StatsPage'
+import ProductPage from '@/pages/ProductPage'
 
 const AppRoutes = () => {
   return (
@@ -24,8 +24,10 @@ const AppRoutes = () => {
       {/* Rutas privadas sin layout */}
       <Route element={<AccessRoutes isPrivate={true} />}>
         <Route path="productscanner" element={<ProductScannerPage />} />
-        <Route path="/addproduct" element={<AddProductPage />} />
-        <Route path="/addproduct/:barcode" element={<AddProductPage />} />
+        <Route path="/products" element={<ProductPage />} />
+        <Route path="/products/barcode/:barcode" element={<ProductPage />} />
+        <Route path="/products/id/:id" element={<ProductPage />} />
+
       </Route>
 
       {/* Rutas protegidas */}
