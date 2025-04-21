@@ -1,9 +1,20 @@
-import { Flex, Text, InputGroup, Input, Box, IconButton, Button, useBreakpointValue, Skeleton } from '@chakra-ui/react';
-import { FaSearch, FaBell } from 'react-icons/fa';
-import { useColorModeValue } from '@/components/ui/color-mode';
-import { MdMenu } from 'react-icons/md';
-import useSidenavbarStore from '@/store/useSidenavbarStore';
-import { useFetchProfile } from '@/hooks/useProfile';
+import {
+  Flex,
+  Link,
+  Text,
+  InputGroup,
+  Input,
+  Box,
+  IconButton,
+  Button,
+  useBreakpointValue,
+  Skeleton,
+} from "@chakra-ui/react";
+import { FaSearch, FaBell } from "react-icons/fa";
+import { useColorModeValue } from "@/components/ui/color-mode";
+import { MdMenu } from "react-icons/md";
+import useSidenavbarStore from "@/store/useSidenavbarStore";
+import { useFetchProfile } from "@/hooks/useProfile";
 
 const Topbar = () => {
   const { isLoading } = useFetchProfile();
@@ -27,17 +38,24 @@ const Topbar = () => {
       boxShadow="soft"
     >
       <Flex align={"center"} gap={2}>
-        {isMobile &&
+        {isMobile && (
           <Button
             h={"auto"}
             p={"10px"}
             mr={"4px"}
             variant={"ghost"}
-            onClick={() => setIsOpen(true)}>
+            onClick={() => setIsOpen(true)}
+          >
             <MdMenu />
           </Button>
-        }
-        <Skeleton as={Text} loading={isLoading} fontSize="lg" fontWeight="bold" color={color}>
+        )}
+        <Skeleton
+          as={Text}
+          loading={isLoading}
+          fontSize="lg"
+          fontWeight="bold"
+          color={color}
+        >
           {titleToTopBar}
         </Skeleton>
       </Flex>
@@ -55,11 +73,16 @@ const Topbar = () => {
         </InputGroup>
 
         <Box position="relative">
-          <IconButton
-            aria-label="Notificaciones"
-            variant="plain"
-            color={color}
-          > <FaBell /> </IconButton>
+          <Link href="/notifications">
+            <IconButton
+              aria-label="Notificaciones"
+              variant="plain"
+              color={color}
+            >
+              {" "}
+              <FaBell />{" "}
+            </IconButton>
+          </Link>
           {/* <Box
             position="absolute"
             top="0"

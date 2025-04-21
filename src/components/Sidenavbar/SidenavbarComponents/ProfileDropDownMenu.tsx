@@ -1,4 +1,4 @@
-import { Box, Button, Menu, Portal, useBreakpointValue } from "@chakra-ui/react";
+import { Box, Button, Menu, Portal } from "@chakra-ui/react";
 import { useState } from "react";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp, MdLogout, MdPerson } from "react-icons/md";
 import NavItem from "./NavItem";
@@ -10,7 +10,6 @@ import useSidenavbarStore from "@/store/useSidenavbarStore";
 const ProfileDropDownMenu = () => {
     const [profileDropDownIsOpen, setProfileDropDownIsOpen] = useState<boolean>(false);
     const { isToggle } = useSidenavbarStore();
-    const isMobile = useBreakpointValue({ base: true, sm: true, md: false })
 
     const logout = useLogout();
     const location = useLocation();
