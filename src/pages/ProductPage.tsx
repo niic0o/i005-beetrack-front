@@ -12,6 +12,7 @@ import {
   Switch,
   Text,
   Image,
+  useBreakpointValue,
 } from '@chakra-ui/react'
 import { useEffect, useRef, useState } from 'react'
 import { CiBarcode } from 'react-icons/ci'
@@ -23,12 +24,12 @@ const ProductPage = () => {
   const [stock_min, setStock_min] = useState(0)
   const [stock_optimus, setStock_optimus] = useState(0)
   const [alertsEnabled, setAlertsEnabled] = useState(false)
-  const [barCodeInput, setBarcodeInput] = useState("")
+  const [barcodeInput, setBarcodeInput] = useState("")
   const [name, setName] = useState("")
   const [salesPrice, setSalesPrice] = useState("")
   const [costPrice, setCostPrice] = useState("")
   const [description, setDescription] = useState("")
-  const [image, setImage] = useState<File>(new File([], ''));
+  const [image, setImage] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null)
   const imageInputRef = useRef<HTMLInputElement>(null)
   const { barcode, id } = useParams()
@@ -36,7 +37,13 @@ const ProductPage = () => {
   const { data: productData } = useFetchProduct(id ?? '')
   const { mutateAsync: addProduct } = useAddProduct()
   const { mutateAsync: updateProduct } = useUpdateProduct()
+  const isMobile = useBreakpointValue({ base: true, md: false });
 
+  useEffect(() => {
+    if (barcode) {
+      setBarcodeInput(barcode)
+    }
+  }, [barcode]);
 
   useEffect(() => {
     if (!productData) return;
@@ -70,7 +77,7 @@ const ProductPage = () => {
       await updateProduct({
         id: id.toString(),
         updatedData: {
-          barcode: barCodeInput,
+          barcode: barcodeInput,
           name,
           salesPrice,
           costPrice,
@@ -84,7 +91,7 @@ const ProductPage = () => {
       });
     } else {
       await addProduct({
-        barcode: barCodeInput,
+        barcode: barcodeInput,
         name,
         salesPrice,
         costPrice,
@@ -104,12 +111,14 @@ const ProductPage = () => {
   return (
     <>
     <Fieldset.Root p={4} maxW="1200px" mx="auto" display="flex" flexDirection="column" minH="100vh">
-      <HStack align="center">
-        <MdArrowBack size={22} onClick={() => navigate(-1)} cursor="pointer" />
-        <Text fontSize="lg" fontWeight="bold">
-          {!id ? "Agregar producto" : name}
-        </Text>
-      </HStack>
+      {isMobile && (
+        <HStack mb={4} align="center">
+          <MdArrowBack size={22} onClick={() => navigate(-1)} cursor="pointer" />
+          <Text fontSize="lg" fontWeight="bold">
+            {!id ? "Agregar producto" : name}
+          </Text>
+        </HStack>
+      )}
 
       <Flex
         direction={{ base: 'column', md: 'row' }}
@@ -167,7 +176,7 @@ const ProductPage = () => {
             <Field.Root>
               <Field.Label>Código de barras</Field.Label>
               <HStack w="full" position="relative">
-                <Input placeholder="0000000000000" value={barCodeInput || barcode || ''} onChange={(e) => setBarcodeInput(e.target.value)} />
+                <Input placeholder="0000000000000" value={barcodeInput || ''} onChange={(e) => setBarcodeInput(e.target.value)} />
                 <IconButton
                   position="absolute"
                   variant="plain"
@@ -183,11 +192,11 @@ const ProductPage = () => {
 
             <Field.Root>
               <Field.Label>Nombre del producto</Field.Label>
-              <Input value={name || ""} placeholder="Nombre del producto" onChange={(e) => setBarcodeInput(e.target.value)} />
+              <Input value={name || ""} placeholder="Nombre del producto" onChange={(e) => setName(e.target.value)} />
             </Field.Root>
 
             <Field.Root>
-              <Field.Label>Costo</Field.Label>
+              <Field.Label>Precio</Field.Label>
               <Input pl={5} value={salesPrice || ""} placeholder="0.00" onChange={(e) => setSalesPrice(e.target.value)} />
               <Box position="absolute" left="2" top="70%" transform="translateY(-50%)" color="gray.500">
                 $

@@ -38,6 +38,9 @@ const AppRoutes = () => {
           <Route element={<PrivateLayout />}>
             <Route path="productscanner" element={<ProductScannerPage />} />
             <Route path="notifications" element={<Notifications />} />
+            <Route path="/products" element={<ProductPage />} />
+            <Route path="/products/barcode/:barcode" element={<ProductPage />} />
+            <Route path="/products/id/:id" element={<ProductPage />} />
           </Route>
         )}
 
