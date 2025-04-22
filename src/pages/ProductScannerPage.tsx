@@ -6,11 +6,13 @@ import {
   VStack,
   HStack,
   useBreakpointValue,
+  Button,
 } from '@chakra-ui/react'
 import { MdArrowBack, MdLightbulb } from 'react-icons/md'
 import { CiBarcode } from 'react-icons/ci'
 import ProductScanner from '@/components/InventoryComponents/ProductScanner'
 import { ProductNotFoundModal } from '@/components/InventoryComponents/ProductNotFoundModal'
+import { AddBarcodeModal } from '@/components/InventoryComponents/AddBarcodeModal'
 
 const products = [
   {
@@ -27,6 +29,7 @@ function ProductScannerPage() {
   const [barCode, setBarCode] = useState<string | null>(null)
   const [showModal, setShowModal] = useState(false)
   const [scannerKey, setScannerKey] = useState(0)
+  const [isAddBarcodeOpen, setIsAddBarcodeOpen] = useState(false)
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -84,6 +87,21 @@ function ProductScannerPage() {
         </VStack>
       </Box>
 
+       <VStack mx="auto" display="flex">
+        <Text>¿Tienes problemas para escanear el producto?</Text>
+        <Button
+          onClick={() => setIsAddBarcodeOpen(true)}
+          w="full"
+          bg="yellow.amarillo"
+          rounded="2xl"
+          variant="plain"
+          mb={4}
+        >
+          Cargar código manualmente
+        </Button>
+      </VStack>
+
+      {/* Modales */}
       <ProductNotFoundModal
         isOpen={showModal}
         barCode={barCode}
@@ -94,7 +112,15 @@ function ProductScannerPage() {
         }}
         onAdd={(barCode) => {
           setShowModal(false)
-          navigate(`/addproduct/${barCode}`)
+          navigate(`/products/barcode/${barCode}`)
+        }}
+      />
+
+      <AddBarcodeModal
+        isOpen={isAddBarcodeOpen}
+        onClose={() => setIsAddBarcodeOpen(false)}
+        onConfirm={(code) => {
+          setBarCode(code)
         }}
       />
     </Box>

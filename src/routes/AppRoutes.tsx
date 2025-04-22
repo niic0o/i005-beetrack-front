@@ -6,13 +6,13 @@ import InventoryPage from '@/pages/InventoryPage'
 import NotFoundPage from '@/pages/NotFoundPage'
 import AccessRoutes from './AccessRoutes'
 import ProductScannerPage from '@/pages/ProductScannerPage'
-import AddProductPage from '@/pages/AddProductPage'
 import ProfilePage from '@/pages/ProfilePage'
 import PrivateLayout from '@/layout/PrivateLayout'
 import SalesPage from '@/pages/SalesPage'
 import StatsPage from '@/pages/StatsPage'
 import Notifications from '@/pages/NotificationPage'
 import { useBreakpointValue } from '@chakra-ui/react'
+import ProductPage from '@/pages/ProductPage'
 
 const AppRoutes = () => {
   const isMobile = useBreakpointValue({ base: true, md: false });
@@ -24,18 +24,15 @@ const AppRoutes = () => {
         <Route path="/register" element={<Register />} />
       </Route>
 
-      {/* Rutas privadas sin layout */}
-      <Route element={<AccessRoutes isPrivate={true} />}>
-        <Route path="/addproduct" element={<AddProductPage />} />
-        <Route path="/addproduct/:barcode" element={<AddProductPage />} />
-      </Route>
-
       {/* rutas privadas con layout en big screen y no layout on mobile */}
       <Route element={<AccessRoutes isPrivate={true} />}>
         {isMobile ? (
           <Route>
             <Route path="notifications" element={<Notifications />} />
             <Route path="productscanner" element={<ProductScannerPage />} />
+            <Route path="/products" element={<ProductPage />} />
+            <Route path="/products/barcode/:barcode" element={<ProductPage />} />
+            <Route path="/products/id/:id" element={<ProductPage />} />
           </Route>
         ) : (
           <Route element={<PrivateLayout />}>

@@ -25,7 +25,7 @@ const AccessRoutes: React.FC<AccessRoutesProps> = ({ isPrivate }) => {
     return isPrivate ? <Navigate to="/login" replace /> : <Outlet />;
   } //TODO: Cambiar "user" a "!user" cuando tengamos implementada la autenticación.
 
-  if (!user && !isPrivate) {
+  if (user && !isPrivate) {
     return <Navigate to="/" replace />;
   } //TODO: Cambiar "!user" a "user" cuando tengamos implementada la autenticación.
 
