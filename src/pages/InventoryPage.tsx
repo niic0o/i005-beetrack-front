@@ -255,7 +255,19 @@ const InventoryPage = () => {
         gap={3}
         maxW="1200px"
         justify={isGridView ? 'flex-start' : 'center'}
->
+      >
+        {filteredProducts.length === 0 && (
+          <Text
+            fontSize="lg"
+            fontWeight="bold"
+            color="gray.500"
+            textAlign="center"
+            flex="1"
+            mt={10}
+          >
+            No hay productos que mostrar
+          </Text>
+        )}
         {filteredProducts.map((product) => (
           <ProductItem
             key={product.id}
