@@ -2,7 +2,7 @@ import { toaster } from '@/components/ui/toaster';
 import { PRODUCTS_ENDPOINT } from '@/const/api';
 import { productService } from '@/services/productService';
 import useProductStore from '@/store/useProductStore';
-import { FetchProduct, FetchProductById, NewProduct, Product, UpdateProductResponse } from '@/types/productType';
+import { AddProductResponse, FetchProduct, FetchProductById, NewProduct, Product, UpdateProductResponse } from '@/types/productType';
 import { buildUrl } from '@/utils/buildUrl';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useEffect } from 'react';
@@ -43,12 +43,16 @@ export const useAddProduct = () => {
   const { addProduct, queryParams } = useProductStore();
   const url = buildUrl(PRODUCTS_ENDPOINT, queryParams);
 
-  return useMutation<Product, Error, NewProduct & { file: File }>({
-    mutationFn: productService.addProduct,
+  return useMutation<AddProductResponse, Error, NewProduct & { file: File }>({
+    mutationFn: (product) => productService.addProduct(product),
     onSuccess: (data) => {
-      addProduct(data);
+      addProduct(data.data);
+      toaster.create({
+        type: 'success',
+        description: 'Producto añadido',
+      });
       queryClient.setQueryData<Product[]>([url], (old) =>
-        Array.isArray(old) ? [...old, data] : [data]
+        Array.isArray(old) ? [...old, data.data] : [data.data]
       );
     },
   });

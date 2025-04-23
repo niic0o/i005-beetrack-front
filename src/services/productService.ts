@@ -1,5 +1,5 @@
 import { PRODUCTS_ENDPOINT } from "@/const/api";
-import { FetchProduct, FetchProductById, NewProduct, Product, UpdateProductResponse } from "@/types/productType";
+import { AddProductResponse, FetchProduct, FetchProductById, NewProduct, Product, UpdateProductResponse } from "@/types/productType";
 import { QueryParams } from "@/types/utilsAppTypes";
 import { apiRequest } from "@/utils/apiRequest";
 import { buildUrl } from "@/utils/buildUrl";
@@ -15,7 +15,7 @@ export const productService = {
     return apiRequest<FetchProductById>(url);
   },
 
-  async addProduct(product: NewProduct & { file?: File }): Promise<Product> {
+  async addProduct(product: NewProduct & { file?: File }): Promise<AddProductResponse> {
   const formData = new FormData();
 
   Object.entries(product).forEach(([key, value]) => {
