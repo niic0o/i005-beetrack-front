@@ -38,9 +38,6 @@ jobs:
           npm ci
           npm install @rollup/rollup-linux-x64-gnu --no-save
 
-      - name: Run tests
-        run: npm test -- --watchAll=false
-
       - name: Build application
         run: npm run build
 

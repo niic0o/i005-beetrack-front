@@ -10,29 +10,30 @@ import { useState } from 'react';
 const ProfilePage = () => {
   const [isEditingStore, setIsEditingStore] = useState<boolean>(false);
   const [isEditingUser, setIsEditingUser] = useState<boolean>(false);
-  const { isLoading, isError, error } = useFetchProfile()
+  const { isLoading, isError/* , error */ } = useFetchProfile();
   const { profile } = useProfileStore();
   const { mutate: mutateStore, isPending: isPendingStore } = useUpdateStore();
   const { mutate: mutateUser, isPending: isPendingUser } = useUpdateUser();
 
-
-  if (isLoading) return (
-    <VStack colorPalette="gray" h={"full"} justifyContent={"center"} alignItems={"center"}>
-      <Spinner color="colorPalette.600" />
-      <Text color="colorPalette.600">Loading...</Text>
-    </VStack>
-  );
-
-  if (isError || !profile || !profile.store) {
+  if (isError) {
     return (
       <Center h={"full"}>
         <Text fontWeight={"bold"} color={"gray.500"}>
           {isError
-            ? error.message
+            ? "Error de red."
             : "No se pudo recuperar la información como se esperaba. Por favor, inténtelo de nuevo más tarde."
           }
         </Text>
       </Center>
+    )
+  }
+
+  if (isLoading || !profile) {
+    return (
+      <VStack colorPalette="gray" h={"full"} justifyContent={"center"} alignItems={"center"} flexGrow={1} w={"full"}>
+        <Spinner color="colorPalette.600" />
+        <Text color="colorPalette.600">Loading...</Text>
+      </VStack>
     )
   }
 
