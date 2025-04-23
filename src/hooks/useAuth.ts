@@ -29,8 +29,8 @@ export const useCheckAuthStatus = () => {
     if (query.data) {
       setUser(query.data);
       setIsAuthenticated(true);
-    },
-    staleTime: 5 * 60 * 1000, // lo puse porque esta en products tmb ^^'
+    }
+    staleTime: 5 * 60 * 1000 // lo puse porque esta en products tmb ^^'
   });
 };
 

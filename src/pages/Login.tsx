@@ -27,7 +27,6 @@ import {
   LoginFormData,
 } from "@/components/login-registerComponents/loginSchema";
 import { PasswordInput } from "@/components/ui/password-input";
-import { useLogin } from "@/hooks/useAuth";
 
 const Login = () => {
   //TODO: arreglar esto
