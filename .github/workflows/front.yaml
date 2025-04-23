@@ -8,6 +8,7 @@ on:
   push:
     branches:
       - main
+      - cicd/deploy
 
 env:
   PROJECT_ID: ${{ secrets.PROJECT_ID }}   # Proyecto GCP (secreto)
