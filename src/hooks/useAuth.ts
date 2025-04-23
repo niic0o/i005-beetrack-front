@@ -13,7 +13,10 @@ interface AppError {
 
 export const useCheckAuthStatus = () => {
   const { setUser, setIsAuthenticated, queryParams } = useAuthStore();
-  const url = buildUrl(AUTH_ENDPOINT, { ...queryParams, resource: "checkAuthStatus" });
+  const url = buildUrl(AUTH_ENDPOINT, {
+    ...queryParams,
+    resource: "checkAuthStatus",
+  });
 
   const query = useQuery<User, AppError>({
     queryKey: [url],
@@ -26,10 +29,9 @@ export const useCheckAuthStatus = () => {
     if (query.data) {
       setUser(query.data);
       setIsAuthenticated(true);
-    }
-  }, [query.data, setUser, setIsAuthenticated]);
-
-  return query;
+    },
+    staleTime: 5 * 60 * 1000, // lo puse porque esta en products tmb ^^'
+  });
 };
 
 export const useLogin = () => {
@@ -43,7 +45,7 @@ export const useLogin = () => {
       setUser(data);
       setIsAuthenticated(true);
       queryClient.invalidateQueries({ queryKey: [url] });
-    }
+    },
   });
 };
 
@@ -56,8 +58,11 @@ export const useLogout = () => {
     mutationFn: authService.logoutUser,
     onSuccess: () => {
       resetState();
+      localStorage.clear();
+      // localStorage.removeItem("profile")
+      // localStorage.removeItem("auth")
       queryClient.invalidateQueries({ queryKey: [url] });
-    }
+    },
   });
 };
 
@@ -71,7 +76,7 @@ export const useRegister = () => {
     onSuccess: (data) => {
       setUser(data);
       queryClient.invalidateQueries({ queryKey: [url] });
-    }
+    },
   });
 };
 
