@@ -1,20 +1,16 @@
 import {
-  Flex,
-  Link,
-  Text,
-  InputGroup,
-  Input,
-  Box,
+  Flex, Text, Box,
   IconButton,
   Button,
   useBreakpointValue,
-  Skeleton,
+  Skeleton
 } from "@chakra-ui/react";
-import { FaSearch, FaBell } from "react-icons/fa";
+import { FaBell } from "react-icons/fa";
 import { useColorModeValue } from "@/components/ui/color-mode";
 import { MdMenu } from "react-icons/md";
 import useSidenavbarStore from "@/store/useSidenavbarStore";
 import { useFetchProfile } from "@/hooks/useProfile";
+import { NavLink } from "react-router-dom";
 
 const Topbar = () => {
   const { isLoading } = useFetchProfile();
@@ -49,19 +45,23 @@ const Topbar = () => {
             <MdMenu />
           </Button>
         )}
-        <Skeleton
-          as={Text}
-          loading={isLoading}
-          fontSize="lg"
-          fontWeight="bold"
-          color={color}
-        >
-          {titleToTopBar}
-        </Skeleton>
+        {isLoading ? (
+          <Skeleton h="24px" w="150px" />
+        ) : (
+          <Text
+            truncate
+            maxW="200px"
+            fontSize="lg"
+            fontWeight="bold"
+            color={color}
+          >
+            {titleToTopBar}
+          </Text>
+        )}
       </Flex>
 
       <Flex align="center" gap={4}>
-        <InputGroup flex="1" startElement={<FaSearch />}>
+        {/* <InputGroup flex="1" startElement={<FaSearch />}>
           <Input
             placeholder="Buscar"
             borderRadius="full"
@@ -70,10 +70,10 @@ const Topbar = () => {
             _hover={{ borderColor: "gray.400" }}
             color={color}
           />
-        </InputGroup>
+        </InputGroup> */}
 
         <Box position="relative">
-          <Link href="/notifications">
+          <NavLink to="/notifications">
             <IconButton
               aria-label="Notificaciones"
               variant="plain"
@@ -82,7 +82,7 @@ const Topbar = () => {
               {" "}
               <FaBell />{" "}
             </IconButton>
-          </Link>
+          </NavLink>
           {/* <Box
             position="absolute"
             top="0"
