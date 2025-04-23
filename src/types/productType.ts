@@ -16,7 +16,10 @@ export interface Product {
 
 export interface FetchProduct {
     status: string;
-    data: Product[];
+    data: {
+        items: Product[];
+        total: number;
+    }
 }
 
 export interface FetchProductById {

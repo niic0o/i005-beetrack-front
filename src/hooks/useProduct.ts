@@ -19,8 +19,8 @@ export const useFetchProducts = () => {
   });
 
   useEffect(() => {
-  if (query.data?.data?.length) {
-    fetchProducts(query.data.data);
+  if (query.data?.data?.items.length) {
+    fetchProducts(query.data.data.items);
   }
 }, [query.data, fetchProducts]);
 
@@ -78,6 +78,7 @@ export const useUpdateProduct = () => {
           ? old.map((product) => (product.id === id ? data.data : product))
           : [data.data]
       );
+      queryClient.invalidateQueries({ queryKey: ['product', id] });
     },
   });
 };

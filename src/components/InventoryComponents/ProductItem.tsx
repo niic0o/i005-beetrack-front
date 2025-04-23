@@ -7,6 +7,7 @@ import {
 } from '@chakra-ui/react'
 import StockLabel from './StockLabel'
 import { useNavigate } from 'react-router-dom'
+import noImg from '@/assets/noimg.jpg'
 
 export type ProductItemProps = {
   id: string
@@ -29,14 +30,13 @@ const ProductItem = ({
   stock_min,
   stock_optimus,
 }: ProductItemProps) => {
-const navigate = useNavigate()
+  const navigate = useNavigate()
 
   if (view === 'list') {
     return (
       <Flex
-        onClick={() => navigate(`/products/id/${id}`) }
+        onClick={() => navigate(`/products/id/${id}`)}
         w="100%"
-        mx="auto"
         bg="white"
         py={3}
         px={4}
@@ -46,10 +46,11 @@ const navigate = useNavigate()
         justify="space-between"
         position="relative"
         cursor="pointer"
+        _hover={{ bg: "gray.50" }}
       >
         <Flex align="center" gap={4}>
           <Image
-            src={imagePath}
+            src={imagePath || noImg}
             alt={name}
             boxSize="50px"
             objectFit="cover"
@@ -57,8 +58,12 @@ const navigate = useNavigate()
             flexShrink={0}
           />
           <Stack gap={0}>
-            <Text fontSize="sm" fontWeight="medium">{name}</Text>
-            <Text fontSize="sm" color="gray.600">{salesPrice}</Text>
+            <Text fontSize="sm" fontWeight="medium">
+              {name}
+            </Text>
+            <Text fontSize="sm" color="gray.600">
+              $ {salesPrice}
+            </Text>
           </Stack>
         </Flex>
 
@@ -67,27 +72,30 @@ const navigate = useNavigate()
     )
   }
 
+  // Vista grid
   return (
     <Box
-      onClick={() => navigate(`/products/id/${id}`) }
-      w={170}
+      onClick={() => navigate(`/products/id/${id}`)}
+      w="100%"
+      maxW="160px"
       borderRadius="xl"
       overflow="hidden"
       bg="white"
       position="relative"
       borderWidth="1px"
       borderColor="gray.300"
+      cursor="pointer"
+      _hover={{ boxShadow: 'md' }}
     >
       <StockLabel stock={stock} stockMin={stock_min} stockOpt={stock_optimus} />
 
       <Image
-        src={imagePath}
+        src={imagePath || noImg}
         alt={name}
-        w="80%"
+        mx="auto"
         h="130px"
         objectFit="cover"
-        mx="auto"
-        mt="4"
+        w={!imagePath ? "100%" : ""}
       />
 
       <Stack p={3} gap={0}>
@@ -95,7 +103,7 @@ const navigate = useNavigate()
           {name}
         </Text>
         <Text fontSize="sm" color="gray.700">
-          {salesPrice}
+          $ {salesPrice}
         </Text>
       </Stack>
     </Box>
