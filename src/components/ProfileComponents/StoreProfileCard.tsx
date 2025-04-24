@@ -15,7 +15,7 @@ const StoreProfileCard = ({ setIsEditingStore, isPending }: StoreProfileCardProp
         return (
             <VStack colorPalette="gray" w={"full"} h={"full"} justifyContent={"center"} alignItems={"center"}>
                 <Spinner color="colorPalette.600" />
-                <Text color="colorPalette.600">Editing...</Text>
+                <Text color="colorPalette.600">Editando...</Text>
             </VStack>
         )
     }

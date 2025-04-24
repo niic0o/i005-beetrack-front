@@ -5,10 +5,9 @@ import {
   Stack,
   Heading,
   Image,
-  Button,
-  Link,
-  Flex,
+  Button, Flex,
   HStack,
+  Link
 } from "@chakra-ui/react";
 import { AiFillGoogleCircle } from "react-icons/ai";
 import { IoLogoFacebook } from "react-icons/io";
@@ -330,12 +329,13 @@ const Register = () => {
               <Text mt={1} textStyle={"xs"}>
                 ¿Ya tienes una cuenta?{" "}
                 <Link
-                  as={NavLink}
-                  to="/login"
+                  asChild
                   textDecoration="underline"
                   fontWeight={"bold"}
                 >
-                  Iniciar sesión
+                  <NavLink to={"/login"}>
+                    Iniciar sesión
+                  </NavLink>
                 </Link>
               </Text>
             )}

@@ -1,17 +1,26 @@
-import React from 'react';
-import { Box, Heading, Text } from '@chakra-ui/react';
+import CashTotal from '@/components/StatsComponents/CashTotal';
+import SalesStats from '@/components/StatsComponents/SalesStats';
+import TopBestSellings from '@/components/StatsComponents/TopBestSellings';
+import { Box, GridItem, SimpleGrid } from '@chakra-ui/react';
 
-interface StatsPageProps {
-  title?: string;
-}
+const StatsPage = () => {
 
-const StatsPage: React.FC<StatsPageProps> = ({ title = 'Statistics' }) => {
   return (
-    <Box p={4}>
-      <Heading mb={4}>{title}</Heading>
-      <Box bg="white" p={6} borderRadius="lg" boxShadow="sm">
-        <Text>Welcome to the statistics page</Text>
-      </Box>
+    <Box>
+      <SimpleGrid columns={12} gap={6}>
+        <GridItem colSpan={{ base: 12, lg: 6 }}>
+          <SimpleGrid columns={12} gap={6}>
+            <CashTotal />
+            <TopBestSellings />
+          </SimpleGrid>
+        </GridItem>
+        <GridItem colSpan={{ base: 12, lg: 6 }}>
+          <SimpleGrid columns={12} gap={6}>
+            {/* <TodayProfits /> */}
+            <SalesStats />
+          </SimpleGrid>
+        </GridItem>
+      </SimpleGrid>
     </Box>
   );
 };

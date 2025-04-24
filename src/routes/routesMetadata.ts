@@ -3,7 +3,7 @@ const getRoutesMetadata = (): Record<string, { title: string }> => ({
 	"/home": { title: "Dashboard" },
 	"/inventory": { title: "Inventario" },
 	"/sales": { title: "Ventas" },
-	"/stadistics": { title: "Estadísticas" },
+	"/stats": { title: "Estadísticas" },
 	"/profile": { title: "Perfil" },
 	"/notifications": { title: "Notificaciones" },
 	"/404": { title: "Página no encontrada" },

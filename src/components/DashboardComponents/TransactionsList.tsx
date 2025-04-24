@@ -1,4 +1,4 @@
-import { VStack, Box, Spinner, Text } from "@chakra-ui/react";
+import { VStack, Box, Spinner, Text, Center } from "@chakra-ui/react";
 import { TransactionItem } from "@/components/DashboardComponents/TransactionItem";
 import type { TransactionItemProps } from "@/components/DashboardComponents/TransactionItem";
 import { useOrders } from "@/hooks/useOrders";
@@ -39,13 +39,23 @@ export default function TransactionsList() {
     );
   }
 
+  if (orders.length === 0) {
+    return (
+      <Box bg="white" p={6} borderRadius="2xl" boxShadow="sm" width="100%">
+        <Center>
+          <Text color="gray.500">Todavía no hay órdenes</Text>
+        </Center>
+      </Box>
+    );
+  }
+
   return (
     <Box bg="white" p={{ base: 3 }} borderRadius="xl" boxShadow="sm">
       <VStack gap={2} p={4}>
         {Array.isArray(orders) && orders.map((order) => (
           <TransactionItem
             key={order.id}
-            type={mapPaymentTypeToTransactionType(order.payment.name)}
+            type={mapPaymentTypeToTransactionType(order.payment?.name ?? 'CARD')}
             method="Ventas"
             amount={order.totalAmount}
             date={new Date().toLocaleDateString('es-AR', {

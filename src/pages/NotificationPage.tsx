@@ -123,7 +123,7 @@ const Notifications = () => {
                   <Box w="8px" h="8px" bg={getStockColor(item)} borderRadius="full" />
                   {getStockLabel(item)}
                 </Badge>
-              
+
                 <Icon onClick={() => navigate(`/products/id/${item.id}`)} as={IoIosArrowForward} boxSize={5} color="gray.600" cursor={'pointer'} />
               </HStack>
             </Flex>
@@ -132,29 +132,25 @@ const Notifications = () => {
       </Box>
 
       {isMobile && (
-        <Link
-          as={NavLink}
-          to="/inventory"
-          w="full"
-          position="fixed"
-          bottom={0}
-          left={0}
-          right={0}
-          p={4}
+
+        <Button
+          asChild
+          variant="solid"
+          position={"fixed"}
+          bottom={6}
+          left={6}
+          right={6}
           zIndex={10}
+          colorPalette="yellow"
+          color="gray.900"
+          fontWeight="bold"
+          borderRadius="xl"
+          py={6}
         >
-          <Button
-            variant="solid"
-            w="full"
-            colorPalette="yellow"
-            color="gray.900"
-            fontWeight="bold"
-            borderRadius="xl"
-            py={6}
-          >
+          <NavLink to={"/inventory"}>
             Ir a todo el inventario
-          </Button>
-        </Link>
+          </NavLink>
+        </Button>
       )}
     </Flex>
   );
