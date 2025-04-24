@@ -123,7 +123,8 @@ const Notifications = () => {
                   <Box w="8px" h="8px" bg={getStockColor(item)} borderRadius="full" />
                   {getStockLabel(item)}
                 </Badge>
-                <Icon as={IoIosArrowForward} boxSize={5} color="gray.600" />
+              
+                <Icon onClick={() => navigate(`/products/id/${item.id}`)} as={IoIosArrowForward} boxSize={5} color="gray.600" cursor={'pointer'} />
               </HStack>
             </Flex>
           ))

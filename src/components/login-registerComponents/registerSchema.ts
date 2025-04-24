@@ -31,7 +31,7 @@ export const baseRegisterSchema = z.object({
     .string()
     .min(10, "Password must be at least 10 characters")
     .regex(
-      /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[#\?\)\,&_]).+$/,
+      /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[#\?\)\,&_!]).+$/,
       "La contraseña tiene que tener un caracter especial"
     ),
   confirmPassword: z.string().min(1, "Contraseña de confirmación es requerida"),
