@@ -176,7 +176,7 @@ const InventoryPage = () => {
       ) : isGridView ? (
         <Wrap gap={4} justify={{ base: 'center', md: 'flex-start' }} >
           {filteredProducts.map((product) => (
-              <ProductItem view="grid" {...product} />
+              <ProductItem key={product.id} view="grid" {...product} />
           ))}
         </Wrap>
       ) : (

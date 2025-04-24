@@ -7,7 +7,11 @@ import { buildUrl } from '@/utils/buildUrl';
 export const reportsService = {
     async getTopBestSellings(params: QueryParams): Promise<TopBestSellingsReport> {
         const url = buildUrl(REPORTS_ENDPOINT, params);
+
+        // console.log(url)
         const res = await apiRequest<TopBestSellingsReport>(url);
+
+        // console.log(res)
         return res;
     },
     async getTodayResume(params: QueryParams): Promise<RangeReport> {
@@ -20,6 +24,15 @@ export const reportsService = {
         return res;
     },
     async getDailyReport(params: QueryParams): Promise<RangeReport> {
+        const url = buildUrl(REPORTS_ENDPOINT, params);
+
+        // console.log(url)
+        const res = await apiRequest<RangeReport>(url);
+
+        // console.log(res)
+        return res;
+    },
+    async getRangeReport(params: QueryParams): Promise<RangeReport> {
         const url = buildUrl(REPORTS_ENDPOINT, params);
 
         // console.log(url)

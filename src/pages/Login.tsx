@@ -192,12 +192,13 @@ const Login = () => {
               <Text my={2} textStyle={"xs"}>
                 ¿Eres nuevo?{" "}
                 <Link
-                  as={NavLink}
-                  to='/register'
+                  asChild
                   textDecoration="underline"
                   fontWeight={"bold"}
                 >
-                  Crear una cuenta
+                  <NavLink to='/register'>
+                    Crear una cuenta
+                  </NavLink>
                 </Link>
               </Text>
             </Box>
@@ -260,7 +261,7 @@ const Login = () => {
                   textStyle={"xs"}
                   textDecoration="underline"
                   fontWeight={"bold"}
-                  href="/forgot-password"
+                  // href="/forgot-password"
                 >
                   ¿Olvidaste tu contraseña?
                 </Link>

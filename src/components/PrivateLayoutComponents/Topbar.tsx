@@ -14,7 +14,6 @@ import useSidenavbarStore from "@/store/useSidenavbarStore";
 import { useFetchProfile } from "@/hooks/useProfile";
 import { NavLink } from "react-router-dom";
 import useProductStore from "@/store/useProductStore";
-import { useFetchProduct } from "@/hooks/useProduct";
 
 const Topbar = () => {
   const { isLoading } = useFetchProfile();
@@ -22,7 +21,6 @@ const Topbar = () => {
   const isMobile = useBreakpointValue({ base: true, md: false });
 
   const { products } = useProductStore();
-  useFetchProduct();
 
   const lowStockProducts = products.filter(product => product.stock <= product.stock_min);
   const hasNotifications = lowStockProducts.length > 0;

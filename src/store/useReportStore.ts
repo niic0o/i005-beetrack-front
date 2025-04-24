@@ -7,6 +7,8 @@ interface ReportState {
   todayResume: RangeReport;
   dailyReport: RangeReport;
   rangeReport: RangeReport;
+  monthReport: RangeReport;
+  yearReport: RangeReport;
   queryParams: {
     view: 'now' | 'daily' | 'top' | 'range';
     date: string;
@@ -17,6 +19,8 @@ interface ReportState {
   fetchTodayResume: (dailyReport: RangeReport) => Promise<void>;
   fetchDailyReport: (dailyReport: RangeReport) => Promise<void>;
   fetchRangeReport: (rangeReport: RangeReport) => Promise<void>;
+  fetchMonthReport: (rangeReport: RangeReport) => Promise<void>;
+  fetchYearReport: (rangeReport: RangeReport) => Promise<void>;
 }
 
 const useReportStore = create<ReportState>()(
@@ -26,6 +30,8 @@ const useReportStore = create<ReportState>()(
       todayResume: null,
       dailyReport: null,
       rangeReport: null,
+      monthReport: null,
+      yearReport: null,
       queryParams: {
         view: 'top',
         date: '',
@@ -36,6 +42,8 @@ const useReportStore = create<ReportState>()(
       fetchTodayResume: (todayResume: RangeReport) => set({ todayResume }),
       fetchDailyReport: (dailyReport: RangeReport) => set({ dailyReport }),
       fetchRangeReport: (rangeReport: RangeReport) => set({ rangeReport }),
+      fetchMonthReport: (monthReport: RangeReport) => set({ monthReport }),
+      fetchYearReport: (yearReport: RangeReport) => set({ yearReport }),
     })
   )
 );
