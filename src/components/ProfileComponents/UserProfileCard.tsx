@@ -15,7 +15,7 @@ const UserProfileCard = ({ setIsEditingUser, isPending }: UserProfileCardProps) 
         return (
             <VStack colorPalette="gray" w={"full"} h={"full"} justifyContent={"center"} alignItems={"center"}>
                 <Spinner color="colorPalette.600" />
-                <Text color="colorPalette.600">Editing...</Text>
+                <Text color="colorPalette.600">Editando...</Text>
             </VStack>
         )
     }
