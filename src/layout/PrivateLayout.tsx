@@ -6,6 +6,7 @@ import { useTopbarTitle } from '@/hooks/useTopbarTitle';
 import MainContainer from '@/components/PrivateLayoutComponents/MainContainer';
 import { useFetchProfile } from '@/hooks/useProfile';
 import { useFetchProducts } from '@/hooks/useProduct';
+import { useDailyReport, useTodayResume, useTopBestSellings } from '@/hooks/useReport';
 // import { ColorModeButton } from '@/components/ui/color-mode';
 
 const PrivateLayout = () => {
@@ -15,6 +16,9 @@ const PrivateLayout = () => {
   useTopbarTitle();
   useFetchProfile();
   useFetchProducts();
+  useTopBestSellings();
+  useTodayResume();
+  useDailyReport(new Date());
 
   return (
     <Box
