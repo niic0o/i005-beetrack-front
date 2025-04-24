@@ -1,5 +1,7 @@
 import {
-  Flex, Text, Box,
+  Text,
+  Flex,
+  Box,
   IconButton,
   Button,
   useBreakpointValue,
@@ -11,11 +13,19 @@ import { MdMenu } from "react-icons/md";
 import useSidenavbarStore from "@/store/useSidenavbarStore";
 import { useFetchProfile } from "@/hooks/useProfile";
 import { NavLink } from "react-router-dom";
+import useProductStore from "@/store/useProductStore";
+import { useFetchProduct } from "@/hooks/useProduct";
 
 const Topbar = () => {
   const { isLoading } = useFetchProfile();
   const { setIsOpen, titleToTopBar } = useSidenavbarStore();
   const isMobile = useBreakpointValue({ base: true, md: false });
+
+  const { products } = useProductStore();
+  useFetchProduct();
+
+  const lowStockProducts = products.filter(product => product.stock <= product.stock_min);
+  const hasNotifications = lowStockProducts.length > 0;
 
   const bg = useColorModeValue("white", "sidenavbar.dark");
   const color = useColorModeValue("black", "white");
@@ -77,21 +87,27 @@ const Topbar = () => {
             <IconButton
               aria-label="Notificaciones"
               variant="plain"
-              color={color}
+              color={hasNotifications ? "red.500" : color}
             >
               {" "}
-              <FaBell />{" "}
+              {hasNotifications ? (
+                <Box position="relative" display="inline-block">
+                  <FaBell color={color} />
+                  <Box
+                    position="absolute"
+                    top="-2px"
+                    right="-2px"
+                    w="8px"
+                    h="8px"
+                    bg="red.500"
+                    borderRadius="full"
+                  />
+                </Box>
+              ) : (
+                <FaBell />
+              )}{" "}
             </IconButton>
           </NavLink>
-          {/* <Box
-            position="absolute"
-            top="0"
-            right="0"
-            w="10px"
-            h="10px"
-            bg="red.500"
-            borderRadius="full"
-          /> */}
         </Box>
       </Flex>
     </Flex>

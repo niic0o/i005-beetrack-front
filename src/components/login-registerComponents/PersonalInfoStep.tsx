@@ -1,4 +1,4 @@
-import { Field, Input, Stack, Text } from "@chakra-ui/react";
+import { Field, Input, Stack } from "@chakra-ui/react";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 import { RegisterFormData } from "./registerSchema";
 

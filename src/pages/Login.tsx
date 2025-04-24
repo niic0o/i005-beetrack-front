@@ -17,9 +17,7 @@ import { AiFillGoogleCircle } from "react-icons/ai";
 import { IoLogoFacebook } from "react-icons/io";
 import { MdInventory, MdPointOfSale, MdShoppingCart } from 'react-icons/md';
 import HexagonPattern from "@/assets/HexagonPattern.svg";
-// import useAuthStore from "@/store/useAuthStore"; BORRAR?
 import { useLogin } from "@/hooks/useAuth";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -27,14 +25,10 @@ import {
   LoginFormData,
 } from "@/components/login-registerComponents/loginSchema";
 import { PasswordInput } from "@/components/ui/password-input";
+import { NavLink } from "react-router-dom";
 
 const Login = () => {
-  //TODO: arreglar esto
-  const [isLoggingIn, setIsLoggingIn] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
-
   const { isPending, mutate } = useLogin()
-
 
   const {
     register,
@@ -51,22 +45,15 @@ const Login = () => {
 
   const onSubmit = async (data: LoginFormData) => {
     try {
-      setIsLoggingIn(true);
+      mutate({
+        email: data.email,
+        password: data.password
+      });
 
-      // Simulate API call
-      // await new Promise((resolve) => setTimeout(resolve, 1500));
-      mutate(data);
-
-      console.log("Login successful!");
-      setIsLoggingIn(false);
     } catch (error) {
-      setErrorMessage("Login failed. Please check your credentials.");
       console.error("Login error:", error);
-      setIsLoggingIn(false);
     }
   };
-
-  // const isLoading = isLoggingIn || isSubmitting;
 
   return (
     <Flex
@@ -80,7 +67,6 @@ const Login = () => {
       overflow="hidden"
     >
       {/* Left Panel: solo aparece en desktop */}
-
       <Flex
         flex={1}
         display={{ base: "none", md: "flex" }}
@@ -116,7 +102,6 @@ const Login = () => {
           <Stack gap={4}>
             <HStack>
               <Box bg="#FFD701" p={2} borderRadius="md">
-                {/* Replace with your icon */}
                 <MdInventory size="24px" />
               </Box>
               <Text fontWeight="bold">Controlá tu inventario</Text>
@@ -144,9 +129,7 @@ const Login = () => {
             w="100%"
             h="auto" />
         </Box>
-        {/* Decorative hexagons, etc. */}
       </Flex>
-
       {/* Right Panel: Login Form */}
       <Flex
         flex={1}
@@ -209,9 +192,10 @@ const Login = () => {
               <Text my={2} textStyle={"xs"}>
                 ¿Eres nuevo?{" "}
                 <Link
+                  as={NavLink}
+                  to='/register'
                   textDecoration="underline"
                   fontWeight={"bold"}
-                  href="/register"
                 >
                   Crear una cuenta
                 </Link>
@@ -298,15 +282,6 @@ const Login = () => {
             >
               Iniciar sesión
             </Button>
-
-            <Stack
-              mt={10}
-              gap={4}
-              display="flex"
-              alignItems="center"
-              justifyContent="center"
-              w={"full"}
-            ></Stack>
           </Card.Footer>
         </Card.Root>
       </Flex>
