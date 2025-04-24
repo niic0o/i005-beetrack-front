@@ -67,7 +67,6 @@ const Login = () => {
       overflow="hidden"
     >
       {/* Left Panel: solo aparece en desktop */}
-
       <Flex
         flex={1}
         display={{ base: "none", md: "flex" }}
@@ -103,7 +102,6 @@ const Login = () => {
           <Stack gap={4}>
             <HStack>
               <Box bg="#FFD701" p={2} borderRadius="md">
-                {/* Replace with your icon */}
                 <MdInventory size="24px" />
               </Box>
               <Text fontWeight="bold">Controlá tu inventario</Text>
@@ -132,7 +130,6 @@ const Login = () => {
             h="auto" />
         </Box>
       </Flex>
-
       {/* Right Panel: Login Form */}
       <Flex
         flex={1}
@@ -285,15 +282,6 @@ const Login = () => {
             >
               Iniciar sesión
             </Button>
-
-            <Stack
-              mt={10}
-              gap={4}
-              display="flex"
-              alignItems="center"
-              justifyContent="center"
-              w={"full"}
-            ></Stack>
           </Card.Footer>
         </Card.Root>
       </Flex>

@@ -19,7 +19,6 @@ export const PasswordStep = ({ register, errors }: PasswordStepProps) => {
           placeholder="**********"
           {...register("password")}
         />
-
         {errors.password && (
           <Field.ErrorText>{errors.password.message as string}</Field.ErrorText>
         )}
@@ -31,12 +30,10 @@ export const PasswordStep = ({ register, errors }: PasswordStepProps) => {
           placeholder="**********"
           {...register("confirmPassword")}
         />
-
         {errors.confirmPassword && (
           <Field.ErrorText>{errors.confirmPassword.message as string}</Field.ErrorText>
         )}
       </Field.Root>
-
       <Box
         w="80%"
         p={0}

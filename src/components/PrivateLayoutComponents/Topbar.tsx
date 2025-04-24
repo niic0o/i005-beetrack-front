@@ -1,11 +1,12 @@
 import {
-  Flex, Text, Box,
+  Text,
+  Flex,
+  Box,
   IconButton,
   Button,
   useBreakpointValue,
   Skeleton
 } from "@chakra-ui/react";
-import { VscBellDot } from "react-icons/vsc";
 import { FaBell } from "react-icons/fa";
 import { useColorModeValue } from "@/components/ui/color-mode";
 import { MdMenu } from "react-icons/md";
@@ -14,7 +15,6 @@ import { useFetchProfile } from "@/hooks/useProfile";
 import { NavLink } from "react-router-dom";
 import useProductStore from "@/store/useProductStore";
 import { useFetchProduct } from "@/hooks/useProduct";
-import { Link } from "react-router-dom";
 
 const Topbar = () => {
   const { isLoading } = useFetchProfile();
@@ -83,25 +83,31 @@ const Topbar = () => {
         </InputGroup> */}
 
         <Box position="relative">
-          <Link as={NavLink} to="/notifications">
+          <NavLink to="/notifications">
             <IconButton
               aria-label="Notificaciones"
               variant="plain"
               color={hasNotifications ? "red.500" : color}
             >
               {" "}
-              {hasNotifications ?  <VscBellDot /> : <FaBell />}{" "}
+              {hasNotifications ? (
+                <Box position="relative" display="inline-block">
+                  <FaBell color={color} />
+                  <Box
+                    position="absolute"
+                    top="-2px"
+                    right="-2px"
+                    w="8px"
+                    h="8px"
+                    bg="red.500"
+                    borderRadius="full"
+                  />
+                </Box>
+              ) : (
+                <FaBell />
+              )}{" "}
             </IconButton>
-          </Link>
-          {/* <Box
-            position="absolute"
-            top="0"
-            right="0"
-            w="10px"
-            h="10px"
-            bg="red.500"
-            borderRadius="full"
-          /> */}
+          </NavLink>
         </Box>
       </Flex>
     </Flex>
