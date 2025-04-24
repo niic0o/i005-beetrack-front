@@ -31,7 +31,7 @@ const MainSidenavbarMenu = () => {
                 <NavItem to="/" icon={<MdHomeFilled />} text="Home" />
                 <NavItem to="/inventory" icon={<MdInventory />} text="Inventario" />
                 <NavItem to="/sales" icon={<MdPointOfSale />} text="Ventas" />
-                <NavItem to="/stadistics" icon={<MdBarChart />} text="Estadísticas" />
+                <NavItem to="/stats" icon={<MdBarChart />} text="Estadísticas" />
                 <ProfileDropDownMenu />
             </VStack>
         </VStack>
