@@ -13,11 +13,13 @@ import {
   Text,
   Image,
   useBreakpointValue,
+  useDisclosure,
 } from '@chakra-ui/react'
 import { useEffect, useRef, useState } from 'react'
 import { CiBarcode } from 'react-icons/ci'
 import { MdAdd, MdArrowBack, MdRemove } from 'react-icons/md'
 import { useFetchProduct, useAddProduct, useUpdateProduct } from '@/hooks/useProduct'
+import BarcodeScannerOverlay from '@/components/InventoryComponents/BarcodeScannerModal'
 
 const ProductPage = () => {
   const [stock, setStock] = useState(0)
@@ -38,6 +40,7 @@ const ProductPage = () => {
   const { mutateAsync: addProduct } = useAddProduct()
   const { mutateAsync: updateProduct } = useUpdateProduct()
   const isMobile = useBreakpointValue({ base: true, md: false });
+  const { open, onOpen, onClose } = useDisclosure()
 
   useEffect(() => {
     if (barcode) {
@@ -46,21 +49,35 @@ const ProductPage = () => {
   }, [barcode]);
 
   useEffect(() => {
-    if (!productData) return;
+  if (!productData) return;
 
-    const { barcode, name, description, costPrice, salesPrice, stock, stock_min, stock_optimus, alerts, imagePath } = productData.data;
+  const {
+    barcode,
+    name,
+    description,
+    costPrice,
+    salesPrice,
+    stock,
+    stock_min,
+    stock_optimus,
+    alerts,
+    imagePath,
+  } = productData.data;
 
+  if (!barcodeInput) {
     setBarcodeInput(barcode);
-    setName(name);
-    setDescription(description)
-    setCostPrice(costPrice);
-    setSalesPrice(salesPrice);
-    setStock(stock);
-    setStock_min(stock_min)
-    setStock_optimus(stock_optimus)
-    setAlertsEnabled(alerts)
-    setPreview(imagePath)
-  }, [productData]);
+  }
+
+  setName(name);
+  setDescription(description);
+  setCostPrice(costPrice);
+  setSalesPrice(salesPrice);
+  setStock(stock);
+  setStock_min(stock_min);
+  setStock_optimus(stock_optimus);
+  setAlertsEnabled(alerts);
+  setPreview(imagePath);
+}, [productData]);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
@@ -77,7 +94,6 @@ const ProductPage = () => {
       await updateProduct({
         id: id.toString(),
         updatedData: {
-          barcode: barcodeInput,
           name,
           salesPrice,
           costPrice,
@@ -103,6 +119,7 @@ const ProductPage = () => {
         file: image,
       });
     }
+    navigate('/inventory')
   } catch (error) {
     console.error('Error al guardar el producto:', error);
   }
@@ -148,8 +165,8 @@ const ProductPage = () => {
           <Box
             role='button'
             cursor="pointer"
-            w={{ base: '100%', md: '180px' }}
-            h={{ base: '200px', md: '180px' }}
+            w="180px"
+            h="180px"
             bg="gray.700"
             color="white"
             borderRadius="lg"
@@ -163,7 +180,7 @@ const ProductPage = () => {
             onClick={() => imageInputRef.current?.click()}
           >
             {preview ? (
-              <Image src={preview} alt="Previsualización" objectFit="cover" w="full" h="full" />
+              <Image src={preview} alt="Previsualización" objectFit="cover" h="full" />
             ) : (
               <>
                 <Text fontSize="3xl">+</Text>
@@ -176,17 +193,23 @@ const ProductPage = () => {
             <Field.Root>
               <Field.Label>Código de barras</Field.Label>
               <HStack w="full" position="relative">
-                <Input placeholder="0000000000000" value={barcodeInput || ''} onChange={(e) => setBarcodeInput(e.target.value)} />
+                <Input disabled={id ? true : false} placeholder="0000000000000" value={barcodeInput || ''} onChange={(e) => setBarcodeInput(e.target.value)} />
                 <IconButton
+                  disabled={id ? true : false}
                   position="absolute"
                   variant="plain"
                   right={2}
-                  onClick={() => navigate("/productscanner")}
+                  onClick={onOpen}
                   aria-label="Escanear"
-                  cursor="pointer"
+                  cursor={!!id ? "default" : "pointer"}
                 >
                   <CiBarcode />
                 </IconButton>
+                <BarcodeScannerOverlay
+                  isOpen={open}
+                  onClose={onClose}
+                  onResult={(code) => setBarcodeInput(code)}
+                />
               </HStack>
             </Field.Root>
 

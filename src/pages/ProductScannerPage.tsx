@@ -14,28 +14,29 @@ import { CiBarcode } from 'react-icons/ci'
 import ProductScanner from '@/components/InventoryComponents/ProductScanner'
 import { ProductNotFoundModal } from '@/components/InventoryComponents/ProductNotFoundModal'
 import { AddBarcodeModal } from '@/components/InventoryComponents/AddBarcodeModal'
-
-const products = [] // 👈 recuerda meter esto o traerlo de donde toque
+import useProductStore from '@/store/useProductStore'
 
 function ProductScannerPage() {
   const isMobile = useBreakpointValue({ base: true, md: false });
-  const [barCode, setBarCode] = useState<string | null>(null)
+  const [barcode, setBarcode] = useState<string | null>(null)
   const [showModal, setShowModal] = useState(false)
   const [scannerKey, setScannerKey] = useState(0)
   const [isAddBarcodeOpen, setIsAddBarcodeOpen] = useState(false)
+  const { products } = useProductStore()
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (!barCode) return
+    if (!barcode) return
 
-    const product = products.find((p) => p.id.toString() === barCode)
+    const product = products.find((p) => p.barcode.toString() === barcode)
 
     if (product) {
-      navigate(`/productDetail/${product.id}`)
+      navigate(`/products/id/${product.id}`)
+      setScannerKey((prev) => prev + 1)
     } else {
       setShowModal(true)
     }
-  }, [barCode, navigate])
+  }, [barcode, navigate])
 
   return (
     <Flex direction="column" minH={{ base: '100svh', md: '100%' }} p={4} maxW="500px" mx="auto" justify="space-between">
@@ -58,7 +59,7 @@ function ProductScannerPage() {
           gap={4}
           mx="auto"
         >
-          <ProductScanner key={scannerKey} onScanSuccess={setBarCode} />
+          <ProductScanner key={scannerKey} onScanSuccess={setBarcode} />
           <VStack gap={4} px={4} align="start">
             <HStack>
               <Box bg="yellow.300" p={2} borderRadius="md">
@@ -97,10 +98,10 @@ function ProductScannerPage() {
       {/* Modales */}
       <ProductNotFoundModal
         isOpen={showModal}
-        barCode={barCode}
+        barCode={barcode}
         onClose={() => {
           setShowModal(false)
-          setBarCode(null)
+          setBarcode(null)
           setScannerKey((prev) => prev + 1)
         }}
         onAdd={(barCode) => {
@@ -113,7 +114,7 @@ function ProductScannerPage() {
         isOpen={isAddBarcodeOpen}
         onClose={() => setIsAddBarcodeOpen(false)}
         onConfirm={(code) => {
-          setBarCode(code)
+          setBarcode(code)
         }}
       />
     </Flex>
