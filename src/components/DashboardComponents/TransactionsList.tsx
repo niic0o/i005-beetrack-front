@@ -45,7 +45,7 @@ export default function TransactionsList() {
         {Array.isArray(orders) && orders.map((order) => (
           <TransactionItem
             key={order.id}
-            type={mapPaymentTypeToTransactionType(order.payment.name)}
+            type={mapPaymentTypeToTransactionType(order.payment?.name ?? 'CARD')}
             method="Ventas"
             amount={order.totalAmount}
             date={new Date().toLocaleDateString('es-AR', {
