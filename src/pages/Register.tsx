@@ -74,9 +74,9 @@ const Register = () => {
         name: data.name,
         last_name: data.lastName,
         birthdate: data.dateOfBirth,
-        storeName: data.storeName, 
-        storePhone: data.storePhone, 
-        storeAddress: data.storeAddress || "", 
+        storeName: data.storeName,
+        storeTel: data.storePhone,
+        storeAddress: data.storeAddress || "",
       }
       await registerMutation.mutateAsync(formattedData as any);
       setIsRegistering(false);
@@ -89,7 +89,6 @@ const Register = () => {
 
   const validateCurrentStep = async () => {
     let isValid = false;
-
     switch (step) {
       case 1:
         isValid = await trigger("email");
@@ -107,20 +106,17 @@ const Register = () => {
         isValid = await trigger(["storeName", "storePhone", "storeAddress"]);
         break;
     }
-
     return isValid;
   };
 
   const handleNextStep = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
-
     const isValid = await validateCurrentStep();
-
     if (isValid) {
       if (step < 4) {
         setStep(step + 1);
       } else {
-        handleSubmit(onSubmit)(); //keep an eye on this
+        handleSubmit(onSubmit)();
       }
     }
   };
@@ -239,7 +235,6 @@ const Register = () => {
             h="auto" />
         </Box>
       </Flex>
-
       {/* Right Panel: Register Form */}
       <Flex
         flex={1}
