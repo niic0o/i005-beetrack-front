@@ -72,6 +72,7 @@ export const useLogout = () => {
         type: "success",
         description: "Espero verto pronto ♥",
       })
+      queryClient.clear();
     },
   });
 };
