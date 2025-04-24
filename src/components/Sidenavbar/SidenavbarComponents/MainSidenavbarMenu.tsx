@@ -23,7 +23,7 @@ const MainSidenavbarMenu = () => {
                         src={Logo} alt="Logo Beetrack" maxWidth={"50px"} />
                     <Box>
                         <Text as={"p"} fontWeight={"bold"}>BEETRACK</Text>
-                        <Text as={"p"} fontSize={"2xs"}>SALES & MINORY MANAGER</Text>
+                        <Text as={"p"} fontSize={"2xs"}>SALES & INVENTORY MANAGER</Text>
                     </Box>
                 </HStack>
             </Flex>
