@@ -87,7 +87,7 @@ const ProductItem = ({
       cursor="pointer"
       _hover={{ boxShadow: 'md' }}
     >
-      <StockLabel stock={stock} stockMin={stock_min} stockOpt={stock_optimus} />
+      <StockLabel stock={stock} stockMin={stock_min} stockOpt={stock_optimus}/>
 
       <Image
         src={imagePath || noImg}

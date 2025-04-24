@@ -1,8 +1,5 @@
 import {
-  Link,
-  Input,
   Text,
-  InputGroup,
   Flex,
   Box,
   IconButton,
@@ -10,7 +7,7 @@ import {
   useBreakpointValue,
   Skeleton
 } from "@chakra-ui/react";
-import { FaSearch, FaBell } from "react-icons/fa";
+import { FaBell } from "react-icons/fa";
 import { useColorModeValue } from "@/components/ui/color-mode";
 import { MdMenu } from "react-icons/md";
 import useSidenavbarStore from "@/store/useSidenavbarStore";

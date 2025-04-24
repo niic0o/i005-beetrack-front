@@ -67,8 +67,8 @@ const formattedBarcode = barcode.split('').join('-')
             <VStack w="100%">
               <Button
                 w="100%"
-                bg="gray.400"
-                color="white"
+                bg="green.400"
+                color="black"
                 borderRadius="2xl"
                 onClick={handleConfirm}
               >
