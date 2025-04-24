@@ -75,7 +75,7 @@ const Register = () => {
         last_name: data.lastName,
         birthdate: data.dateOfBirth,
         storeName: data.storeName,
-        storePhone: data.storePhone,
+        storeTel: data.storePhone,
         storeAddress: data.storeAddress || "",
       }
       await registerMutation.mutateAsync(formattedData as any);
