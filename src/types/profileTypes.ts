@@ -2,7 +2,7 @@ export interface Profile {
     id: string;
     name: string;
     last_name: string;
-    birthdate: Date;
+    birthdate: string;
     email: string;
     status: 'ACTIVE' | 'BLOCKED';
     createdAt: Date;

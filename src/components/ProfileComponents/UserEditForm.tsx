@@ -1,9 +1,10 @@
 import { UserDataForm, userDataFormSchema } from "@/schemas/profileSchemas";
 import useProfileStore from "@/store/useProfileStore";
 import { UserData } from "@/types/authType";
-import { Button, Field, HStack, Input, VStack } from "@chakra-ui/react";
+import { Button, DataList, Field, HStack, Input, VStack } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { dateBirthDateFormatter, dateFormatter } from "@/utils/dateFormatter";
 
 type UserEditFormProps = {
     setIsEditingUser: React.Dispatch<React.SetStateAction<boolean>>;
@@ -53,11 +54,26 @@ const UserEditForm = ({ setIsEditingUser, mutateUser }: UserEditFormProps) => {
                         <Field.RequiredIndicator />
                     </Field.Label>
                     <Input {...register("email")} />
+                    <Field.ErrorText>{errors.email?.message}</Field.ErrorText>
                     <Field.HelperText>
                         Recuerde que si cambia la dirección de correo eletrónico, deberá usar la nueva dirección para el inicio de sesión.
                     </Field.HelperText>
-                    <Field.ErrorText>{errors.email?.message}</Field.ErrorText>
                 </Field.Root>
+
+                <DataList.Root>
+                    <DataList.Item>
+                        <DataList.ItemLabel fontWeight={"bold"}>Fecha de nacimiento</DataList.ItemLabel>
+                        <DataList.ItemValue wordBreak={"break-word"} whiteSpace={"normal"}>{dateBirthDateFormatter(profile?.birthdate)}</DataList.ItemValue>
+                    </DataList.Item>
+                    <DataList.Item>
+                        <DataList.ItemLabel fontWeight={"bold"}>Fecha de creación</DataList.ItemLabel>
+                        <DataList.ItemValue wordBreak={"break-word"} whiteSpace={"normal"}>{dateFormatter(profile?.createdAt)}</DataList.ItemValue>
+                    </DataList.Item>
+                    <DataList.Item>
+                        <DataList.ItemLabel fontWeight={"bold"}>Última actualización del usuario</DataList.ItemLabel>
+                        <DataList.ItemValue wordBreak={"break-word"} whiteSpace={"normal"}>{dateFormatter(profile?.updatedAt)}</DataList.ItemValue>
+                    </DataList.Item>
+                </DataList.Root>
 
                 <HStack justify="end" mt={"auto"}>
                     <Button variant="ghost" onClick={() => setIsEditingUser(false)}>Cancelar</Button>
