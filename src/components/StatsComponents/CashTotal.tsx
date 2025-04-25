@@ -1,5 +1,5 @@
 import useReportStore from "@/store/useReportStore";
-import { Box, Flex, FormatNumber, GridItem, Icon, Text, VStack } from "@chakra-ui/react";
+import { Box, Flex, FormatNumber, GridItem, Icon, Skeleton, Text, VStack } from "@chakra-ui/react";
 import { MdOutlinePointOfSale } from "react-icons/md";
 
 // interface CashTotalProps {
@@ -39,9 +39,11 @@ const CashTotal = () => {
                     </Flex>
                     <VStack align="start" gap={0}>
                         <Text fontWeight="bold">Total</Text>
+                        <Skeleton loading={!todayResume}>
                             <Text color="green.500" fontSize="xl" fontWeight="semibold">
                                 <FormatNumber value={todayResume?.byPaymentMethod.cash} style="currency" currency="USD" />
                             </Text>
+                        </Skeleton>
                     </VStack>
                 </Flex>
             </Box>

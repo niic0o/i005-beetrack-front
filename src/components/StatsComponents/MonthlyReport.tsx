@@ -21,7 +21,7 @@ const MonthlyReport = () => {
     const [isCalendarOpen, setIsCalendarOpen] = useState<boolean>(false);
 
     const { isLoading } = useMonthlyReport(selectedMonth);
-    
+
     const handleMonthSelection = () => {
         setIsCalendarOpen(!isCalendarOpen);
     }
@@ -47,7 +47,9 @@ const MonthlyReport = () => {
                     rounded={"8px"}
                     onClick={handleMonthSelection}>
                     <MdCalendarMonth />
-                <Float placement={"bottom-center"} offsetY={"-20"} w={"full"}>
+                </IconButton>
+                <Text fontWeight={"bold"}>{selectedMonth.firstDay.toLocaleDateString("en-GB", { month: "2-digit", year: "numeric" })}</Text>
+                <Float placement={"bottom-center"} offsetY={"-76px"} w={"250px"}>
                     {isCalendarOpen &&
                         <DatePicker
                             inline
@@ -60,8 +62,6 @@ const MonthlyReport = () => {
                         />
                     }
                 </Float>
-                </IconButton>
-                <Text fontWeight={"bold"}>{selectedMonth.firstDay.toLocaleDateString("en-GB", { month: "2-digit", year: "numeric" })}</Text>
             </HStack>
             <Skeleton asChild loading={isLoading} w={"full"}>
                 {!monthReport

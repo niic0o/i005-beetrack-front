@@ -70,9 +70,11 @@ export const useLogout = () => {
       queryClient.invalidateQueries({ queryKey: [url] });
       toaster.create({
         type: "success",
-        description: "Espero verto pronto ♥",
+        description: "Espero verte pronto ♥",
       })
       queryClient.clear();
+
+      window.location.href = "/login";
     },
   });
 };

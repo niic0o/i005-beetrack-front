@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { devtools } from 'zustand/middleware';
+// import { devtools } from 'zustand/middleware';
 import { RangeReport, TopBestSellingsReport } from '@/types/statsTypes';
 
 interface ReportState {
@@ -15,16 +15,16 @@ interface ReportState {
     fromDate: string;
     toDate: string;
   };
-  fetchTopBestSellingsReport: (topBestSellingReport: TopBestSellingsReport) => Promise<void>;
-  fetchTodayResume: (dailyReport: RangeReport) => Promise<void>;
-  fetchDailyReport: (dailyReport: RangeReport) => Promise<void>;
-  fetchRangeReport: (rangeReport: RangeReport) => Promise<void>;
-  fetchMonthReport: (rangeReport: RangeReport) => Promise<void>;
-  fetchYearReport: (rangeReport: RangeReport) => Promise<void>;
+  fetchTopBestSellingsReport: (topBestSellingReport: TopBestSellingsReport) => void;
+  fetchTodayResume: (dailyReport: RangeReport) => void;
+  fetchDailyReport: (dailyReport: RangeReport) => void;
+  fetchRangeReport: (rangeReport: RangeReport) => void;
+  fetchMonthReport: (rangeReport: RangeReport) => void;
+  fetchYearReport: (rangeReport: RangeReport) => void;
 }
 
 const useReportStore = create<ReportState>()(
-  devtools(
+  // devtools(
     (set) => ({
       topBestSellingsReport: null,
       todayResume: null,
@@ -45,7 +45,7 @@ const useReportStore = create<ReportState>()(
       fetchMonthReport: (monthReport: RangeReport) => set({ monthReport }),
       fetchYearReport: (yearReport: RangeReport) => set({ yearReport }),
     })
-  )
+  // )
 );
 
 export default useReportStore;

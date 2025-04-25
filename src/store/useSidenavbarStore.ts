@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { devtools } from 'zustand/middleware';
+// import { devtools } from 'zustand/middleware';
 
 interface SidenavbarState {
     isOpen: boolean;
@@ -11,7 +11,7 @@ interface SidenavbarState {
 }
 
 const useSidenavbarStore = create<SidenavbarState>()(
-    devtools(
+    // devtools(
         (set) => ({
             isOpen: false,
             isToggle: false,
@@ -32,8 +32,8 @@ const useSidenavbarStore = create<SidenavbarState>()(
                 })
             },
         }),
-{ name: "SidenavbarStore" }
-    )
+// { name: "SidenavbarStore" }
+//     )
 )
 
 export default useSidenavbarStore;

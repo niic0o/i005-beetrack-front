@@ -16,7 +16,6 @@ const StatsPage = () => {
         </GridItem>
         <GridItem colSpan={{ base: 12, lg: 6 }}>
           <SimpleGrid columns={12} gap={6}>
-            {/* <TodayProfits /> */}
             <SalesStats />
           </SimpleGrid>
         </GridItem>

@@ -56,22 +56,22 @@ const WeeklyReport = () => {
                     rounded={"8px"}
                     onClick={handleWeekSelection}>
                     <MdCalendarMonth />
-                    <Float placement={"bottom-center"} offsetY={"-32"} w={"full"}>
-                        {isCalendarOpen &&
-                            <DatePicker
-                                inline
-                                showWeekPicker
-                                showWeekNumbers
-                                dateFormat="I/R"
-                                locale={es}
-                                shouldCloseOnSelect={true}
-                                selected={selectedWeek.monday ?? null}
-                                onChange={handleWeekChange}
-                            />
-                        }
-                    </Float>
                 </IconButton>
                 <Text fontWeight={"bold"}>{selectedWeek.monday.toLocaleDateString('en-GB')} - {selectedWeek.sunday.toLocaleDateString('en-GB')}</Text>
+                <Float placement={"bottom-center"} offsetY={"-32"} w={"full"}>
+                    {isCalendarOpen &&
+                        <DatePicker
+                            inline
+                            showWeekPicker
+                            showWeekNumbers
+                            dateFormat="I/R"
+                            locale={es}
+                            shouldCloseOnSelect={true}
+                            selected={selectedWeek.monday ?? null}
+                            onChange={handleWeekChange}
+                        />
+                    }
+                </Float>
             </HStack>
             <Skeleton asChild loading={isLoading} w={"full"}>
                 {!rangeReport
