@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { devtools, persist } from 'zustand/middleware';
+import { /* devtools, */ persist } from 'zustand/middleware';
 import { Product } from '../types/productType';
 
 interface ProductState {
@@ -16,7 +16,7 @@ interface ProductState {
 }
 
 const useProductStore = create<ProductState>()(
-  devtools(
+  // devtools(
     persist(
       (set) => ({
         products: [],
@@ -48,8 +48,8 @@ const useProductStore = create<ProductState>()(
         name: 'product-storage', // clave en localStorage
       }
     ),
-    { name: 'ProductStore' }
-  )
+  //   { name: 'ProductStore' }
+  // )
 );
 
 export default useProductStore;

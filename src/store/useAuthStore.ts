@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { devtools, persist } from "zustand/middleware";
+import { /* devtools, */ persist } from "zustand/middleware";
 import { User } from "@/types/authType";
 import { QueryParams } from "@/types/utilsAppTypes";
 
@@ -31,7 +31,7 @@ const initialState = {
 };
 
 const useAuthStore = create<AuthState>()(
-  devtools(
+  // devtools(
     persist(
       (set) => ({
         ...initialState,
@@ -54,8 +54,8 @@ const useAuthStore = create<AuthState>()(
           isAuthenticated: state.isAuthenticated,
         }),
       }
-    ),
-    { name: "AuthStore" }
+    // ),
+    // { name: "AuthStore" }
   )
 );
 
