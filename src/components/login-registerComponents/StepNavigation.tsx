@@ -41,10 +41,10 @@ export const StepNavigation = ({
         loading={isLoading}
         loadingText={
           isCheckingEmail
-            ? "Checking Email"
+            ? "Verificando Email"
             : isRegistering
-              ? "Registering"
-              : "Processing"
+              ? "Registrando..."
+              : "Procesando..."
         }
         borderRadius="xl"
         py={6}
