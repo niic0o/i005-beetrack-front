@@ -1,6 +1,7 @@
 import { useDailyReport } from "@/hooks/useReport";
 import useReportStore from "@/store/useReportStore";
-import { Center, Flex, Float, FormatNumber, HStack, IconButton, Separator, Skeleton, VStack, Box, Icon, Text, Stack } from "@chakra-ui/react";
+import { RangeReport } from "@/types/statsTypes";
+import { Center, Flex, Float, FormatNumber, HStack, Separator, Skeleton, VStack, Box, Icon, Text, Stack, IconButton } from "@chakra-ui/react";
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 import { FaShoppingCart } from "react-icons/fa";
@@ -8,23 +9,34 @@ import { FaMoneyBills } from "react-icons/fa6";
 import { MdCalendarMonth, MdCreditCard, MdInventory, MdSyncAlt, MdTrendingUp } from "react-icons/md";
 
 const DEFAULT_DAILY_REPORT = {
+    totalSales: 0,
+    totalCost: 0,
     totalProfit: 0,
     totalOrders: 0,
     totalProductsSold: 0,
     byPaymentMethod: {
-      cash: 0,
-      card: 0,
-      digital: 0
+        cash: 0,
+        card: 0,
+        digital: 0
     }
-  };
+};
+
+const getCorrectReport = (selectedDate: Date, todayResume : RangeReport, dailyReport : RangeReport): RangeReport => {
+    const reportData = selectedDate.toDateString() === new Date().toDateString() ? todayResume : dailyReport;
+
+    const reportToShow = reportData ?? DEFAULT_DAILY_REPORT;
+
+    return { ...reportToShow };
+}
 
 const DailyReport = () => {
-    const { dailyReport } = useReportStore();
-
-    const reportData = dailyReport ?? DEFAULT_DAILY_REPORT;
-
     const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
     const [isCalendarOpen, setIsCalendarOpen] = useState<boolean>(false);
+
+    const { dailyReport } = useReportStore();
+    const { todayResume } = useReportStore();
+
+    const reportData = getCorrectReport(selectedDate, todayResume, dailyReport);
 
     const { isLoading } = useDailyReport(selectedDate);
 
@@ -33,7 +45,6 @@ const DailyReport = () => {
     }
 
     const handleDateChange = (date: Date | null) => {
-        // console.log('Desde SalesStats componente:', dailyReport);
         setSelectedDate(date);
         setIsCalendarOpen(false);
     };
@@ -47,18 +58,18 @@ const DailyReport = () => {
                     rounded={"8px"}
                     onClick={handleDateSelection}>
                     <MdCalendarMonth />
-                    <Float placement={"bottom-center"} offsetY={"-32"} w={"full"}>
-                        {isCalendarOpen &&
-                            <DatePicker
-                                inline
-                                shouldCloseOnSelect={true}
-                                selected={selectedDate}
-                                onChange={handleDateChange}
-                            />
-                        }
-                    </Float>
                 </IconButton>
                 <Text fontWeight={"bold"}>{selectedDate.toLocaleDateString('en-GB')}</Text>
+                <Float placement={"bottom-center"} offsetY={"-32"} w={"full"}>
+                    {isCalendarOpen &&
+                        <DatePicker
+                            inline
+                            shouldCloseOnSelect={true}
+                            selected={selectedDate}
+                            onChange={handleDateChange}
+                        />
+                    }
+                </Float>
             </HStack>
             <Skeleton asChild loading={isLoading} w={"full"}>
                 {!reportData
