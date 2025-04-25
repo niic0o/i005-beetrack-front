@@ -75,7 +75,7 @@ const DailyReport = () => {
                 {!reportData
                     ? <Center>No hay contenido que mostrar para este día</Center>
                     : (
-                        <VStack gap={4}>
+                        <VStack gap={4} fontSize={{ mdDown: "small" }}>
                             <VStack
                                 w={"full"}
                                 alignItems={"start"}
@@ -83,7 +83,7 @@ const DailyReport = () => {
                                 p={4}
                                 bg="white"
                                 flexGrow={1}
-                                fontSize={"medium"}
+                                fontSize={{ base: "small", md: "medium"}}
                                 borderRadius="3xl"
                                 boxShadow="md">
                                 <Flex
