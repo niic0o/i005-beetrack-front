@@ -47,22 +47,22 @@ const YearlyReport = () => {
                     rounded={"8px"}
                     onClick={handleYearSelection}>
                     <MdCalendarMonth />
-                    <Float placement={"bottom-center"} offsetY={"-24"} w={"200px"}>
-                        {isCalendarOpen &&
-                            <DatePicker
-                                inline
-                                showYearPicker
-                                showWeekNumbers
-                                dateFormat="I/R"
-                                locale={es}
-                                shouldCloseOnSelect={true}
-                                selected={selectedYear.first ?? null}
-                                onChange={handleYearChange}
-                            />
-                        }
-                    </Float>
                 </IconButton>
                 <Text fontWeight={"bold"}>{selectedYear.first.getFullYear()}</Text>
+                <Float placement={"bottom-center"} offsetY={"-24"} w={"200px"}>
+                    {isCalendarOpen &&
+                        <DatePicker
+                            inline
+                            showYearPicker
+                            showWeekNumbers
+                            dateFormat="I/R"
+                            locale={es}
+                            shouldCloseOnSelect={true}
+                            selected={selectedYear.first ?? null}
+                            onChange={handleYearChange}
+                        />
+                    }
+                </Float>
             </HStack>
             <Skeleton asChild loading={isLoading} w={"full"}>
                 {!yearReport
