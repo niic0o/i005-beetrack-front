@@ -1,7 +1,8 @@
 import { StoreDataForm, storeDataFormSchema } from "@/schemas/profileSchemas";
 import useProfileStore from "@/store/useProfileStore";
 import { Store } from "@/types/profileTypes";
-import { Button, Field, HStack, Input, VStack } from "@chakra-ui/react";
+import { dateFormatter } from "@/utils/dateFormatter";
+import { Button, DataList, Field, HStack, Input, VStack } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
 import { useForm } from "react-hook-form";
@@ -40,10 +41,9 @@ const StoreEditForm = ({ setIsEditingStore, mutateStore }: StoreEditFormProps) =
                     <Input {...register("name")} />
                     <Field.ErrorText>{errors.name?.message}</Field.ErrorText>
                 </Field.Root>
-                <Field.Root invalid={!!errors.address} required>
+                <Field.Root invalid={!!errors.address}>
                     <Field.Label>
                         Dirección
-                        <Field.RequiredIndicator />
                     </Field.Label>
                     <Input {...register("address")} />
                     <Field.ErrorText>{errors.address?.message}</Field.ErrorText>
@@ -56,6 +56,17 @@ const StoreEditForm = ({ setIsEditingStore, mutateStore }: StoreEditFormProps) =
                     <Input {...register("tel")} />
                     <Field.ErrorText>{errors.tel?.message}</Field.ErrorText>
                 </Field.Root>
+
+                <DataList.Root>
+                    <DataList.Item>
+                        <DataList.ItemLabel fontWeight={"bold"}>Fecha de creación</DataList.ItemLabel>
+                        <DataList.ItemValue wordBreak={"break-word"} whiteSpace={"normal"}>{dateFormatter(profile?.store.createdAt)}</DataList.ItemValue>
+                    </DataList.Item>
+                    <DataList.Item>
+                        <DataList.ItemLabel fontWeight={"bold"}>Última actualización de la tienda</DataList.ItemLabel>
+                        <DataList.ItemValue wordBreak={"break-word"} whiteSpace={"normal"}>{dateFormatter(profile?.store.updatedAt)}</DataList.ItemValue>
+                    </DataList.Item>
+                </DataList.Root>
 
                 <HStack justify="end" mt={"auto"}>
                     <Button variant="ghost" onClick={() => setIsEditingStore(false)}>Cancelar</Button>

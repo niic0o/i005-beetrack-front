@@ -1,5 +1,5 @@
 import useProfileStore from "@/store/useProfileStore";
-import { dateFormatter } from "@/utils/dateFormatter";
+import { dateBirthDateFormatter, dateFormatter } from "@/utils/dateFormatter";
 import { Button, DataList, Spinner, Text, VStack } from "@chakra-ui/react";
 import { MdOutlineEdit } from "react-icons/md";
 
@@ -32,12 +32,12 @@ const UserProfileCard = ({ setIsEditingUser, isPending }: UserProfileCardProps) 
                     <DataList.ItemValue wordBreak={"break-word"} whiteSpace={"normal"}>{profile?.last_name}</DataList.ItemValue>
                 </DataList.Item>
                 <DataList.Item>
-                    <DataList.ItemLabel fontWeight={"bold"}>Fecha de nacimiento</DataList.ItemLabel>
-                    <DataList.ItemValue wordBreak={"break-word"} whiteSpace={"normal"}>{dateFormatter(profile?.birthdate)}</DataList.ItemValue>
-                </DataList.Item>
-                <DataList.Item>
                     <DataList.ItemLabel fontWeight={"bold"}>Email</DataList.ItemLabel>
                     <DataList.ItemValue wordBreak={"break-word"} whiteSpace={"normal"}>{profile?.email}</DataList.ItemValue>
+                </DataList.Item>
+                <DataList.Item>
+                    <DataList.ItemLabel fontWeight={"bold"}>Fecha de nacimiento</DataList.ItemLabel>
+                    <DataList.ItemValue wordBreak={"break-word"} whiteSpace={"normal"}>{dateBirthDateFormatter(profile?.birthdate)}</DataList.ItemValue>
                 </DataList.Item>
                 <DataList.Item>
                     <DataList.ItemLabel fontWeight={"bold"}>Fecha de creación</DataList.ItemLabel>

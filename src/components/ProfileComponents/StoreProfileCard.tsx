@@ -29,7 +29,7 @@ const StoreProfileCard = ({ setIsEditingStore, isPending }: StoreProfileCardProp
                 </DataList.Item>
                 <DataList.Item>
                     <DataList.ItemLabel fontWeight={"bold"}>Dirección</DataList.ItemLabel>
-                    <DataList.ItemValue wordBreak={"break-word"} whiteSpace={"normal"}>{profile?.store.address}</DataList.ItemValue>
+                    <DataList.ItemValue wordBreak={"break-word"} whiteSpace={"normal"}>{profile?.store.address || "No especificada"}</DataList.ItemValue>
                 </DataList.Item>
                 <DataList.Item>
                     <DataList.ItemLabel fontWeight={"bold"}>Teléfono</DataList.ItemLabel>
