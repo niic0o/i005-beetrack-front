@@ -119,7 +119,9 @@ git clone https://github.com/niic0o/i005-beetrack-front.git
 npm install
 ```
 
-### - Paso 7 | Copiar la url donde se levante (paso 10) y modificar ORIGIN_URL del .env del frontend
+### - Paso 7 | Crear un archivo .env en la raíz del proyecto con las variables de .env.example.
+
+En caso de querer las variables de producción, se puede añadir un archivo `.env.production` con las mismas variables que en `.env.example`, y solicitarlas.
 
 ### - Paso 8 | Correr el proyecto en modo de desarrollo:
 
@@ -127,7 +129,7 @@ npm install
 npm run dev
 ```
 
-### La página web estará corriendo en http://localhost:5473 o donde vite encuentre libre un puerto
+### La página web estará corriendo en http://localhost:5173 o donde vite encuentre libre un puerto
 
 ---
 
